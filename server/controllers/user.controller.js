@@ -24,7 +24,11 @@ module.exports = {
 				.then(results => {
 					// if results is null 
 						// either wrong password or user doesn't exist
-					// else user object sent back 
+					if(results === null) {
+						console.log('uh oh');
+					}
+					var username = results.dataValues.username;
+					res.send(username);
 				})
 				.catch(error => {
 					console.log(error);

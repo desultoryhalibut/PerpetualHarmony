@@ -15,6 +15,7 @@ class Home extends React.Component {
     this.state = {
       search: '',
       selectedCoordinate: null,
+      newMeetUp: {},
       data: [],
       sessions: []
     }
@@ -37,16 +38,20 @@ class Home extends React.Component {
 
   handleSubmit() {
     // post this.state.search to database
-    var place = this.state.autocomplete.getPlace();
-    this.setStateSync({
-    eatUp: {
-      username: 'Dan',
-      locationName: place.name,
-      address: place.formatted_address
-    }
-    }).then(function(eatUp) {
-      console.log(this.state.eatUp);
-    }.bind(this))
+
+    var place = this.state.autocomplete.getPlaces()[0];
+    $.ajax({
+      type: 'POST',
+      url: 'http://localhost:3000/sessions/createMeetUp',
+      data: JSON.stringify({username: 'Dan', name: place.name, address: place.formatted_address}),
+      contentType: 'application/json',
+      success: (data) => {
+        //We will have to make another ajax call maybe??
+        this.getData();
+        this.getAllSessions();
+      }
+    });
+    // console.log('Name: ' + place.name, 'Formateed Address: ' + place.formatted_address);
   }
 
   getData () {

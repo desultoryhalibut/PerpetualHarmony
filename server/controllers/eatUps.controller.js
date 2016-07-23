@@ -1,11 +1,11 @@
 var model = require('../models/db.js');
 
-var tempData = [{creatorID: 'Dan', location: 'HackReactor'},
-                {creatorID: 'Brian', location: 'Subway'},
-                {creatorID: 'Dog', location: 'House'},
-                {creatorID: 'Neil', location: 'Yerba Buena'},
-                {creatorID: 'Henry', location: 'Oasis'},
-                {creatorID: 'Sunny', location: 'FatBurger'}]
+var tempData = [{username: 'Dan', name: 'HackReactor', address: 'Somewhere'},
+                {username: 'Brian', name: 'Subway', address: 'Here'},
+                {username: 'Dog', name: 'House', address: 'Here'},
+                {username: 'Neil', name: 'Yerba Buena', address: 'Here'},
+                {username: 'Henry', name: 'Oasis', address: 'Here'},
+                {username: 'Sunny', name: 'FatBurger', address: 'Here'}]
 
 
 module.exports = {
@@ -23,6 +23,12 @@ module.exports = {
       // model.sessions.getUserSessions().then(function(data){
       //   res.end();
       // });
+    },
+    createMeetUp: function(req, res) {
+      tempData.push(req.body);
+      res.send(200);
+      // res.send(req.body);
+      console.log(req);
     }
   }
 }

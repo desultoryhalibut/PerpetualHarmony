@@ -43,12 +43,13 @@ class Home extends React.Component {
     $.ajax({
       type: 'POST',
       url: 'http://localhost:3000/sessions/createMeetUp',
-      data: JSON.stringify({username: 'Dan', name: place.name, address: place.formatted_address}),
+      //How do we get the actual username
+      data: JSON.stringify({username: 'Dan', locationName: place.name, locationAddress: place.formatted_address}),
       contentType: 'application/json',
       success: (data) => {
         //We will have to make another ajax call maybe??
-        this.getData();
-        this.getAllSessions();
+        // this.getData();
+        // this.getAllSessions();
       }
     });
     // console.log('Name: ' + place.name, 'Formateed Address: ' + place.formatted_address);

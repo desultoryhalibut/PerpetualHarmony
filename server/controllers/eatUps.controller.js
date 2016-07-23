@@ -25,7 +25,10 @@ module.exports = {
       // });
     },
     createMeetUp: function(req, res) {
-      tempData.push(req.body);
+      //Passes the request body containing {username, locationName, locationAddress}
+      var meetUpObject = req.body;
+      model.sessions.createMeetUp(meetUpObject);
+
       res.send(200);
       // res.send(req.body);
       console.log(req);

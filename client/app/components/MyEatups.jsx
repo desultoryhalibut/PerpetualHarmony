@@ -12,7 +12,7 @@ class MyEatups extends React.Component {
     		<h2>Your Eatups</h2>
     		{this.props.data.map(restaurant => 
     			<div>
-    			{restaurant.location}
+    			{restaurant.name}
     			</div>
     		)}
         <Button className="deleteButton" bsStyle="danger">Delete</Button>

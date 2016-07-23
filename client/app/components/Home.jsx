@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Promise from 'bluebird';
 import { Link } from 'react-router';
@@ -37,16 +38,19 @@ class Home extends React.Component {
 
   handleSubmit() {
     // post this.state.search to database
-    var place = this.state.autocomplete.getPlace();
-    this.setStateSync({
-    eatUp: {
-      username: 'Dan',
-      locationName: place.name,
-      address: place.formatted_address
-    }
-    }).then(function(eatUp) {
-      console.log(this.state.eatUp);
-    }.bind(this))
+
+    var place = this.state.autocomplete.getPlaces()[0];
+    $.ajax({
+      type: 'POST',
+      url: 'http://localhost:3000/sessions/createMeetUp',
+      //How do we get the actual username
+      data: JSON.stringify({username: 'Dan', locationName: place.name, locationAddress: place.formatted_address}),
+      contentType: 'application/json',
+      success: (data) => {
+        // this.getData();
+        // this.getAllSessions();
+      }
+    });
   }
 
   getData () {
@@ -72,7 +76,6 @@ class Home extends React.Component {
       }
     });
   }
-
 
   render() {
     return (

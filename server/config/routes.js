@@ -16,5 +16,8 @@ router.post('/users/signUp', UserController.users.signUp);
 
 router.post('/users/signIn', UserController.users.signIn);
 
+router.post('/sessions/createMeetUp', EatUpController.sessions.createMeetUp);
+
+
 
 module.exports = router;

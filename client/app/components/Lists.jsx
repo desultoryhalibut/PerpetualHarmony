@@ -7,7 +7,7 @@ export default class ListOfEatUp extends React.Component {
   }
 
   render () {
-    var resultStuffs = this.props.sessions.map(result => <li className="list-group-item"> {result.location} </li>)
+    var resultStuffs = this.props.sessions.map(result => <li className="list-group-item"> {result.username} </li>)
     return (
       <div>
         <h1>Eatups around you!</h1>

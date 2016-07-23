@@ -1,4 +1,5 @@
 var Sequelize = require('sequelize');
+
 var db = new Sequelize('database', 'username', 'password');
 
 db.authenticate()
@@ -7,33 +8,33 @@ db.authenticate()
   }, function (err) { 
     console.log('Unable to connect to the database:', err);
   });
-
+​
 var User = db.define('User', {
   username: {type: Sequelize.STRING, unique: true},
   password: {type: Sequelize.STRING}
 });
-
+​
 var Session = db.define('Session', {
   sessionname: Sequelize.STRING,
   address: Sequelize.STRING,
   latitude: Sequelize.INTEGER,
   longitude: Sequelize.INTEGER
 });
-
+​
 // The join table
 var Attendees = db.define('Attendees');
-
+​
 // Adds the attribute creatorId to the Session model
 // Session.prototype will gain the methods session.getUser() and session.setUser()
 Session.belongsTo(User, {foreignKey: 'creatorId', targetKey: 'id'});
-
+​
 // Injects userId and sessionId into Attendees table
 // This will add methods: 
   // to User: getSessions, setSessions, addSession, addSessions
   // to Session: getUsers, setUsers, addUser, addUsers
 User.belongsToMany(Session, { through: 'Attendees', foreignKey: 'userId' });
 Session.belongsToMany(User, { through: 'Attendees', foreignKey: 'sessionId' });
-
+​
 // Model syncs are chained with promises in this order because the Session model requires
 // foreign id injection from User, and Attendees requires foreign id injections from User and Session
 User.sync().then(function() {
@@ -52,9 +53,22 @@ module.exports = {
         // do sequalize here 
         //return Session.findAll({ include: [ {model: User} ] });
 
+    },
+
+    createMeetUp: function(data) {
+      // {username: '', location: '', locationAddress: ''}
+      User.findOne({
+        where: {username: data.username}
+      }).then(function(user) {
+        Session.create({
+          sessionname: data.locationName,
+          address: data.locationAddress,
+          creatorId: user.get('id')
+        })
+      })
     }
   },
-
+​
   user: {
     signUp: function(user) {
       var username = user.username;

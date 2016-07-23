@@ -16,7 +16,6 @@ class Home extends React.Component {
     this.state = {
       search: '',
       selectedCoordinate: null,
-      newMeetUp: {},
       data: [],
       sessions: []
     }
@@ -48,12 +47,10 @@ class Home extends React.Component {
       data: JSON.stringify({username: 'Dan', locationName: place.name, locationAddress: place.formatted_address}),
       contentType: 'application/json',
       success: (data) => {
-        //We will have to make another ajax call maybe??
         // this.getData();
         // this.getAllSessions();
       }
     });
-    // console.log('Name: ' + place.name, 'Formateed Address: ' + place.formatted_address);
   }
 
   getData () {

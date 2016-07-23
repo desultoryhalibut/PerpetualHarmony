@@ -2,7 +2,6 @@ var Sequelize = require('sequelize');
 
 var db = new Sequelize('database', 'username', 'password');
 
-
 db.authenticate()
   .then(function(err) {
     console.log('Connection has been established successfully.');

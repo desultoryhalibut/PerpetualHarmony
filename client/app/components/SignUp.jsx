@@ -37,7 +37,8 @@ class SignUp extends React.Component {
     })
   }
 
-  handleSubmit() {
+  handleSubmit(e) {
+    e.preventDefault();
     if (this.state.password === this.state.confirmedPassword) {
       console.log('The passwords match!');
       $.ajax({
@@ -54,11 +55,18 @@ class SignUp extends React.Component {
     }
   }
 
-  getValidationState() {
-    const length = this.state.value.length;
-    if (length > 10) return 'success';
-    else if (length > 5) return 'warning';
+  getPasswordValidationState() {
+    const length = this.state.password.length;
+    if (length > 7) return 'success';
+    else if (length > 4) return 'warning';
     else if (length > 0) return 'error';
+  }
+
+  getConfPasswordValidationState() {
+    const password = this.state.password;
+    const confPassword = this.state.confirmedPassword;
+    if (confPassword.length > 0 && password === confPassword) return 'success';
+    else if(confPassword.length > 0) return 'error';
   }
 
   render () {
@@ -71,19 +79,20 @@ class SignUp extends React.Component {
         </Row>
         
       	<Form horizontal>
-          <FormGroup controlId="formHorizontalUsername">
+
+          <FormGroup>
             <Col xs={7} sm={5} md={4} className="authComponent">
               <FormControl type="text" placeholder="Username" onChange={this.onUserNameChange.bind(this)} />
             </Col>
           </FormGroup>
 
-          <FormGroup controlId="formHorizontalPassword">
+          <FormGroup controlId="formHorizontalPassword" validationState={this.getPasswordValidationState()}>
             <Col xs={7} sm={5} md={4} className="authComponent">
               <FormControl type="password" placeholder="Password" onChange={ this.onPasswordChange.bind(this) }/>
             </Col>
           </FormGroup>
 
-          <FormGroup controlId="formHorizontalPassword">
+          <FormGroup controlId="formHorizontalPassword" validationState={this.getConfPasswordValidationState()}>
             <Col xs={7} sm={5} md={4} className="authComponent">
               <FormControl type="password" placeholder="Confirm password" onChange={ this.onConfPasswordChange.bind(this) } />
             </Col>

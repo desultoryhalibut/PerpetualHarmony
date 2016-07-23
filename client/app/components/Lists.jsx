@@ -1,21 +1,20 @@
 import React from 'react';
 
 
-class ListOfEatUp extends React.Component {
+export default class ListOfEatUp extends React.Component {
   constructor(props) {
     super(props);
   }
 
   render () {
-    console.log(this.props.sessions);
-    var resultStuffs = this.props.sessions.map(result => <div> {result.location} </div>)
+    var resultStuffs = this.props.sessions.map(result => <li className="list-group-item"> {result.location} </li>)
     return (
       <div>
-      <h1>Hello</h1>
-      {resultStuffs}
+        <h1>Eatups around you!</h1>
+        <ul className="list-group eatupsList">
+          {resultStuffs}
+        </ul>
       </div>
     )
   }
 }
-
-export default ListOfEatUp;

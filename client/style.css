@@ -5,3 +5,9 @@
   float: none;
   margin: auto;
 }
+.myEatups {
+  float: right;
+}
+.deleteButton {
+  float: right;
+}

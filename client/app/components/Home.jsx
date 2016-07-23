@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import Promise from 'bluebird';
 import { Link } from 'react-router';
 import MyNav from './Navbar.jsx';
 import MyEatups from './MyEatups.jsx';
@@ -8,7 +9,7 @@ import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 
 
-export default class Home extends React.Component {
+class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -27,18 +28,25 @@ export default class Home extends React.Component {
   componentDidMount() {
     var input = document.getElementById('searchTextField');
     var options = {componentRestrictions: {country: 'us'}};   
-    this.setState({ autocomplete: new google.maps.places.SearchBox(input, options) });
+    this.setState({ autocomplete: new google.maps.places.Autocomplete(input, options) });
   }
 
   handleSearchChange(e) {
     this.setState({ search: e.target.value })
-    console.log(this.state.search) // setState is asynchronous, so this logged value is not updated
   }
 
   handleSubmit() {
     // post this.state.search to database
-    var place = this.state.autocomplete.getPlaces()[0];
-    console.log('Name: ' + place.name, 'Formateed Address: ' + place.formatted_address);
+    var place = this.state.autocomplete.getPlace();
+    this.setStateSync({
+    eatUp: {
+      username: 'Dan',
+      locationName: place.name,
+      address: place.formatted_address
+    }
+    }).then(function(eatUp) {
+      console.log(this.state.eatUp);
+    }.bind(this))
   }
 
   getData () {
@@ -46,7 +54,6 @@ export default class Home extends React.Component {
       type:'GET',
       url: 'http://localhost:3000/sessions/userSessions',
       success: (data) => {
-        console.log('im here');
         this.setState({
           data: data
         });
@@ -59,7 +66,6 @@ export default class Home extends React.Component {
       type:'GET',
       url: 'http://localhost:3000/sessions/allSessions',
       success: (sessions) => {
-        console.log('This is dan');
         this.setState({
           sessions: sessions
         });
@@ -74,15 +80,12 @@ export default class Home extends React.Component {
       <div>
         <MyNav handleSearchChange={ this.handleSearchChange.bind(this) } 
                handleSubmit={ this.handleSubmit.bind(this) } />
-        <div className="container">
-          <h1>Eatups around you!</h1>
-        </div>
         <Grid>
           <Row>
-            <Col xs={5} md={4}>
+            <Col xs={6} md={5} className="allEatups">
               <ListOfEatUp sessions = {this.state.sessions} />
             </Col>
-            <Col xs={5} md={4}>
+            <Col xs={3} md={3} className="myEatups well">
               <MyEatups data = {this.state.data} />
             </Col>
           </Row>

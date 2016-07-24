@@ -61,12 +61,12 @@ module.exports = {
         where: {username: username}
       })
       .then(user => {
-         // return all sessions where creator id matches user id
-         return Session.findAll({
-            where: {creatorId: user.get('id')}
-        })
-      })
-    }, 
+        return Session.findAll({
+          where: {creatorId: user.get('id')}
+        });
+      });
+    },
+
 
     createMeetUp: function(data) {
       // {username: '', location: '', locationAddress: ''}

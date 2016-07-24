@@ -31,6 +31,7 @@ module.exports = {
       model.sessions.createMeetUp(meetUpObject);
 
       res.sendStatus(200);
+
     },
 
     deleteMeetUp: function(req, res) {

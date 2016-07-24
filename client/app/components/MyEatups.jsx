@@ -17,6 +17,7 @@ class MyEatups extends React.Component {
       contentType: 'application/json',
       success: () => {
         console.log('success');
+        this.props.onDelete();
       }
     });
   }

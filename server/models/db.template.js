@@ -47,12 +47,21 @@ User.sync().then(function() {
 
 module.exports = {
   sessions: {
+
     getAll: function() {
       return Session.findAll();
     },
 
-    getUserSessions: function() {
-      return Session.findAll();
+    getUserSessions: function(username) {
+
+      return User.findOne({
+        where: {username: username}
+      })
+      .then(user => {
+         return Session.findAll({
+            where: {creatorId: user.get('id')}
+        })
+      })
     }, 
 
     createMeetUp: function(data) {

@@ -12,19 +12,23 @@ module.exports = {
 
   sessions: {
     getAll: function(req, res) {
-      //Temp data just to make sure it works
-      // model.sessions.getAllSessions();
-      model.sessions.getUserSessions().then((data)=> {
+
+      model.sessions.getAll()
+      .then(data => {
         res.send(data);
       })
+
     },
     getUserSessions: function(req, res) {
-      //Temp data just to make sure it works
-      res.send(tempData);
 
-      // model.sessions.getUserSessions().then(function(data){
-      //   res.end();
-      // });
+      model.sessions.getUserSessions()
+      .then(data => {
+        res.send(data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+
     },
     createMeetUp: function(req, res) {
       //Passes the request body containing {username, locationName, locationAddress}
@@ -35,6 +39,14 @@ module.exports = {
       res.send(200);
       // res.send(req.body);
       console.log(req);
+    },
+
+    deleteMeetUp: function(req, res) {
+
+      var meetUpObject = req.body;
+      model.sessions.deleteMeetUp(meetUpObject);
+
+      res.sendStatus(200);
     }
   }
 }

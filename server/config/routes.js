@@ -13,6 +13,6 @@ router.post('/users/signIn', UserController.users.signIn);
 
 router.post('/sessions/createMeetUp', EatUpController.sessions.createMeetUp);
 
-
+router.delete('/sessions/deleteMeetUp', EatUpController.sessions.deleteMeetUp);
 
 module.exports = router;

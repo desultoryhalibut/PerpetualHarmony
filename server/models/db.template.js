@@ -49,7 +49,6 @@ User.sync().then(function() {
 
 module.exports = {
   sessions: {
-
     getAll: function() {
       return Session.findAll();
     },
@@ -60,10 +59,10 @@ module.exports = {
         where: {username: username}
       })
       .then(user => {
-         return Session.findAll({
-            where: {creatorId: user.get('id')}
-        })
-      })
+        return Session.findAll({
+          where: {creatorId: user.get('id')}
+        });
+      });
     }, 
 
     createMeetUp: function(data) {
@@ -75,8 +74,8 @@ module.exports = {
           sessionname: data.locationName,
           address: data.locationAddress,
           creatorId: user.get('id')
-        })
-      })
+        });
+      });
     },
 
     deleteMeetUp: function(data) {

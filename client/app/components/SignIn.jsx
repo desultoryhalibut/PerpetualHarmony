@@ -32,14 +32,15 @@ class SignIn extends React.Component {
 
   handleSubmit() {
     $.ajax({
-            type:'POST',
-            url: 'http://localhost:3000/users/signIn',
-            data: JSON.stringify({username: this.state.username, password: this.state.password}),
-            contentType: 'application/json',
-            success: (username) => {
-              console.log('success');
-            }
-          });
+      type:'POST',
+      url: 'http://localhost:3000/users/signIn',
+      data: JSON.stringify({username: this.state.username, password: this.state.password}),
+      contentType: 'application/json',
+      success: (username) => {
+        console.log('success');
+      }
+    });
+    this.props.history.push('/');
   }
 
   getValidationState() {

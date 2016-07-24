@@ -11,3 +11,6 @@
 .deleteButton {
   float: right;
 }
+#searchTextField {
+  width: 20em;
+}

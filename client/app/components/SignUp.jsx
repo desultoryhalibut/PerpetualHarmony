@@ -42,14 +42,15 @@ class SignUp extends React.Component {
     if (this.state.password === this.state.confirmedPassword) {
       console.log('The passwords match!');
       $.ajax({
-              type:'POST',
-              url: 'http://localhost:3000/users/signUp',
-              data: JSON.stringify({username: this.state.username, password: this.state.password}),
-              contentType: 'application/json',
-              success: (username) => {
-                console.log('success');
-              }
-            });
+        type:'POST',
+        url: 'http://localhost:3000/users/signUp',
+        data: JSON.stringify({username: this.state.username, password: this.state.password}),
+        contentType: 'application/json',
+        success: (username) => {
+          console.log('success');
+        }
+      });
+      this.props.history.push('/');
     } else {
       console.log('Your passwords don\'t match. Get your act together!')
     }

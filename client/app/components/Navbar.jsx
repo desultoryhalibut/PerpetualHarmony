@@ -23,20 +23,18 @@ class MyNav extends React.Component {
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
-          <Nav>
-            <Navbar.Form pullLeft>
-              <FormGroup>
-                 <FormControl
-                    id="searchTextField"
-                    type="text"
-                    placeholder="Search for a place"
-                    onChange={ this.props.handleSearchChange }
-                  />
-              </FormGroup>
-              {' '}
-              <Button type="submit" onClick={ this.props.handleSubmit }>Create Eatup</Button>
-            </Navbar.Form>
-          </Nav>
+          <Navbar.Form pullLeft>
+            <FormGroup>
+               <FormControl
+                  id="searchTextField"
+                  type="text"
+                  placeholder="Search for a place"
+                  onChange={ this.props.handleSearchChange }
+                />
+            </FormGroup>
+            {' '}
+            <Button type="submit" onClick={ this.props.handleSubmit } bsStyle="primary">Create Eatup</Button>
+          </Navbar.Form>
           <Nav pullRight>
             <LinkContainer to={{ pathname: '/SignUp'}}><NavItem eventKey={1} href="#">Signup</NavItem></LinkContainer>
             <LinkContainer to={{ pathname: '/SignIn'}}><NavItem eventKey={2} href="#">Signin</NavItem></LinkContainer>

@@ -7,15 +7,8 @@ class MyEatups extends React.Component {
   }
 
   onSessionDelete(index, props) {
-    console.log(props.userSession[index]);
-    console.log(props.userSession[index].sessionname);
 
     var sessionToDelete = props.userSession[index];
-
-
-    console.log('the session to delete', sessionToDelete);
-
-    console.log(sessionToDelete.creatorId);
 
     $.ajax({
       type:'DELETE',

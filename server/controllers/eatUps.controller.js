@@ -20,15 +20,15 @@ module.exports = {
 
     },
     getUserSessions: function(req, res) {
-
-      model.sessions.getUserSessions()
+      var username = req.query.username;
+      
+      model.sessions.getUserSessions(username)
       .then(data => {
         res.send(data);
       })
       .catch(error => {
         console.log(error);
-      });
-
+      })
     },
     createMeetUp: function(req, res) {
       //Passes the request body containing {username, locationName, locationAddress}

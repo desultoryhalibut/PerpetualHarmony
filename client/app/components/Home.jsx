@@ -59,6 +59,8 @@ class Home extends React.Component {
     $.ajax({
       type:'GET',
       url: 'http://localhost:3000/sessions/userSessions',
+      data: ({username: 'Dan'}),
+      contentType: 'application/json',
       success: (userSession) => {
         this.setState({
           userSession: userSession

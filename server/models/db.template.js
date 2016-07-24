@@ -15,7 +15,6 @@ var User = db.define('User', {
 
 var Session = db.define('Session', {
   sessionname: Sequelize.STRING,
-  address: Sequelize.STRING,
   latitude: Sequelize.INTEGER,
   longitude: Sequelize.INTEGER
 });
@@ -39,6 +38,7 @@ Session.belongsToMany(User, { through: 'Attendees', foreignKey: 'sessionId' });
 User.sync().then(function() {
   Session.sync().then(function() {
     Attendees.sync().then(function() {
+     
     });
   });
 });
@@ -47,10 +47,14 @@ User.sync().then(function() {
 
 module.exports = {
   sessions: {
-    getUserSessions: function() {
-        // do sequalize here 
-        return Session.findAll();
+    getAll: function() {
+      return Session.findAll();
     },
+
+    getUserSessions: function() {
+      return Session.findAll();
+    }, 
+
     createMeetUp: function(data) {
       // {username: '', location: '', locationAddress: ''}
       User.findOne({
@@ -62,6 +66,12 @@ module.exports = {
           creatorId: user.get('id')
         })
       })
+    },
+
+    deleteMeetUp: function(data) {
+      Session.destroy({ 
+        where: {id: data.sessionId, creatorId: data.userId}
+      });
     }
   },
 
@@ -78,4 +88,4 @@ module.exports = {
       return User.findOne({where: {username: username, password: password}});
     }
   }
-};
+}

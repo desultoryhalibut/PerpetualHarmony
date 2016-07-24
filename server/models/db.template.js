@@ -67,7 +67,6 @@ module.exports = {
       });
     },
 
-
     createMeetUp: function(data) {
       // {username: '', location: '', locationAddress: ''}
       User.findOne({

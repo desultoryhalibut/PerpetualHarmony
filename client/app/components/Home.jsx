@@ -22,7 +22,7 @@ class Home extends React.Component {
   }
 
   componentWillMount() {
-    this.getData();
+    // this.getData();
     this.getAllSessions();
   }
 
@@ -39,7 +39,7 @@ class Home extends React.Component {
   handleSubmit() {
     // post this.state.search to database
 
-    var place = this.state.autocomplete.getPlaces()[0];
+    var place = this.state.autocomplete.getPlace();
     $.ajax({
       type: 'POST',
       url: 'http://localhost:3000/sessions/createMeetUp',
@@ -47,8 +47,10 @@ class Home extends React.Component {
       data: JSON.stringify({username: 'Dan', locationName: place.name, locationAddress: place.formatted_address}),
       contentType: 'application/json',
       success: (data) => {
+        console.log(data);
         // this.getData();
-        // this.getAllSessions();
+        this.getAllSessions();
+        this.setState(this.state); 
       }
     });
   }
@@ -66,15 +68,17 @@ class Home extends React.Component {
   };
 
   getAllSessions () {
-    $.ajax({
-      type:'GET',
-      url: 'http://localhost:3000/sessions/allSessions',
-      success: (sessions) => {
-        this.setState({
-          sessions: sessions
-        });
-      }
-    });
+    
+      $.ajax({
+        type:'GET',
+        url: 'http://localhost:3000/sessions/allSessions',
+        success: (sessions) => {
+          console.log(sessions);
+          this.setState({
+            sessions: sessions
+          });
+        }
+      });
   }
 
   render() {

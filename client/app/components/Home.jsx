@@ -44,7 +44,6 @@ class Home extends React.Component {
   }
 
   handleSubmit() {
-    // post this.state.search to database
 
     var place = this.state.autocomplete.getPlace();
     $.ajax({
@@ -55,10 +54,8 @@ class Home extends React.Component {
       contentType: 'application/json',
       success: (data) => {
         this.refresh();
-      }
     });
   }
-
 
   getUserCreatedSession() {
     $.ajax({

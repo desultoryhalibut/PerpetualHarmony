@@ -75,7 +75,7 @@ module.exports = {
     signIn: function(user) {
       var username = user.username;
       var password = user.password; 
-      return User.find({where: {username: username}, defaults: {username: username, password: password}});
+      return User.findOne({where: {username: username, password: password}});
     }
   }
 };

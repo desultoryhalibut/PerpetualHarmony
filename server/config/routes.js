@@ -7,17 +7,12 @@ router.get('/sessions/allSessions', EatUpController.sessions.getAll);
 
 router.get('/sessions/userSessions', EatUpController.sessions.getUserSessions);
 
-// router.get('/SignUp', function(req, res) {
-// 	console.log('here');
-// 	res.redirect('/SignIn');
-// });
-
 router.post('/users/signUp', UserController.users.signUp);
 
 router.post('/users/signIn', UserController.users.signIn);
 
 router.post('/sessions/createMeetUp', EatUpController.sessions.createMeetUp);
 
-
+router.delete('/sessions/deleteMeetUp', EatUpController.sessions.deleteMeetUp);
 
 module.exports = router;

@@ -16,13 +16,14 @@ class Home extends React.Component {
     this.state = {
       search: '',
       selectedCoordinate: null,
-      data: [],
-      sessions: []
+      userSession: [],
+      sessions: [],
+      key: 1
     }
   }
 
   componentWillMount() {
-    // this.getData();
+    this.getUserCreatedSession();
     this.getAllSessions();
   }
 
@@ -47,38 +48,35 @@ class Home extends React.Component {
       data: JSON.stringify({username: 'Dan', locationName: place.name, locationAddress: place.formatted_address}),
       contentType: 'application/json',
       success: (data) => {
-        console.log(data);
-        // this.getData();
         this.getAllSessions();
+        this.getUserCreatedSession();
         this.setState(this.state); 
       }
     });
   }
 
-  getData () {
+  getUserCreatedSession() {
     $.ajax({
       type:'GET',
       url: 'http://localhost:3000/sessions/userSessions',
-      success: (data) => {
+      success: (userSession) => {
         this.setState({
-          data: data
+          userSession: userSession
         });
       }
     });
   };
 
   getAllSessions () {
-    
       $.ajax({
         type:'GET',
         url: 'http://localhost:3000/sessions/allSessions',
         success: (sessions) => {
-          console.log(sessions);
           this.setState({
             sessions: sessions
           });
         }
-      });
+      })
   }
 
   render() {
@@ -93,7 +91,7 @@ class Home extends React.Component {
               <ListOfEatUp sessions = {this.state.sessions} />
             </Col>
             <Col xs={3} md={3} className="myEatups well">
-              <MyEatups data = {this.state.data} />
+              <MyEatups userSession = {this.state.userSession} />
             </Col>
           </Row>
         </Grid>

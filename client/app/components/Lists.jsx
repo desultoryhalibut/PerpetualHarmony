@@ -1,7 +1,6 @@
 import React from 'react';
 
-
-export default class ListOfEatUp extends React.Component {
+class ListOfEatUp extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -18,3 +17,5 @@ export default class ListOfEatUp extends React.Component {
     )
   }
 }
+
+export default ListOfEatUp;

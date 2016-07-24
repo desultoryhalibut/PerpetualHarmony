@@ -23,8 +23,8 @@ class Home extends React.Component {
   }
 
   componentWillMount() {
-    this.getUserCreatedSession();
     this.getAllSessions();
+    this.getUserCreatedSession();
   }
 
   componentDidMount() {
@@ -48,8 +48,8 @@ class Home extends React.Component {
       data: JSON.stringify({username: 'Dan', locationName: place.name, locationAddress: place.formatted_address}),
       contentType: 'application/json',
       success: (data) => {
-        this.getAllSessions();
         this.getUserCreatedSession();
+        this.getAllSessions();
         this.setState(this.state); 
       }
     });
@@ -70,15 +70,16 @@ class Home extends React.Component {
   };
 
   getAllSessions () {
-      $.ajax({
-        type:'GET',
-        url: 'http://localhost:3000/sessions/allSessions',
-        success: (sessions) => {
-          this.setState({
-            sessions: sessions
-          });
-        }
-      })
+    $.ajax({
+      type:'GET',
+      url: 'http://localhost:3000/sessions/allSessions',
+      contentType: 'application/json',
+      success: (sessions) => {
+        this.setState({
+          sessions: sessions
+        });
+      }
+    })
   }
 
   render() {

@@ -30,7 +30,8 @@ class SignIn extends React.Component {
     })
   }
 
-  handleSubmit() {
+  handleSubmit(e) {
+    e.preventDefault();
     $.ajax({
       type:'POST',
       url: 'http://localhost:3000/users/signIn',

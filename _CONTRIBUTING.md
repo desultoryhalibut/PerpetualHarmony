@@ -1,4 +1,4 @@
-f# Contributing
+# Contributing
 
 ## General Workflow
 

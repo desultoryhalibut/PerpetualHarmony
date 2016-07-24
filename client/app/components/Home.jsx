@@ -37,6 +37,12 @@ class Home extends React.Component {
     this.setState({ search: e.target.value })
   }
 
+  refresh() {
+    this.getAllSessions();
+    this.getUserCreatedSession();
+    this.setState(this.state); 
+  }
+
   handleSubmit() {
     // post this.state.search to database
 
@@ -48,19 +54,17 @@ class Home extends React.Component {
       data: JSON.stringify({username: 'Dan', locationName: place.name, locationAddress: place.formatted_address}),
       contentType: 'application/json',
       success: (data) => {
-        this.getUserCreatedSession();
-        this.getAllSessions();
-        this.setState(this.state); 
+        this.refresh();
       }
     });
   }
+
 
   getUserCreatedSession() {
     $.ajax({
       type:'GET',
       url: 'http://localhost:3000/sessions/userSessions',
       data: ({username: 'Dan'}),
-      contentType: 'application/json',
       success: (userSession) => {
         this.setState({
           userSession: userSession
@@ -70,16 +74,17 @@ class Home extends React.Component {
   };
 
   getAllSessions () {
-    $.ajax({
-      type:'GET',
-      url: 'http://localhost:3000/sessions/allSessions',
-      contentType: 'application/json',
-      success: (sessions) => {
-        this.setState({
-          sessions: sessions
-        });
-      }
-    })
+
+      $.ajax({
+        type:'GET',
+        url: 'http://localhost:3000/sessions/allSessions',
+        contentType: 'application/json',
+        success: (sessions) => {
+          this.setState({
+            sessions: sessions
+          });
+        }
+      })
   }
 
   render() {
@@ -94,7 +99,7 @@ class Home extends React.Component {
               <ListOfEatUp sessions = {this.state.sessions} />
             </Col>
             <Col xs={3} md={3} className="myEatups well">
-              <MyEatups userSession = {this.state.userSession} />
+              <MyEatups userSession = {this.state.userSession} onDelete={this.refresh.bind(this)} />
             </Col>
           </Row>
         </Grid>

@@ -8,6 +8,7 @@ import Grid from 'react-bootstrap/lib/Grid'
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 
+import auth from '../auth'
 
 class Home extends React.Component {
   constructor(props) {
@@ -24,13 +25,13 @@ class Home extends React.Component {
     this.getUserCreatedSession();
   }
 
-  
   getUserCreatedSession() {
     
     $.ajax({
       type:'GET',
       url: 'http://localhost:3000/sessions/userSessions',
-      data: ({username: 'Dan'}),
+      data: ({username: auth.getToken()}),
+      contentType: 'application/json',
       success: (userSession) => {
         this.setState({
           userSession: userSession
@@ -46,6 +47,8 @@ class Home extends React.Component {
       url: 'http://localhost:3000/sessions/allSessions',
       contentType: 'application/json',
       success: (sessions) => {
+        console.log(auth.getToken());
+        console.log('Sessions: ', sessions);
         this.setState({
           sessions: sessions
         });
@@ -60,7 +63,7 @@ class Home extends React.Component {
         <Grid>
           <Row>
             <Col xs={6} md={5} className="allEatups">
-              <ListOfEatUp sessions = {this.state.sessions} />
+              <ListOfEatUp sessions = {this.state.sessions} username={this.state.token} />
             </Col>
             <Col xs={3} md={3} className="myEatups well">
               <MyEatups userSession = {this.state.userSession} onDelete={this.refresh.bind(this)} />

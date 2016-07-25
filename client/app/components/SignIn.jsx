@@ -77,18 +77,12 @@ const SignIn = withRouter(
 
       const { location } = this.props
 
-      console.log('location');
-
       if (location.state && location.state.nextPathname) {
         this.props.router.replace(location.state.nextPathname)
       } else {
         this.props.router.replace('/home')
       }
     })
-  },
-
-  getValidationState() {
-    
   },
 
   onUserNameChange(event) {

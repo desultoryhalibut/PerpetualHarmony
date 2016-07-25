@@ -28,6 +28,7 @@ module.exports = {
     createMeetUp: function(req, res) {
       //Passes the request body containing {username, locationName, locationAddress}
       var meetUpObject = req.body;
+      console.log('createMeetUp req.body:', req.body);
       model.sessions.createMeetUp(meetUpObject);
 
       res.sendStatus(200);

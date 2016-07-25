@@ -3,6 +3,7 @@ import auth from '../auth'
 import { Link } from 'react-router';
 import MyNav from './Navbar.jsx';
 
+
 class App extends React.Component {
 
   constructor(props) {
@@ -62,7 +63,7 @@ class App extends React.Component {
       type: 'POST',
       url: 'http://localhost:3000/sessions/createMeetUp',
       //How do we get the actual username
-      data: JSON.stringify({username: 'Dan', 
+      data: JSON.stringify({username: auth.getToken(), 
                             locationName: place.name, 
                             locationAddress: place.formatted_address}),
       contentType: 'application/json',
@@ -74,11 +75,17 @@ class App extends React.Component {
     });
   }
 
+  componentDidMount() {
+    var input = document.getElementById('searchTextField');
+    var options = {componentRestrictions: {country: 'us'}};   
+    this.setState({ autocomplete: new google.maps.places.Autocomplete(input, options) });
+  }
+
   getUserCreatedSession() {
     $.ajax({
       type:'GET',
       url: 'http://localhost:3000/sessions/userSessions',
-      data: ({username: 'Dan'}),
+      data: ({username: auth.getToken()}),
       contentType: 'application/json',
       success: (userSession) => {
         this.setState({

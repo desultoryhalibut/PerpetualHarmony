@@ -1,5 +1,5 @@
 module.exports = {
-  login(email, pass, cb) {
+  login(username, pass, cb) {
     cb = arguments[arguments.length - 1];
     if (localStorage.token) {
       console.log('There is a token!');
@@ -10,22 +10,31 @@ module.exports = {
       this.onChange(true);
       return;
     }
-    pretendRequest(email, pass, (res) => {
-      console.log('Inside pretendRequest!');
-      if (res.authenticated) {
-        console.log('Res is authenticated!');
-        localStorage.token = res.token;
-        if (cb) { 
-          console.log('There is a callback!');
-          cb(true); 
+
+    console.log('username: ', username);
+    console.log('pass: ', pass);
+    $.ajax({
+      type: 'POST',
+      url: 'http://localhost:3000/users/signIn',
+      data: JSON.stringify({
+        username: username,
+        password: pass
+      }),
+      contentType: 'application/json',
+      success: (dbuser) => {
+        if (dbuser) {
+          localStorage.token = dbuser;
+          if (cb) { 
+            cb(true); 
+          }
+          this.onChange(true);
+        } else {
+          if (cb) { cb(false); }
+          this.onChange(false);
         }
-        this.onChange(true);
-      } else {
-        console.log('Nope, res not authenticated');
-        if (cb) { cb(false); }
-        this.onChange(false);
       }
     });
+
   },
 
   getToken() {
@@ -45,14 +54,12 @@ module.exports = {
   onChange() {}
 };
 
-function pretendRequest(email, pass, cb) {
+function pretendRequest(username, cb) {
   setTimeout(() => {
-    console.log('email: ' + email);
-    console.log('pass: ' + pass);
-    if (email === 'joe@example.com' && pass === 'password') {
+    if (username === 'joe@example.com') {
       cb({
         authenticated: true,
-        token: Math.random().toString(36).substring(7)
+        token: username
       });
     } else {
       cb({ authenticated: false });

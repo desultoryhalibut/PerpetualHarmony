@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Promise from 'bluebird';
 import { Link } from 'react-router';
@@ -55,6 +54,7 @@ class Home extends React.Component {
   }
 
   render() {
+    
     return (
       <div>
         <Grid>

@@ -60,31 +60,47 @@ const SignIn = withRouter(
   React.createClass({
     getInitialState() {
       return {
-        error: false
+        error: false,
+        username: '',
+        password: ''
       }
     },
 
   handleSubmit(e) {
     e.preventDefault();
-    const username = this.refs.username.value
-    const pass = this.refs.pass.value
 
-    auth.login(username, pass, (loggedIn) => {
-      if (!loggedIn)
+    auth.login(this.state.username, this.state.password, (loggedIn) => {
+      if (!loggedIn) {
+        console.log('Not loggedin')
         return this.setState({ error: true })
+      }
 
       const { location } = this.props
+
+      console.log('location');
 
       if (location.state && location.state.nextPathname) {
         this.props.router.replace(location.state.nextPathname)
       } else {
-        this.props.router.replace('/')
+        this.props.router.replace('/home')
       }
     })
   },
 
   getValidationState() {
     
+  },
+
+  onUserNameChange(event) {
+    this.setState({
+      username: event.target.value
+    });
+  },
+
+  onPasswordChange(event) {
+    this.setState({
+      password: event.target.value
+    })
   },
 
   render () {
@@ -99,13 +115,13 @@ const SignIn = withRouter(
         <Form horizontal>
           <FormGroup>
             <Col xs={7} sm={5} md={4} className="authComponent">
-              <FormControl ref="username" type="text" placeholder="Username" />
+              <FormControl onChange={this.onUserNameChange} type="text" placeholder="Username" />
             </Col>
           </FormGroup>
 
           <FormGroup controlId="formHorizontalPassword">
             <Col xs={7} sm={5} md={4} className="authComponent">
-              <FormControl ref="password" type="password" placeholder="Password" />
+              <FormControl onChange={this.onPasswordChange} type="password" placeholder="Password" />
             </Col>
           </FormGroup>
 
@@ -119,7 +135,6 @@ const SignIn = withRouter(
           </FormGroup>
         </Form>
       </Grid>
-
     )
   }
   })

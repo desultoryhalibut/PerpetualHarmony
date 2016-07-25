@@ -7,6 +7,8 @@ import FormControl from 'react-bootstrap/lib/FormControl';
 import Button from 'react-bootstrap/lib/Button';
 import LinkContainer from 'react-router-bootstrap/lib/LinkContainer';
 
+import auth from '../auth'
+
 class MyNav extends React.Component {
 
   constructor(props) {
@@ -14,32 +16,36 @@ class MyNav extends React.Component {
   }
 
   render() {
+
+    const username = auth.getToken();
+
     return (
       <Navbar>
         <Navbar.Header>
           <Navbar.Brand>
-            <a href="#">EatUp</a>
+            <LinkContainer to={{ pathname: '/home'}}><a href="#">EatUp</a></LinkContainer>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
-          <Nav>
-            <Navbar.Form pullLeft>
-              <FormGroup>
-                 <FormControl
-                    id="searchTextField"
-                    type="text"
-                    placeholder="Search for a place"
-                    onChange={ this.props.handleSearchChange }
-                  />
-              </FormGroup>
-              {' '}
-              <Button type="submit" onClick={ this.props.handleSubmit }>Create Eatup</Button>
-            </Navbar.Form>
-          </Nav>
+          <Navbar.Form pullLeft>
+            <FormGroup>
+               <FormControl
+                  id="searchTextField"
+                  type="text"
+                  placeholder="Search for a place"
+                  onChange={ this.props.handleSearchChange }
+                />
+            </FormGroup>
+            {' '}
+            <Button type="submit" onClick={ this.props.handleSubmit } bsStyle="primary">Create EatUp</Button>
+          </Navbar.Form>
           <Nav pullRight>
-            <LinkContainer to={{ pathname: '/SignUp'}}><NavItem eventKey={1} href="#">Signup</NavItem></LinkContainer>
-            <LinkContainer to={{ pathname: '/SignIn'}}><NavItem eventKey={2} href="#">Signin</NavItem></LinkContainer>
+            {this.props.loggedIn ? (
+              <LinkContainer to={{ pathname: '/logout'}}><NavItem eventKey={1} href="#">Welcome {username}! | Logout</NavItem></LinkContainer>
+            ) : (
+              <LinkContainer to={{ pathname: '/signin'}}><NavItem eventKey={1} href="#">Sign in</NavItem></LinkContainer>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Navbar>

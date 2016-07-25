@@ -11,9 +11,9 @@ module.exports = {
       })
       .catch(error => {
         console.log(error);
-      })
-
+      });
     },
+    
     getUserSessions: function(req, res) {
       var username = req.query.username;
       
@@ -23,11 +23,12 @@ module.exports = {
       })
       .catch(error => {
         console.log(error);
-      })
+      });
     },
     createMeetUp: function(req, res) {
       //Passes the request body containing {username, locationName, locationAddress}
       var meetUpObject = req.body;
+      console.log('createMeetUp req.body:', req.body);
       model.sessions.createMeetUp(meetUpObject);
 
       res.sendStatus(200);
@@ -42,5 +43,5 @@ module.exports = {
       res.sendStatus(200);
     }
   }
-}
+};
 

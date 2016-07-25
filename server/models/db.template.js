@@ -40,7 +40,6 @@ Session.belongsToMany(User, { through: 'Attendees', foreignKey: 'sessionId' });
 User.sync().then(function() {
   Session.sync().then(function() {
     Attendees.sync().then(function() {
-     
     });
   });
 });
@@ -49,7 +48,6 @@ User.sync().then(function() {
 
 module.exports = {
   sessions: {
-
     getAll: function() {
       return Session.findAll();
     },
@@ -60,23 +58,24 @@ module.exports = {
         where: {username: username}
       })
       .then(user => {
-         return Session.findAll({
-            where: {creatorId: user.get('id')}
-        })
-      })
-    }, 
+        return Session.findAll({
+          where: {creatorId: user.get('id')}
+        });
+      });
+    },
 
     createMeetUp: function(data) {
-      // {username: '', location: '', locationAddress: ''}
+      console.log('createMeetUp db.js: ', data);
       User.findOne({
         where: {username: data.username}
       }).then(function(user) {
+        console.log('user db.js: ', user.get('id'));
         Session.create({
           sessionname: data.locationName,
           address: data.locationAddress,
           creatorId: user.get('id')
-        })
-      })
+        });
+      });
     },
 
     deleteMeetUp: function(data) {
@@ -119,4 +118,4 @@ module.exports = {
         })
     }
   }
-}
+};

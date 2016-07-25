@@ -91,25 +91,25 @@ const SignUp = withRouter(
 
             <FormGroup>
               <Col xs={7} sm={5} md={4} className="authComponent">
-                <FormControl type="text" placeholder="Username" onChange={this.onUserNameChange.bind(this)} />
+                <FormControl type="text" placeholder="Username" onChange={this.onUserNameChange} />
               </Col>
             </FormGroup>
 
             <FormGroup controlId="formHorizontalPassword" validationState={this.getPasswordValidationState()}>
               <Col xs={7} sm={5} md={4} className="authComponent">
-                <FormControl type="password" placeholder="Password" onChange={ this.onPasswordChange.bind(this) }/>
+                <FormControl type="password" placeholder="Password" onChange={ this.onPasswordChange }/>
               </Col>
             </FormGroup>
 
             <FormGroup controlId="formHorizontalPassword" validationState={this.getConfPasswordValidationState()}>
               <Col xs={7} sm={5} md={4} className="authComponent">
-                <FormControl type="password" placeholder="Confirm password" onChange={ this.onConfPasswordChange.bind(this) } />
+                <FormControl type="password" placeholder="Confirm password" onChange={ this.onConfPasswordChange } />
               </Col>
             </FormGroup>
 
             <FormGroup>
               <Col xs={7} sm={5} md={4} className="authComponent">
-                <Button onClick={ this.handleSubmit.bind(this) } type="submit" bsStyle="primary" block>Sign up</Button>
+                <Button onClick={ this.handleSubmit } type="submit" bsStyle="primary" block>Sign up</Button>
                 <br />
                 <span className="signing">Already have an account? <Link to="/signin">Sign in</Link></span>
                 <br />

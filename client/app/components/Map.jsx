@@ -1,7 +1,7 @@
 import React from 'react';
 import GoogleMap from 'google-map-react';
 
-export default class myMap extends React.Component {
+class ourMap extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -12,8 +12,8 @@ export default class myMap extends React.Component {
 
   render() {
 
-    var mapStyle = {height: screen.height - 100};
-
+    var mapStyle = {height: screen.height - 500, width: screen.width - 500};
+    console.log('im here')
     return (
       <div className='map-wrapper' style={mapStyle}>
         <GoogleMap center={this.state.center} zoom={this.state.zoom} > 
@@ -23,4 +23,4 @@ export default class myMap extends React.Component {
   }
 };
 
-
+export default ourMap;

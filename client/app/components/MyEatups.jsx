@@ -7,7 +7,6 @@ class MyEatups extends React.Component {
   }
 
   onSessionDelete(index, props) {
-
     var sessionToDelete = props.userSession[index];
 
     $.ajax({

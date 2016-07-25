@@ -18,19 +18,37 @@ class Home extends React.Component {
       selectedCoordinate: null,
       userSession: [],
       sessions: [],
-      key: 1
     }
   }
 
   componentWillMount() {
     this.getAllSessions();
     this.getUserCreatedSession();
+    this.getUserLocation();
   }
 
-  componentDidMount() {
+  googlePlaces() {
     var input = document.getElementById('searchTextField');
-    var options = {componentRestrictions: {country: 'us'}};   
-    this.setState({ autocomplete: new google.maps.places.Autocomplete(input, options) });
+    var options = {radius: 5000, types: 'establishment'};
+    var location = {latitude: this.state.location.lat, longitude: this.state.location.long}
+
+    this.setState({ autocomplete: new google.maps.places.Autocomplete(input, location, options)});
+  }
+
+  getUserLocation() {
+    var that = this;
+
+    if (navigator.geolocation) {
+      console.log('Geolocation is supported!');
+      var geoSuccess = function(position) {
+        that.setState({location: {lat: position.coords.latitude, long: position.coords.longitude}});
+        that.googlePlaces();
+      };
+      navigator.geolocation.getCurrentPosition(geoSuccess);
+    }
+    else {
+      console.log('Geolocation is not supported for this Browser/OS version yet.');
+    }
   }
 
   handleSearchChange(e) {
@@ -44,9 +62,8 @@ class Home extends React.Component {
   }
 
   handleSubmit() {
-    // post this.state.search to database
-
     var place = this.state.autocomplete.getPlace();
+    
     $.ajax({
       type: 'POST',
       url: 'http://localhost:3000/sessions/createMeetUp',
@@ -59,8 +76,8 @@ class Home extends React.Component {
     });
   }
 
-
   getUserCreatedSession() {
+    
     $.ajax({
       type:'GET',
       url: 'http://localhost:3000/sessions/userSessions',
@@ -75,21 +92,20 @@ class Home extends React.Component {
 
   getAllSessions () {
 
-      $.ajax({
-        type:'GET',
-        url: 'http://localhost:3000/sessions/allSessions',
-        contentType: 'application/json',
-        success: (sessions) => {
-          this.setState({
-            sessions: sessions
-          });
-        }
-      })
+    $.ajax({
+      type:'GET',
+      url: 'http://localhost:3000/sessions/allSessions',
+      contentType: 'application/json',
+      success: (sessions) => {
+        this.setState({
+          sessions: sessions
+        });
+      }
+    });
   }
 
   render() {
     return (
-      //Defines the nav bar and different routes depending on clicks
       <div>
         <MyNav handleSearchChange={ this.handleSearchChange.bind(this) } 
                handleSubmit={ this.handleSubmit.bind(this) } />
@@ -106,7 +122,6 @@ class Home extends React.Component {
       </div>
     )
   }
-
 }
 
 export default Home;

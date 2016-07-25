@@ -4,35 +4,33 @@ module.exports = {
 	users: { 
 		signUp: function(req, res) { 
 			var user = req.body; 
-			model.user.signUp(user)
-				.spread((user, created) => {
-					// new user just made
-					// if (created  === true) {
-					// 	res.redirect('/');
-					// } else {
-					// 	res.redirect('SignIn');
-					// }
-				})
-				.catch(error => {
-					console.log(error);
-				});
+
+			var cb = function(user, created) {
+				if(created === true) {
+					var username = user.dataValues.username;
+					res.send(username);
+				} else {
+					res.send(created);
+				}
+			}
+
+			model.user.signUp(user, cb);
 		}, 
 
 		signIn: function(req, res) {
 			var user = req.body; 
-			model.user.signIn(user)
-				.then(results => {
-					// if results is null 
-						// either wrong password or user doesn't exist
-					if(results === null) {
-						console.log('uh oh');
-					}
-					var username = results.dataValues.username;
+
+			var cb = function(user, correctPassword) {
+				if (correctPassword) {
+					var username = user.dataValues.username;
 					res.send(username);
-				})
-				.catch(error => {
-					console.log(error);
-				});
+				} else {
+					res.send(null);
+				}
+			}
+
+			model.user.signIn(user, cb);
+			
 		}
 	}
 }

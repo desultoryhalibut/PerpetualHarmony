@@ -110,7 +110,9 @@ class SignUp extends React.Component {
           <FormGroup>
             <Col xs={7} sm={5} md={4} className="authComponent">
               <Button onClick={ this.handleSubmit.bind(this) } type="submit" bsStyle="primary" block>Sign up</Button>
+              <br />
               <span className="signing">Already have an account? <Link to="/signin">Sign in</Link></span>
+              <br />
               {this.state.error && (
                 <p>Username already exists</p>
               )}

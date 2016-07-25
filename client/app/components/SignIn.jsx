@@ -80,6 +80,7 @@ const SignIn = withRouter(
               <Button onClick={ this.handleSubmit } type="submit" bsStyle="primary" block>Sign in</Button>
               <br />
               <span className="signing">Don't have an account yet? <Link to="/signup">Create one</Link></span>
+              <br />
               {this.state.error && (
                 <p>Wrong username or password</p>
               )}

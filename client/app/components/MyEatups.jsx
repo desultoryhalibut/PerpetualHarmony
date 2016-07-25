@@ -32,7 +32,7 @@ class MyEatups extends React.Component {
 
     return (
       <div>
-        <h2>Your Eatups</h2>
+        <h2>Your EatUps</h2>
         <ul className='list-group eatupsList'>
           {userCreatedSessions}
         </ul>

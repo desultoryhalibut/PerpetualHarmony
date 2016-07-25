@@ -8,13 +8,17 @@ import FormControl from 'react-bootstrap/lib/FormControl';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import Checkbox from 'react-bootstrap/lib/Checkbox';
 import Button from 'react-bootstrap/lib/Button';
+import { Link } from 'react-router'
+
+import auth from '../auth'
 
 class SignUp extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			username: '',
-			password: '',
+      error: false,
+      username: '',
+      password: '',
       confirmedPassword: ''
 		}
 	}
@@ -41,16 +45,20 @@ class SignUp extends React.Component {
     e.preventDefault();
     if (this.state.password === this.state.confirmedPassword) {
       console.log('The passwords match!');
-      $.ajax({
-        type:'POST',
-        url: 'http://localhost:3000/users/signUp',
-        data: JSON.stringify({username: this.state.username, password: this.state.password}),
-        contentType: 'application/json',
-        success: (username) => {
-          console.log('success');
+      auth.signup(this.state.username, this.state.password, (loggedIn) => {
+        if (!loggedIn) {
+          console.log('Not loggedin')
+          return this.setState({ error: true })
         }
-      });
-      this.props.history.push('/');
+
+        const { location } = this.props
+
+        if (location.state && location.state.nextPathname) {
+          this.props.router.replace(location.state.nextPathname)
+        } else {
+          this.props.router.replace('/home')
+        }
+      })
     } else {
       console.log('Your passwords don\'t match. Get your act together!')
     }
@@ -102,6 +110,10 @@ class SignUp extends React.Component {
           <FormGroup>
             <Col xs={7} sm={5} md={4} className="authComponent">
               <Button onClick={ this.handleSubmit.bind(this) } type="submit" bsStyle="primary" block>Sign up</Button>
+              <span className="signing">Already have an account? <Link to="/signin">Sign in</Link></span>
+              {this.state.error && (
+                <p>Username already exists</p>
+              )}
             </Col>
           </FormGroup>
       	</Form>

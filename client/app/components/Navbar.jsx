@@ -36,11 +36,10 @@ class MyNav extends React.Component {
             <Button type="submit" onClick={ this.props.handleSubmit } bsStyle="primary">Create Eatup</Button>
           </Navbar.Form>
           <Nav pullRight>
-            <LinkContainer to={{ pathname: '/signup'}}><NavItem eventKey={1} href="#">Sign up</NavItem></LinkContainer>
             {this.props.loggedIn ? (
-              <LinkContainer to={{ pathname: '/logout'}}><NavItem eventKey={2} href="#">Logout</NavItem></LinkContainer>
+              <LinkContainer to={{ pathname: '/logout'}}><NavItem eventKey={1} href="#">Logout</NavItem></LinkContainer>
             ) : (
-              <LinkContainer to={{ pathname: '/signin'}}><NavItem eventKey={2} href="#">Sign in</NavItem></LinkContainer>
+              <LinkContainer to={{ pathname: '/signin'}}><NavItem eventKey={1} href="#">Sign in</NavItem></LinkContainer>
             )}
           </Nav>
         </Navbar.Collapse>

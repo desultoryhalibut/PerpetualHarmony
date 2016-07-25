@@ -68,8 +68,8 @@ class App extends React.Component {
                             locationAddress: place.formatted_address}),
       contentType: 'application/json',
       success: (data) => {
-        this.getUserCreatedSession();
         this.getAllSessions();
+        this.getUserCreatedSession();
         this.setState(this.state); 
       }
     });

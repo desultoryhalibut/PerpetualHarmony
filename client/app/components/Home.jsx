@@ -63,7 +63,7 @@ class Home extends React.Component {
         <Grid>
           <Row>
             <Col xs={6} md={5} className="allEatups">
-              <ListOfEatUp sessions = {this.state.sessions} username={this.state.token} />
+              <ListOfEatUp sessions = {this.state.sessions} username={auth.getToken()} />
             </Col>
             <Col xs={3} md={3} className="myEatups well">
               <MyEatups userSession = {this.state.userSession} onDelete={this.refresh.bind(this)} />

@@ -4,7 +4,6 @@ module.exports = {
   users: { 
     signUp: function(req, res) { 
       var user = req.body; 
-
       var cb = function(user, created) {
         if (created === true) {
           var username = user.dataValues.username;

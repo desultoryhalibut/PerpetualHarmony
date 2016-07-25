@@ -32,7 +32,7 @@ class Home extends React.Component {
     var options = {radius: 5000, types: 'establishment'};
     var location = {latitude: this.state.location.lat, longitude: this.state.location.long}
 
-    this.setState({ autocomplete: new google.maps.places.Autocomplete(input, location, radius)});
+    this.setState({ autocomplete: new google.maps.places.Autocomplete(input, location, options)});
   }
 
   getUserLocation() {

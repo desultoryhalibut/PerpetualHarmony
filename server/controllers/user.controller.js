@@ -25,7 +25,7 @@ module.exports = {
 					var username = user.dataValues.username;
 					res.send(username);
 				} else {
-					res.send(null);
+					res.send(false);
 				}
 			}
 

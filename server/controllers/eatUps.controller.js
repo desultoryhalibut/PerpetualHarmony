@@ -7,6 +7,7 @@ module.exports = {
 
       model.sessions.getAll()
       .then(data => {
+        console.log('the data is here', data);
         res.send(data);
       })
       .catch(error => {

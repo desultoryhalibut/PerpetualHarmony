@@ -16,40 +16,46 @@ class Home extends React.Component {
     this.state = {
       selectedCoordinate: null,
       userSession: [],
-      sessions: [],
+      sessions: []
     }
   }
 
   componentWillMount() {
-    this.getAllSessions();
     this.getUserCreatedSession();
+    this.getAllSessions();
+  }
+
+  refresh() {
+    this.getUserCreatedSession();
+    this.getAllSessions();
   }
 
   getUserCreatedSession() {
-    
+    var that = this;
     $.ajax({
       type:'GET',
       url: 'http://localhost:3000/sessions/userSessions',
       data: ({username: auth.getToken()}),
       contentType: 'application/json',
       success: (userSession) => {
-        this.setState({
+        that.setState({
           userSession: userSession
         });
+        this.refresh();
       }
     });
   }
 
   getAllSessions () {
 
+    var that = this;
+
     $.ajax({
       type:'GET',
       url: 'http://localhost:3000/sessions/allSessions',
       contentType: 'application/json',
       success: (sessions) => {
-        console.log(auth.getToken());
-        console.log('Sessions: ', sessions);
-        this.setState({
+        that.setState({
           sessions: sessions
         });
       }
@@ -57,7 +63,6 @@ class Home extends React.Component {
   }
 
   render() {
-    
     return (
       <div>
         <Grid>

@@ -68,8 +68,6 @@ class App extends React.Component {
                             locationAddress: place.formatted_address}),
       contentType: 'application/json',
       success: (data) => {
-        this.getAllSessions();
-        this.getUserCreatedSession();
         this.setState(this.state); 
       }
     });
@@ -79,33 +77,6 @@ class App extends React.Component {
     var input = document.getElementById('searchTextField');
     var options = {componentRestrictions: {country: 'us'}};   
     this.setState({ autocomplete: new google.maps.places.Autocomplete(input, options) });
-  }
-
-  getUserCreatedSession() {
-    $.ajax({
-      type:'GET',
-      url: 'http://localhost:3000/sessions/userSessions',
-      data: ({username: auth.getToken()}),
-      contentType: 'application/json',
-      success: (userSession) => {
-        this.setState({
-          userSession: userSession
-        });
-      }
-    });
-  };
-
-  getAllSessions () {
-    $.ajax({
-      type:'GET',
-      url: 'http://localhost:3000/sessions/allSessions',
-      contentType: 'application/json',
-      success: (sessions) => {
-        this.setState({
-          sessions: sessions
-        });
-      }
-    })
   }
 
   render() {

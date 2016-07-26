@@ -6,7 +6,8 @@ class ListOfEatUp extends React.Component {
   }
 
   render () {
-    var resultStuffs = this.props.sessions.map(result => <li className="list-group-item"> <span className="listing">{result.sessionname}</span> <br /> {result.address}</li>)
+    var resultStuffs = this.props.sessions.map(result => <li className="list-group-item"> <span className="listing">{result.sessionname}</span> <br /> {result.address} <br /> Hosted by: {result.User.username}</li>)
+
     return (
       <div>
         <h1>EatUps around you!</h1>

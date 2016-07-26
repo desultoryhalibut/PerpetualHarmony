@@ -28,6 +28,7 @@ class Home extends React.Component {
   refresh() {
     this.getUserCreatedSession();
     this.getAllSessions();
+    this.setState(this.state);
   }
 
   getUserCreatedSession() {
@@ -41,16 +42,9 @@ class Home extends React.Component {
         that.setState({
           userSession: userSession
         });
-        this.refresh();
       }
     });
   }
-
-  refresh() {
-    this.getAllSessions();
-    this.getUserCreatedSession();
-    this.setState(this.state)
-   }
 
   getAllSessions () {
 

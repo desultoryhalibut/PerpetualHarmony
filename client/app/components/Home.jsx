@@ -46,6 +46,12 @@ class Home extends React.Component {
     });
   }
 
+  refresh() {
+    this.getAllSessions();
+    this.getUserCreatedSession();
+    this.setState(this.state)
+   }
+
   getAllSessions () {
 
     var that = this;
@@ -68,10 +74,10 @@ class Home extends React.Component {
         <Grid>
           <Row>
             <Col xs={6} md={5} className="allEatups">
-              <ListOfEatUp sessions = {this.state.sessions} />
+              <ListOfEatUp sessions = {this.state.sessions} refresh={this.refresh.bind(this)} />
             </Col>
-            <Col xs={3} md={3} className="myEatups well">
-              <MyEatups userSession = {this.state.userSession} />
+            <Col xs={5} md={4} className="myEatups">
+              <MyEatups userSession = {this.state.userSession} refresh={this.refresh.bind(this)} />
             </Col>
           </Row>
         </Grid>

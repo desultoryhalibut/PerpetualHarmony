@@ -1,3 +1,6 @@
+body {
+  background-color: #fff0e6;
+}
 .welcome {
   text-align: center;
 }
@@ -20,4 +23,18 @@
 .listing {
   font-size: 1.2em;
   font-weight: bold;
+}
+.card {
+  border: 1px solid #ccc!important;
+  border-radius: 16px!important;
+  padding: 1em 2em;
+  margin: 1em 0;
+  background-color: white
+}
+.card-title {
+  font-weight: bold;
+}
+.myEatUp {
+  display: inline-block;
+  margin: 0;
 }

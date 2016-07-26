@@ -16,17 +16,20 @@ class MyEatups extends React.Component {
       contentType: 'application/json',
       success: () => {
         console.log('success');
+        this.props.refresh();
       }
     });
   }
 
 
   render () {
+
     var userCreatedSessions = this.props.userSession.map((result, index) => 
-      <li className="list-group-item"> {result.sessionname} 
-      <Button className="deleteButton" bsStyle="danger" bsSize="xsmall" 
-      onClick= { this.onSessionDelete.bind(this, index, this.props) }>Delete</Button>
-      </li>
+      <div className="card card-block">
+        <p className="card-title myEatUp">{result.sessionname}</p>
+        <Button className="deleteButton" bsStyle="danger" bsSize="xsmall" 
+        onClick= { this.onSessionDelete.bind(this, index, this.props) }>Delete</Button>
+      </div>
       )
 
     return (

@@ -38,7 +38,8 @@ class MyNav extends React.Component {
                 />
             </FormGroup>
             {' '}
-            <Button type="submit" onClick={ this.props.handleSubmit } bsStyle="primary">Create EatUp</Button>
+            <Button type="submit" onClick={ this.props.handleSubmit } bsStyle="success">Create EatUp</Button>
+
           </Navbar.Form>
           <Nav pullRight>
             {this.props.loggedIn ? (

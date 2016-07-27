@@ -1,35 +1,43 @@
-var Sequelize = require('sequelize');
-var db = new Sequelize('database', 'username', 'password');
-var bcrypt = require('bcrypt');
+const Sequelize = require('sequelize');
+const db = new Sequelize('database', 'username', 'password');
+const bcrypt = require('bcrypt');
+
+// Table models
+const User = require('../api/user/user.model');
+const Restaurant = require('../api/user/restaurant.model');
+const Eatup = require('../api/user/eatup.model');
+const Reservation = require('../api/user/reservation.model');
 
 db.authenticate()
   .then(function(err) {
     console.log('Connection has been established successfully.');
-  }, function (err) { 
+  }, function (err) {
     console.log('Unable to connect to the database:', err);
   });
 
-var User = db.define('User', {
-  username: {type: Sequelize.STRING, unique: true},
-  password: {type: Sequelize.STRING}
-});
 
-var Session = db.define('Session', {
-  sessionname: Sequelize.STRING,
-  address: Sequelize.STRING, 
-  latitude: Sequelize.INTEGER,
-  longitude: Sequelize.INTEGER
-});
 
-// The join table
-var Attendees = db.define('Attendees');
+// var User = db.define('User', {
+//   username: {type: Sequelize.STRING, unique: true},
+//   password: {type: Sequelize.STRING}
+// });
+//
+// var Session = db.define('Session', {
+//   sessionname: Sequelize.STRING,
+//   address: Sequelize.STRING,
+//   latitude: Sequelize.INTEGER,
+//   longitude: Sequelize.INTEGER
+// });
+//
+// // The join table
+// var Attendees = db.define('Attendees');
 
 // Adds the attribute creatorId to the Session model
 // Session.prototype will gain the methods session.getUser() and session.setUser()
 Session.belongsTo(User, {foreignKey: 'creatorId', targetKey: 'id'});
 
 // Injects userId and sessionId into Attendees table
-// This will add methods: 
+// This will add methods:
   // to User: getSessions, setSessions, addSession, addSessions
   // to Session: getUsers, setUsers, addUser, addUsers
 User.belongsToMany(Session, { through: 'Attendees', foreignKey: 'userId' });
@@ -40,7 +48,7 @@ Session.belongsToMany(User, { through: 'Attendees', foreignKey: 'sessionId' });
 User.sync().then(function() {
   Session.sync().then(function() {
     Attendees.sync().then(function() {
-     
+
     });
   });
 });
@@ -81,7 +89,7 @@ module.exports = {
     },
 
     deleteMeetUp: function(data) {
-      Session.destroy({ 
+      Session.destroy({
         where: {id: data.sessionId, creatorId: data.userId}
       });
     }

@@ -34,6 +34,7 @@ module.exports = {
     const password = user.password;
 
     const cb = function(user, correctPassword) {
+      console.log('signin user ', user);
       if (correctPassword) {
         const username = user.dataValues.username;
         res.send(username);
@@ -44,6 +45,7 @@ module.exports = {
 
     User.findOne({where: {username: username}})
       .then(user => {
+        console.log('user in signin', user);
         const hash = user.dataValues.password;
         bcrypt.compare(password, hash, function(error, res) {
           if (error) {

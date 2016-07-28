@@ -28,23 +28,19 @@ Comment.belongsTo(Eatup, {foreignKey: 'eatupId', targetKey: 'id'});
 User.belongsToMany(Eatup, { through: 'Reservation', foreignKey: 'userId' });
 Eatup.belongsToMany(User, { through: 'Reservation', foreignKey: 'eatupId' });
 
-// Synchronizing the schema
-
+// Synchronizing the database
 db.query('SET FOREIGN_KEY_CHECKS = 0')
   .then(function(){
-      return db.sync({ force: true });
+    return db.sync();
   })
   .then(function(){
-      return db.query('SET FOREIGN_KEY_CHECKS = 1')
+    return db.query('SET FOREIGN_KEY_CHECKS = 1')
   })
   .then(function(){
-      console.log('Database synchronised.');
+    console.log('Database synchronised.');
   }, function(err){
-      console.log(err);
+    console.log(err);
   });
-
-// creates these tables in MySQL if they don't already exist. Pass in {force: true}
-// to drop any existing user and message tables and make new ones.
 
 module.exports = {
   User: User,

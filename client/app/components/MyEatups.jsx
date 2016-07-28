@@ -6,6 +6,7 @@ class MyEatups extends React.Component {
     super(props);
   }
 
+
   onSessionDelete(index, props) {
     var sessionToDelete = props.userSession[index];
 
@@ -15,7 +16,7 @@ class MyEatups extends React.Component {
       data: JSON.stringify({userId: sessionToDelete.creatorId, sessionId: sessionToDelete.id}),
       contentType: 'application/json',
       success: () => {
-        console.log('success');
+        console.log('Successful delete');
         this.props.refresh();
       }
     });

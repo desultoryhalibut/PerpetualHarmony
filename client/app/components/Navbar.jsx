@@ -29,16 +29,7 @@ class MyNav extends React.Component {
         </Navbar.Header>
         <Navbar.Collapse>
           <Navbar.Form pullLeft>
-            <FormGroup>
-               <FormControl
-                  id="searchTextField"
-                  type="text"
-                  placeholder="Search for a place"
-                  onChange={ this.props.handleSearchChange }
-                />
-            </FormGroup>
-            {' '}
-            <Button type="submit" onClick={ this.props.handleSubmit } bsStyle="success">Create EatUp</Button>
+            
 
           </Navbar.Form>
           <Nav pullRight>

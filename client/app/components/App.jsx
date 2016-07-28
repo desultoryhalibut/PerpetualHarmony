@@ -46,7 +46,7 @@ class App extends React.Component {
     var that = this;
     $.ajax({
       type:'GET',
-      url: 'http://localhost:3000/sessions/userSessions',
+      url: 'http://localhost:3000/api/eatup/usereatups',
       data: ({username: auth.getToken()}),
       contentType: 'application/json',
       success: (userSession) => {
@@ -64,7 +64,7 @@ class App extends React.Component {
 
     $.ajax({
       type:'GET',
-      url: 'http://localhost:3000//api/eatup',
+      url: 'http://localhost:3000/api/eatup',
       contentType: 'application/json',
       success: (sessions) => {
         that.setState({
@@ -99,6 +99,7 @@ class App extends React.Component {
   }
 
   handleSearchChange(e) {
+    console.log('handle search chang running')
     this.setState({ search: e.target.value })
   }
 
@@ -129,11 +130,13 @@ class App extends React.Component {
     return (
       <div>
         <MyNav loggedIn = { this.state.loggedIn }
-               handleSearchChange = { this.handleSearchChange.bind(this) } 
-               handleSubmit = { this.handleSubmit.bind(this) } 
         />
 
-        <Home data={{userSession: this.state.userSession, sessions: this.state.sessions}} refresh={this.refresh.bind(this)}/>
+        <Home data={{userSession: this.state.userSession, sessions: this.state.sessions}}
+              refresh={this.refresh.bind(this)}
+              handleSearchChange = { this.handleSearchChange.bind(this) } 
+              handleSubmit = { this.handleSubmit.bind(this) }
+        />
 
         {this.props.children || <p>You are {!this.state.loggedIn && 'not'} logged in.</p>}
       </div>

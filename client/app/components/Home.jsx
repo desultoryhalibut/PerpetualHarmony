@@ -11,6 +11,10 @@ import Tab from 'react-bootstrap/lib/Tab';
 import Nav from 'react-bootstrap/lib/Nav';
 import NavItem from 'react-bootstrap/lib/NavItem';
 import Jumbotron from 'react-bootstrap/lib/Jumbotron';
+import FormGroup from 'react-bootstrap/lib/FormGroup';
+import FormControl from 'react-bootstrap/lib/FormControl';
+import Button from 'react-bootstrap/lib/Button';
+
 
 
 import auth from '../auth'
@@ -24,13 +28,30 @@ class Home extends React.Component {
       sessions: this.props.data.sessions
     }
   }
-
+  componentDidMount() {
+    auth.login();
+    var input = document.getElementById('searchTextField');
+    var options = {componentRestrictions: {country: 'us'}};   
+    this.setState({ autocomplete: new google.maps.places.Autocomplete(input, options) });
+  }
 
 
   render() {
     return (
       <div className="container">
-        
+      <Jumbotron>
+        <FormGroup>
+           <FormControl
+              id="searchTextField"
+              type="text"
+              placeholder="Search for a place"
+              onChange={ this.props.handleSearchChange }
+            />
+        </FormGroup>
+        {' '}
+        <Button type="submit" onClick={ this.props.handleSubmit } bsStyle="success">Create EatUp</Button>
+        </Jumbotron>
+
         <Tab.Container id="left-tabs-example" defaultActiveKey="first">
           <Row className="clearfix">
             <Col sm={4}>
@@ -39,9 +60,7 @@ class Home extends React.Component {
                   See EatUps In My Area
                 </NavItem>
                 <NavItem eventKey="myEatups">
-
                   EatUps I'm Attending
-                  
                 </NavItem>
               </Nav>
             </Col>

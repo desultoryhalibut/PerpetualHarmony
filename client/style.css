@@ -11,7 +11,7 @@ body {
 .myEatups {
   float: right;
 }
-.deleteButton {
+.deleteButton, .rsvpButton {
   float: right;
 }
 #searchTextField {

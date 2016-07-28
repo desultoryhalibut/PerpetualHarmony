@@ -56,7 +56,6 @@ module.exports = {
       });
 
     res.sendStatus(200);
-
   },
 
   // Deletes a EatUp
@@ -66,43 +65,4 @@ module.exports = {
     res.sendStatus(200);
   }
 
-};
-
-// sessions: {
-//
-//   getAll: function() {
-//     return Session.findAll({include: [ {model: User, required: true} ]});
-//   },
-//
-//   getUserSessions: function(username) {
-//
-//     // find a specific user where username matches
-//     return User.findOne({
-//       where: {username: username}
-//     })
-//     .then(user => {
-//       return Session.findAll({
-//         where: {creatorId: user.get('id')}
-//       });
-//     });
-//   },
-//
-//   createMeetUp: function(data) {
-//     // {username: '', location: '', locationAddress: ''}
-//     User.findOne({
-//       where: {username: data.username}
-//     }).then(function(user) {
-//       Session.create({
-//         sessionname: data.locationName,
-//         address: data.locationAddress,
-//         creatorId: user.get('id')
-//       })
-//     })
-//   },
-//
-//   deleteMeetUp: function(data) {
-//     Session.destroy({
-//       where: {id: data.sessionId, creatorId: data.userId}
-//     });
-//   }
-// }
+}

@@ -2,7 +2,7 @@ const EatUpController = require('../api/eatup/eatup.controller.js');
 const UserController = require('../api/user/user.controller.js');
 const router = require('express').Router();
 
-// Routing for EatUps
+// API Routing for EatUps
 router.get('/api/eatup', EatUpController.getAll);
 router.get('/api/eatup/usereatups', EatUpController.getUserEatups);
 router.post('/api/eatup', EatUpController.createEatUp);

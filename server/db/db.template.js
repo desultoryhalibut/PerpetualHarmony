@@ -9,7 +9,7 @@ const Eatup = require('../api/eatup/eatup.model')(db, Sequelize);
 const Reservation = require('../api/reservation/reservation.model')(db, Sequelize);
 const Comment = require('../api/comment/comment.model')(db, Sequelize);
 
-// Connect to database
+// Connect to Database
 db.authenticate()
   .then((err) => {
     console.log('Connection has been established successfully.');
@@ -17,11 +17,11 @@ db.authenticate()
     console.log('Unable to connect to the database:', err);
   });
 
-// // EATUP Table - add foreign key creatorId to the Eatup model
+// EATUP Table - add foreign key creatorId to the Eatup model
 Eatup.belongsTo(User, {foreignKey: 'creatorId', targetKey: 'id'});
 Eatup.belongsTo(Restaurant, {foreignKey: 'restaurantId', targetKey: 'id'});
 
-// // COMMENT Table - add foreign key userId to User eatupId to Eatup
+// COMMENT Table - add foreign key userId to User eatupId to Eatup
 Comment.belongsTo(User, {foreignKey: 'userId', targetKey: 'id'});
 Comment.belongsTo(Eatup, {foreignKey: 'eatupId', targetKey: 'id'});
 

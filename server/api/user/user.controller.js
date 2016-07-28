@@ -56,38 +56,4 @@ module.exports = {
         });
       });
   }
-};
-
-// user: {
-//   signUp: function(user, cb) {
-//     var username = user.username;
-//     var password = user.password;
-//
-//     bcrypt.genSalt(10, function(error, salt) {
-//       bcrypt.hash(password, salt, function(error, hash) {
-//           User.findOrCreate({where: {username: username}, defaults: {username: username, password: hash}})
-//           .spread((user, created) => {
-//             cb(user, created);
-//           })
-//       });
-//     });
-//
-//   },
-//
-//   signIn: function(user, cb) {
-//     var username = user.username;
-//     var password = user.password;
-//
-//     User.findOne({where: {username: username}})
-//       .then(user => {
-//         var hash = user.dataValues.password;
-//         bcrypt.compare(password, hash, function(error, res) {
-//           if (error) {
-//             console.log(error);
-//           } else {
-//             cb(user, res);
-//           }
-//         });
-//       });
-//   }
-// }
+}

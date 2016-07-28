@@ -25,9 +25,9 @@ document.addEventListener('DOMContentLoaded', function() {
   //Defines the routes for app and renders different components
   ReactDOM.render((
   <Router history={ hashHistory }>
-  
-    <Route path="/" component={App} />
-    <Route path="/login" component={SignIn} />
+
+    <Route path="/" component={App} onEnter={requireAuth} />
+    <Route path="/login" component={Loading} />
       <div className="container">
         <Route path="home" component={Home} onEnter={requireAuth} />
         <Route path="home/:eatupdetails" component={EatupDetails} />

@@ -25,7 +25,11 @@ class MyEatups extends React.Component {
 
   render () {
 
+<<<<<<< 2bbe42e5f6f9e95f357cb08e3dfce90ff3cb40a0
     var userCreatedSessions = this.props.userSession.map((result, index) => 
+=======
+    var userCreatedSessions = this.props.userSession.map((result, index) =>
+>>>>>>> Add lastes changes form repo
       <div className="card card-block" >
         <p className="card-title myEatUp" >{result.sessionname}</p>
 

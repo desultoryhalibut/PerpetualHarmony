@@ -29,7 +29,7 @@ class MyNav extends React.Component {
         </Navbar.Header>
         <Navbar.Collapse>
           <Navbar.Form pullLeft>
-            
+
 
           </Navbar.Form>
           <Nav pullRight>

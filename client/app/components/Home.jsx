@@ -31,7 +31,7 @@ class Home extends React.Component {
   componentDidMount() {
     auth.login();
     var input = document.getElementById('searchTextField');
-    var options = {componentRestrictions: {country: 'us'}};   
+    var options = {componentRestrictions: {country: 'us'}};
     this.setState({ autocomplete: new google.maps.places.Autocomplete(input, options) });
   }
 
@@ -67,7 +67,7 @@ class Home extends React.Component {
             <Col sm={8}>
               <Tab.Content animation>
                 <Tab.Pane eventKey="allEatups">
-                  
+
                   EatUps in My Area content
 
                   <ListOfEatUp sessions = {this.props.data.sessions} />

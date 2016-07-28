@@ -86,7 +86,7 @@ const SignUp = withRouter(
               <h1 className="welcome">Pleased to Meet You</h1>
             </Col>
           </Row>
-          
+
           <Form horizontal>
 
             <FormGroup>

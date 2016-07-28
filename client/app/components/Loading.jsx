@@ -193,4 +193,8 @@ const Loading = withRouter(
   })
 )
 
+<<<<<<< 2bbe42e5f6f9e95f357cb08e3dfce90ff3cb40a0
 export default Loading;
+=======
+export default Loading;
+>>>>>>> Add lastes changes form repo

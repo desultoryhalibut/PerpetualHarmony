@@ -110,19 +110,19 @@ class App extends React.Component {
       type: 'POST',
       url: 'http://localhost:3000/api/eatup',
       //How do we get the actual username
-      data: JSON.stringify({username: auth.getToken(), 
-                            locationName: place.name, 
+      data: JSON.stringify({username: auth.getToken(),
+                            locationName: place.name,
                             locationAddress: place.formatted_address}),
       contentType: 'application/json',
       success: (data) => {
-        this.setState(this.state); 
+        this.setState(this.state);
       }
     });
   }
 
   componentDidMount() {
     var input = document.getElementById('searchTextField');
-    var options = {componentRestrictions: {country: 'us'}};   
+    var options = {componentRestrictions: {country: 'us'}};
     this.setState({ autocomplete: new google.maps.places.Autocomplete(input, options) });
   }
 
@@ -134,7 +134,7 @@ class App extends React.Component {
 
         <Home data={{userSession: this.state.userSession, sessions: this.state.sessions}}
               refresh={this.refresh.bind(this)}
-              handleSearchChange = { this.handleSearchChange.bind(this) } 
+              handleSearchChange = { this.handleSearchChange.bind(this) }
               handleSubmit = { this.handleSubmit.bind(this) }
         />
 

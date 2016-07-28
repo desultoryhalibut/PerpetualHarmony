@@ -4,7 +4,7 @@ const User = require('../../db/db.js').User;
 module.exports = {
 
   // Retrieve all EatUp events
-  getAll: function(req, res) {
+  getAllEatUps: function(req, res) {
     Eatup.findAll({include: [ {model: User, required: true} ]})
       .then(data => {
         console.log('Eatup data ', data);
@@ -16,7 +16,7 @@ module.exports = {
   },
 
   // Retrieve all EatUp events for a specific user
-  getUserEatups: function(req, res) {
+  getUserEatUps: function(req, res) {
     const username = req.query.username;
 
     User.findOne({ where: {username: username} })
@@ -33,9 +33,21 @@ module.exports = {
       });
   },
 
+  // Retrieve specific EatUp Profile by id
+  getEatUp: function(req, res) {
+    const id = req.params.id;
+
+    Eatup.findOne({where: {id: id}})
+      .then(eatup => {
+        res.json(eatup);
+      })
+      .catch(err => {
+        console.log('Error finding eatup ', err);
+      });
+  },
+
   // Creates a new Meet Up
-  createEatUp: function(req, res) {
-    //Passes the request body containing {username, locationName, locationAddress}
+  postEatUp: function(req, res) {
     const data = req.body;
     const title = req.body.title || req.body.locationName;
     const description = req.body.description || req.body.locationAddress;

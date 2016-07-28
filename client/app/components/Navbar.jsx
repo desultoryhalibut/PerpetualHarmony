@@ -28,28 +28,12 @@ class MyNav extends React.Component {
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
-          <Navbar.Form pullLeft>
-<<<<<<< 1888fa67a23bce06b6555486f23243d7c80bda3e
 
-=======
-            <FormGroup>
-               <FormControl
-                  id="searchTextField"
-                  type="text"
-                  placeholder="Search for a place"
-                  onChange={ this.props.handleSearchChange }
-                />
-            </FormGroup>
-            {' '}
-            <Button type="submit" onClick={ this.props.handleSubmit } bsStyle="success">Create EatUp</Button>
->>>>>>> Update files
-
-          </Navbar.Form>
           <Nav pullRight>
             {this.props.loggedIn ? (
               <LinkContainer to={{ pathname: '/logout'}}><NavItem eventKey={1} href="#">Welcome {username}! | Logout</NavItem></LinkContainer>
             ) : (
-              <LinkContainer to={{ pathname: '/signin'}}><NavItem eventKey={1} href="#">Sign in</NavItem></LinkContainer>
+              <LinkContainer to={{ pathname: '/login'}}><NavItem eventKey={1} href="#">Sign in</NavItem></LinkContainer>
             )}
           </Nav>
         </Navbar.Collapse>
@@ -59,8 +43,4 @@ class MyNav extends React.Component {
 
 };
 
-<<<<<<< 1888fa67a23bce06b6555486f23243d7c80bda3e
 export default MyNav;
-=======
-export default MyNav;
->>>>>>> Update files

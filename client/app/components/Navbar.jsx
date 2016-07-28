@@ -20,7 +20,7 @@ class MyNav extends React.Component {
     const username = auth.getToken();
 
     return (
-      <Navbar>
+      <Navbar >
         <Navbar.Header>
           <Navbar.Brand>
             <LinkContainer to={{ pathname: '/home'}}><a href="#">EatUp</a></LinkContainer>

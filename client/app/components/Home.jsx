@@ -7,6 +7,11 @@ import ListOfEatUp from './Lists.jsx';
 import Grid from 'react-bootstrap/lib/Grid'
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
+import Tab from 'react-bootstrap/lib/Tab';
+import Nav from 'react-bootstrap/lib/Nav';
+import NavItem from 'react-bootstrap/lib/NavItem';
+import Jumbotron from 'react-bootstrap/lib/Jumbotron';
+
 
 import auth from '../auth'
 
@@ -15,66 +20,49 @@ class Home extends React.Component {
     super(props);
     this.state = {
       selectedCoordinate: null,
-      userSession: [],
-      sessions: []
+      userSession: this.props.data.userSession,
+      sessions: this.props.data.sessions
     }
   }
 
-  componentWillMount() {
-    this.getUserCreatedSession();
-    this.getAllSessions();
-  }
 
-  refresh() {
-    this.getUserCreatedSession();
-    this.getAllSessions();
-    this.setState(this.state);
-  }
-
-  getUserCreatedSession() {
-    var that = this;
-    $.ajax({
-      type:'GET',
-      url: 'http://localhost:3000/sessions/userSessions',
-      data: ({username: auth.getToken()}),
-      contentType: 'application/json',
-      success: (userSession) => {
-        that.setState({
-          userSession: userSession
-        });
-      }
-    });
-  }
-
-  getAllSessions () {
-
-    var that = this;
-
-    $.ajax({
-      type:'GET',
-      url: 'http://localhost:3000/sessions/allSessions',
-      contentType: 'application/json',
-      success: (sessions) => {
-        that.setState({
-          sessions: sessions
-        });
-      }
-    });
-  }
 
   render() {
     return (
-      <div>
-        <Grid>
-          <Row>
-            <Col xs={6} md={5} className="allEatups">
-              <ListOfEatUp sessions = {this.state.sessions} refresh={this.refresh.bind(this)} />
+      <div className="container">
+        
+        <Tab.Container id="left-tabs-example" defaultActiveKey="first">
+          <Row className="clearfix">
+            <Col sm={4}>
+              <Nav bsStyle="pills" stacked>
+                <NavItem eventKey="allEatups">
+                  See EatUps In My Area
+                </NavItem>
+                <NavItem eventKey="myEatups">
+
+                  EatUps I'm Attending
+                  
+                </NavItem>
+              </Nav>
             </Col>
-            <Col xs={5} md={4} className="myEatups">
-              <MyEatups userSession = {this.state.userSession} refresh={this.refresh.bind(this)} />
+            <Col sm={8}>
+              <Tab.Content animation>
+                <Tab.Pane eventKey="allEatups">
+                  
+                  EatUps in My Area content
+
+                  <ListOfEatUp sessions = {this.props.data.sessions} />
+                </Tab.Pane>
+                <Tab.Pane eventKey="myEatups">
+                  EatUps I'm attending content
+                  <MyEatups userSession = {this.props.data.userSession} refresh={this.props.refresh.bind(this)} />
+                </Tab.Pane>
+              </Tab.Content>
             </Col>
           </Row>
-        </Grid>
+        </Tab.Container>
+
+
       </div>
     )
   }

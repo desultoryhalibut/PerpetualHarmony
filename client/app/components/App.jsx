@@ -2,6 +2,9 @@ import React from 'react'
 import auth from '../auth'
 import { Link } from 'react-router';
 import MyNav from './Navbar.jsx';
+import Home from './Home.jsx';
+// import auth from '../auth'
+
 
 
 class App extends React.Component {
@@ -12,8 +15,18 @@ class App extends React.Component {
       loggedIn: auth.loggedIn(),
       userSession: [],
       sessions: [],
-      search: ''
+      search: '',
+      currentEatup: null
     }
+  }
+
+
+  componentWillMount() {
+    auth.onChange = this.updateAuth.bind(this)
+    auth.login()
+    this.getUserCreatedSession();
+    this.getAllSessions();
+    this.getUserLocation();
   }
 
   updateAuth(loggedIn) {
@@ -22,10 +35,43 @@ class App extends React.Component {
     })
   }
 
-  componentWillMount() {
-    auth.onChange = this.updateAuth.bind(this)
-    auth.login()
-    this.getUserLocation();
+
+  refresh() {
+    this.getUserCreatedSession();
+    this.getAllSessions();
+    this.setState(this.state);
+  }
+
+  getUserCreatedSession() {
+    var that = this;
+    $.ajax({
+      type:'GET',
+      url: 'http://localhost:3000/sessions/userSessions',
+      data: ({username: auth.getToken()}),
+      contentType: 'application/json',
+      success: (userSession) => {
+        console.log('Successful login')
+        that.setState({
+          userSession: userSession
+        });
+      }
+    });
+  }
+
+  getAllSessions () {
+
+    var that = this;
+
+    $.ajax({
+      type:'GET',
+      url: 'http://localhost:3000//api/eatup',
+      contentType: 'application/json',
+      success: (sessions) => {
+        that.setState({
+          sessions: sessions
+        });
+      }
+    });
   }
 
   googlePlaces() {
@@ -61,7 +107,7 @@ class App extends React.Component {
     var place = this.state.autocomplete.getPlace();
     $.ajax({
       type: 'POST',
-      url: 'http://localhost:3000/sessions/createMeetUp',
+      url: 'http://localhost:3000/api/eatup',
       //How do we get the actual username
       data: JSON.stringify({username: auth.getToken(), 
                             locationName: place.name, 
@@ -86,6 +132,9 @@ class App extends React.Component {
                handleSearchChange = { this.handleSearchChange.bind(this) } 
                handleSubmit = { this.handleSubmit.bind(this) } 
         />
+
+        <Home data={{userSession: this.state.userSession, sessions: this.state.sessions}} refresh={this.refresh.bind(this)}/>
+
         {this.props.children || <p>You are {!this.state.loggedIn && 'not'} logged in.</p>}
       </div>
     )

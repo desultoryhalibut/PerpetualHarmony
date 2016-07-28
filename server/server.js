@@ -12,7 +12,7 @@ var compiler = webpack(webpackConfig);
 require('./config/middleware.js')(app, express);
 
 
-require('./models/db.js');
+require('./db/db.js');
 app.use(router);
 
 

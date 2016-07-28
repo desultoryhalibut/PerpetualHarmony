@@ -11,10 +11,9 @@ module.exports = {
       .then(comments => {
         res.json(comments);
       })
-      .catch(error => {
-        console.error('Error retrieiving comments ', error);
+      .catch(err => {
+        console.error('Error retrieiving comments ', err);
       });
-
   },
 
   // Posts a comment to a specific EatUp event
@@ -35,8 +34,8 @@ module.exports = {
         Comment.create(newComment);
         res.send(newComment);
       })
-      .catch(error => {
-        console.error('Error sending comment ', error);
+      .catch(err => {
+        console.error('Error sending comment ', err);
       });
   }
 

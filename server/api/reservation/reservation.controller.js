@@ -39,7 +39,7 @@ module.exports = {
         console.error('Error retrieving eatup reservatios ', err);
       });
   },
-
+  // Retrieves all RSVPs for a specific EatUp
   getUserReservations: function(req, res) {
     const username = req.body.username;
     const userId = null;
@@ -50,7 +50,7 @@ module.exports = {
 
         Reservation.findAll({where: {userId: userId}, include: [ {model: User}]})
           .then(reservations => {
-            res.json(reservations);  
+            res.json(reservations);
           });
       });
   }

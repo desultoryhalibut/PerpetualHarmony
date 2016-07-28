@@ -10,7 +10,7 @@ router.post('/users/signin', UserController.signIn);
 
 // API for EatUps
 router.get('/api/eatup', EatUpController.getAllEatUps);
-router.get('/api/eatup/usereatups', ReservationController.getUserReservations);
+router.get('/api/eatup/usereatups', EatUpController.getUserEatUps);
 router.get('/api/eatup/:id', EatUpController.getEatUp);
 router.post('/api/eatup', EatUpController.postEatUp);
 router.delete('/api/eatup', EatUpController.deleteEatUp);
@@ -22,5 +22,8 @@ router.post('/api/eatup/:id/comment', CommentController.postComment);
 // Route to post and get EatUp reservations
 router.get('/api/eatup/:id/rsvp', ReservationController.postReservation);
 router.post('/api/eatup/:id/rsvp', ReservationController.getReservations);
+
+// Wildcard route to serve assets to Client
+
 
 module.exports = router;

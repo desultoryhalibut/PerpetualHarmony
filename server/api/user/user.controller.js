@@ -2,7 +2,7 @@ const User = require('../../db/db.js').User;
 const bcrypt = require('bcrypt');
 
 module.exports = {
-
+  // Adds a new User to the database
   signUp: function(req, res) {
     const user = req.body;
     const username = user.username || 'tee';
@@ -27,7 +27,7 @@ module.exports = {
       });
     });
   },
-
+  // Sign-up a new User to the database
   signIn: function(req, res) {
     const user = req.body;
     const username = user.username;

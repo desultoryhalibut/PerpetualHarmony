@@ -57,7 +57,9 @@ From within the root directory:
 sudo npm install -g bower
 npm install
 bower install
+insert db name, username, password 
 ```
+
 
 ### Roadmap
 

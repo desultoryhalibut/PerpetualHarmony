@@ -3,8 +3,6 @@ import auth from '../auth'
 import { Link } from 'react-router';
 import MyNav from './Navbar.jsx';
 import Home from './Home.jsx';
-// import auth from '../auth'
-
 
 
 class App extends React.Component {
@@ -12,7 +10,6 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loggedIn: auth.loggedIn(),
       userSession: [],
       sessions: [],
       search: '',
@@ -121,6 +118,9 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    if(!this.state.loggedIn) {
+      this.props.router.replace('/login');
+    }
     var input = document.getElementById('searchTextField');
     var options = {componentRestrictions: {country: 'us'}};
     this.setState({ autocomplete: new google.maps.places.Autocomplete(input, options) });

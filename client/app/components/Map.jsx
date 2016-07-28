@@ -16,7 +16,7 @@ class ourMap extends React.Component {
     console.log('im here')
     return (
       <div className='map-wrapper' style={mapStyle}>
-        <GoogleMap center={this.state.center} zoom={this.state.zoom} >
+        <GoogleMap center={this.state.center} zoom={this.state.zoom} > 
         </GoogleMap>
       </div>
     );

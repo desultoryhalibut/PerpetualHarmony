@@ -25,11 +25,15 @@ class MyEatups extends React.Component {
 
   render () {
 
+<<<<<<< 1888fa67a23bce06b6555486f23243d7c80bda3e
 <<<<<<< 2bbe42e5f6f9e95f357cb08e3dfce90ff3cb40a0
     var userCreatedSessions = this.props.userSession.map((result, index) => 
 =======
     var userCreatedSessions = this.props.userSession.map((result, index) =>
 >>>>>>> Add lastes changes form repo
+=======
+    var userCreatedSessions = this.props.userSession.map((result, index) => 
+>>>>>>> Update files
       <div className="card card-block" >
         <p className="card-title myEatUp" >{result.sessionname}</p>
 

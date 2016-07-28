@@ -13,11 +13,78 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://bootswatch.com/united/bootstrap.min.css">
-    
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+
     <link rel="stylesheet" href="style.css" type="text/css">
+    <link rel="stylesheet" href="signup.css" type="text/css">
+    <link rel="stylesheet" href="video.css" type="text/css">
 
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDcCRzgtjQJl6XsllGiSeRWfQDoK0tvYEQ&libraries=places"></script>
-  
+    <script type="application/javascript">
+    //jQuery is required to run this code
+    $( document ).ready(function() {
+
+      scaleVideoContainer();
+
+      initBannerVideoSize('.video-container .poster img');
+      initBannerVideoSize('.video-container .filter');
+      initBannerVideoSize('.video-container video');
+
+      $(window).on('resize', function() {
+          scaleVideoContainer();
+          scaleBannerVideoSize('.video-container .poster img');
+          scaleBannerVideoSize('.video-container .filter');
+          scaleBannerVideoSize('.video-container video');
+      });
+
+    });
+
+    function scaleVideoContainer() {
+
+      var height = $(window).height() + 5;
+      var unitHeight = parseInt(height) + 'px';
+      $('.homepage-hero-module').css('height',unitHeight);
+
+    }
+
+    function initBannerVideoSize(element){
+
+      $(element).each(function(){
+          $(this).data('height', $(this).height());
+          $(this).data('width', $(this).width());
+      });
+
+      scaleBannerVideoSize(element);
+
+    }
+
+    function scaleBannerVideoSize(element){
+
+      var windowWidth = $(window).width(),
+      windowHeight = $(window).height() + 5,
+      videoWidth,
+      videoHeight;
+
+      console.log(windowHeight);
+
+      $(element).each(function(){
+          var videoAspectRatio = $(this).data('height')/$(this).data('width');
+
+          $(this).width(windowWidth);
+
+          if(windowWidth < 1000){
+              videoHeight = windowHeight;
+              videoWidth = videoHeight / videoAspectRatio;
+              $(this).css({'margin-top' : 0, 'margin-left' : -(videoWidth - windowWidth) / 2 + 'px'});
+
+              $(this).width(videoWidth).height(videoHeight);
+          }
+
+          $('.homepage-hero-module .video-container video').addClass('fadeIn animated');
+
+      });
+    }
+    </script>
   </head>
   <body>
     <!-- Runs the bundled webpack file so everything is in JS and not JSX-->

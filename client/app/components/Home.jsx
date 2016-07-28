@@ -17,8 +17,6 @@ import Button from 'react-bootstrap/lib/Button';
 
 
 
-import auth from '../auth'
-
 class Home extends React.Component {
   constructor(props) {
     super(props);
@@ -27,6 +25,7 @@ class Home extends React.Component {
       userSession: this.props.data.userSession,
       sessions: this.props.data.sessions
     }
+
   }
   componentDidMount() {
     auth.login();

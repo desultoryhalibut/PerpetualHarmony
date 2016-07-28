@@ -29,95 +29,24 @@ Comment.belongsTo(Eatup, {foreignKey: 'eatupId', targetKey: 'id'});
 User.belongsToMany(Eatup, { through: 'Reservation', foreignKey: 'userId' });
 Eatup.belongsToMany(User, { through: 'Reservation', foreignKey: 'eatupId' });
 
-// Synchronizing the schema
-
+// Synchronizing the database
 db.query('SET FOREIGN_KEY_CHECKS = 0')
   .then(function(){
-      return db.sync({ force: true });
+    return db.sync();
   })
   .then(function(){
-      return db.query('SET FOREIGN_KEY_CHECKS = 1')
+    return db.query('SET FOREIGN_KEY_CHECKS = 1')
   })
   .then(function(){
-      console.log('Database synchronised.');
+    console.log('Database synchronised.');
   }, function(err){
-      console.log(err);
+    console.log(err);
   });
 
-// creates these tables in MySQL if they don't already exist. Pass in {force: true}
-// to drop any existing user and message tables and make new ones.
-
 module.exports = {
-  sessions: {
-
-    getAll: function() {
-      return Session.findAll({include: [ {model: User, required: true} ]});
-    },
-
-    getUserSessions: function(username) {
-
-      // find a specific user where username matches
-      return User.findOne({
-        where: {username: username}
-      })
-      .then(user => {
-        return Session.findAll({
-          where: {creatorId: user.get('id')}
-        });
-      });
-    },
-
-    createMeetUp: function(data) {
-      // {username: '', location: '', locationAddress: ''}
-      User.findOne({
-        where: {username: data.username}
-      }).then(function(user) {
-        Session.create({
-          sessionname: data.locationName,
-          address: data.locationAddress,
-          creatorId: user.get('id')
-        })
-      })
-    },
-
-    deleteMeetUp: function(data) {
-      Session.destroy({
-        where: {id: data.sessionId, creatorId: data.userId}
-      });
-    }
-  },
-
-  user: {
-    signUp: function(user, cb) {
-      var username = user.username;
-      var password = user.password;
-
-      bcrypt.genSalt(10, function(error, salt) {
-        bcrypt.hash(password, salt, function(error, hash) {
-            User.findOrCreate({where: {username: username}, defaults: {username: username, password: hash}})
-            .spread((user, created) => {
-              cb(user, created);
-            })
-        });
-      });
-
-    },
-
-    signIn: function(user, cb) {
-      var username = user.username;
-      var password = user.password;
-
-      User.findOne({where: {username: username}})
-        .then(user => {
-          var hash = user.dataValues.password;
-          bcrypt.compare(password, hash, function(error, res) {
-            if (error) {
-              console.log(error);
-            } else {
-              cb(user, res);
-            }
-          })
-        })
-    }
-  }
+  User: User,
+  Comment: Comment,
+  Restaurant: Restaurant,
+  Eatup: Eatup,
+  Reservation: Reservation
 }

@@ -21,15 +21,14 @@ class EatupDetails extends React.Component {
     var queryParams = this.props.location.query;
     console.log('this.props',this.props.params.eatupdetails)
     return(
-    <div>
-    <MyNav loggedIn = { this.state.loggedIn }
+    <div className="container">
+      <MyNav loggedIn = { this.state.loggedIn }
+      />
 
-           
-    />
-    <h1>Eatup details</h1>
-    <ul> 
-      <li>{this.props.params.eatupdetails}</li>
-    </ul>
+      <h1>Eatup details</h1>
+      <ul> 
+        <li>{this.props.params.eatupdetails}</li>
+      </ul>
     
     </div>
   ) 

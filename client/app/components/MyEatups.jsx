@@ -11,7 +11,7 @@ class MyEatups extends React.Component {
 
     $.ajax({
       type:'DELETE',
-      url: 'http://localhost:3000/sessions/deleteMeetUp',
+      url: 'http://localhost:3000/api/eatup',
       data: JSON.stringify({userId: sessionToDelete.creatorId, sessionId: sessionToDelete.id}),
       contentType: 'application/json',
       success: () => {

@@ -64,7 +64,7 @@ class App extends React.Component {
 
     $.ajax({
       type:'GET',
-      url: 'http://localhost:3000/sessions/allSessions',
+      url: 'http://localhost:3000//api/eatup',
       contentType: 'application/json',
       success: (sessions) => {
         that.setState({
@@ -107,7 +107,7 @@ class App extends React.Component {
     var place = this.state.autocomplete.getPlace();
     $.ajax({
       type: 'POST',
-      url: 'http://localhost:3000/sessions/createMeetUp',
+      url: 'http://localhost:3000/api/eatup',
       //How do we get the actual username
       data: JSON.stringify({username: auth.getToken(), 
                             locationName: place.name, 

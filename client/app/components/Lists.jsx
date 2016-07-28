@@ -31,7 +31,6 @@ class ListOfEatUp extends React.Component {
         </div>
       </div>
       )
-    console.log("resultStuffs",resultStuffs)
     return (
       <div>
         <h1>EatUps around you!</h1>

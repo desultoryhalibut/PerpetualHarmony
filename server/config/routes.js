@@ -1,5 +1,5 @@
 const EatUpController = require('../api/eatup/eatup.controller.js');
-// const UserController = require('../api/user/user.controller.js');
+const UserController = require('../api/user/user.controller.js');
 const router = require('express').Router();
 
 // Routing for sessions
@@ -9,7 +9,7 @@ router.post('/sessions/createMeetUp', EatUpController.createMeetUp);
 router.delete('/sessions/deleteMeetUp', EatUpController.deleteMeetUp);
 
 // Routing for User sign-in
-// router.post('/users/signUp', UserController.users.signUp);
-// router.post('/users/signIn', UserController.users.signIn);
+router.post('/users/signUp', UserController.signUp);
+router.post('/users/signIn', UserController.signIn);
 
 module.exports = router;

@@ -1,6 +1,7 @@
 const Eatup = require('../../db/db').Eatup;
 const User = require('../../db/db').User;
 const Restaurant = require('../../db/db').Restaurant;
+const Reservation = require('../../db/db').Reservation;
 
 module.exports = {
 
@@ -16,7 +17,7 @@ module.exports = {
       });
   },
 
-  // Retrieve all EatUp events for a specific user
+  // Retrieve all EatUp events a User as RSVPed to
   getUserEatUps: function(req, res) {
     const username = req.query.username;
 
@@ -49,7 +50,6 @@ module.exports = {
 
   // Creates a new Meet Up
   postEatUp: function(req, res) {
-    const d = new Date();
     const title = req.body.title || 'Join my meetup!',
           description = req.body.description || 'description of restaurant here',
           startTime = req.body.startTime || '2012-12-31 11:30:45',
@@ -58,7 +58,8 @@ module.exports = {
           name = req.body.locationName,
           address = req.body.locationAddress,
           latitude = req.body.latitude || undefined,
-          longitude = req.body.longitude || undefined;
+          longitude = req.body.longitude || undefined,
+          username = req.body.username;
 
     const newEatUp = {
       title: title,
@@ -79,7 +80,7 @@ module.exports = {
 
     // Check to see if restaurant exists - if so, add a new restaurant to database
     // If not, create a new restaurant and re-query for the ID
-    // Assign new ID to new eatup and post to database
+    // Assign new ID to created EatUp and post to database
 
     Restaurant.findOne({where: {name: req.body.locationName}})
       .then(restaurant => {
@@ -94,7 +95,7 @@ module.exports = {
         console.log('Error finding and creating new restaurant ', err);
       });
 
-    User.findOne({where: {username: req.body.username}})
+    User.findOne({where: {username: username}})
       .then(user => {
         newEatUp.creatorId = user.get('id');
 
@@ -104,13 +105,13 @@ module.exports = {
             newEatUp.restaurantId = restaurant.get('id');
 
             Eatup.create(newEatUp);
+
             console.log('Created new eat-up ', newEatUp);
           });
       })
       .catch(err => {
         console.log('Error querying new user ', err);
       });
-
 
     res.sendStatus(200);
   },

@@ -6,11 +6,6 @@ import App from './components/App.jsx';
 import Loading from './components/Loading.jsx';
 import Home from './components/Home.jsx';
 import EatupDetails from './components/EatupDetails.jsx';
-<<<<<<< 1888fa67a23bce06b6555486f23243d7c80bda3e
-import SignIn from './components/SignIn.jsx';
-import SignUp from './components/SignUp.jsx';
-=======
->>>>>>> Update files
 import Logout from './components/Logout.jsx';
 import auth from './auth'
 
@@ -35,10 +30,6 @@ document.addEventListener('DOMContentLoaded', function() {
         <Route path="home" component={Home} onEnter={requireAuth} />
         <Route path="home/:eatupdetails" component={EatupDetails} />
         <Route path="logout" component={Logout} />
-<<<<<<< 1888fa67a23bce06b6555486f23243d7c80bda3e
-      <Route path="/*" component={SignIn} />
-=======
->>>>>>> Update files
       </div>
   </Router>
   ), document.getElementById('app'));

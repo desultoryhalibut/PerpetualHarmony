@@ -7,7 +7,7 @@ export default class CommentForm extends React.Component {
 
   render() {
     return (
-      <div className="commentForm.">
+      <div className="commentForm">
         I am the CommentForm
       </div>
     );

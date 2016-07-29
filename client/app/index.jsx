@@ -6,8 +6,6 @@ import App from './components/App.jsx';
 import Loading from './components/Loading.jsx';
 import Home from './components/Home.jsx';
 import EatupDetails from './components/EatupDetails.jsx';
-import SignIn from './components/SignIn.jsx';
-import SignUp from './components/SignUp.jsx';
 import Logout from './components/Logout.jsx';
 import auth from './auth'
 
@@ -25,14 +23,13 @@ document.addEventListener('DOMContentLoaded', function() {
   //Defines the routes for app and renders different components
   ReactDOM.render((
   <Router history={ hashHistory }>
-  
-    <Route path="/" component={App} />
-    <Route path="/login" component={SignIn} />
+
+    <Route path="/" component={App} onEnter={requireAuth} />
+    <Route path="/login" component={Loading} />
       <div className="container">
         <Route path="home" component={Home} onEnter={requireAuth} />
         <Route path="home/:eatupdetails" component={EatupDetails} />
         <Route path="logout" component={Logout} />
-      <Route path="/*" component={SignIn} />
       </div>
   </Router>
   ), document.getElementById('app'));

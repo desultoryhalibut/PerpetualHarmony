@@ -3,9 +3,9 @@ module.exports = {
     cb = arguments[arguments.length - 1];
     if (localStorage.token) {
       console.log('There is a token!');
-      if (cb) { 
+      if (cb) {
         console.log('There is a callback!');
-        cb(true); 
+        cb(true);
       }
       this.onChange(true);
       return;
@@ -20,11 +20,12 @@ module.exports = {
       }),
       contentType: 'application/json',
       success: (dbuser) => {
+        console.log('imhere');
         console.log(dbuser);
         if (dbuser) {
           localStorage.token = dbuser;
-          if (cb) { 
-            cb(true); 
+          if (cb) {
+            cb(true);
           }
           this.onChange(true);
         } else {
@@ -40,9 +41,9 @@ module.exports = {
     cb = arguments[arguments.length - 1];
     if (localStorage.token) {
       console.log('There is a token!');
-      if (cb) { 
+      if (cb) {
         console.log('There is a callback!');
-        cb(true); 
+        cb(true);
       }
       this.onChange(true);
       return;
@@ -59,8 +60,8 @@ module.exports = {
       success: (dbuser) => {
         if (dbuser) {
           localStorage.token = dbuser;
-          if (cb) { 
-            cb(true); 
+          if (cb) {
+            cb(true);
           }
           this.onChange(true);
         } else {

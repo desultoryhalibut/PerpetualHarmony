@@ -17,8 +17,6 @@ import Button from 'react-bootstrap/lib/Button';
 
 
 
-import auth from '../auth'
-
 class Home extends React.Component {
   constructor(props) {
     super(props);
@@ -27,11 +25,12 @@ class Home extends React.Component {
       userSession: this.props.data.userSession,
       sessions: this.props.data.sessions
     }
+
   }
   componentDidMount() {
     auth.login();
     var input = document.getElementById('searchTextField');
-    var options = {componentRestrictions: {country: 'us'}};   
+    var options = {componentRestrictions: {country: 'us'}};
     this.setState({ autocomplete: new google.maps.places.Autocomplete(input, options) });
   }
 
@@ -67,7 +66,7 @@ class Home extends React.Component {
             <Col sm={8}>
               <Tab.Content animation>
                 <Tab.Pane eventKey="allEatups">
-                  
+
                   EatUps in My Area content
 
                   <ListOfEatUp sessions = {this.props.data.sessions} />

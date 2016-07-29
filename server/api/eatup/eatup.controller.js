@@ -68,8 +68,8 @@ module.exports = {
       name: req.body.locationName,
       address: req.body.locationAddress,
       latitude: req.body.latitude || null,
-      longitude: req.body.longitude || undefined,
-      photo: req.body.locationPhoto || 'http://www.themarsh.com/images/thumbnails/thumbnail-food-app.jpg'
+      longitude: req.body.longitude || null,
+      photo: req.body.photo || 'http://www.themarsh.com/images/thumbnails/thumbnail-food-app.jpg'
     };
 
     // Check to see if restaurant exists - if so, add a new restaurant to database
@@ -83,30 +83,23 @@ module.exports = {
           newEatUp.restaurantId = restaurant.get('id');
         };
       })
-      .catch(err => {
-        console.error('Error finding and creating new restaurant ', err);
-      });
+      .then(() => {
+        User.findOne({where: {username: username}})
+          .then(user => {
+            newEatUp.creatorId = user.get('id');
 
-    // Query for User to find userId, update userId for newEatUp and send data for new EatUp to database
-    User.findOne({where: {username: username}})
-      .then(user => {
-        newEatUp.creatorId = user.get('id');
-
-        Restaurant.findOne({where: {name: req.body.locationName}})
-          .then(function(restaurant) {
-            console.log('restaurant 2 ', restaurant);
-            newEatUp.restaurantId = restaurant.get('id');
-
-            Eatup.create(newEatUp);
-
-            console.log('Created new eat-up ', newEatUp);
+            Restaurant.findOne({where: {name: req.body.locationName}})
+              .then(function(restaurant) {
+                newEatUp.restaurantId = restaurant.get('id');
+                Eatup.create(newEatUp);
+                res.sendStatus(200);
+              });
           });
       })
       .catch(err => {
-        console.error('Error querying new user ', err);
+        console.error(err);
       });
 
-    res.sendStatus(200);
   },
 
   // Deletes a EatUp

@@ -45,17 +45,17 @@ class Home extends React.Component {
       <Jumbotron>
         <FormGroup>
            <FormControl
-              id="searchTextField"
               type="text"
+              id="searchTextField"
               placeholder="Search for a place"
               onChange={ this.props.handleSearchChange }
             />
         </FormGroup>
-        {' '}
-        <Button type="submit" onClick={ this.props.handleSubmit } bsStyle="success">Create EatUp</Button>
-        
-        <CreateEatup />
-        
+        {/*{' '}
+        <Button type="submit" onClick={ this.props.handleSubmit } bsStyle="success">Create EatUp</Button>*/}
+
+        <CreateEatup handleSubmit={this.props.handleSubmit} currentPlace={this.props.data.currentPlace}/>
+
         </Jumbotron>
 
         <Tab.Container id="left-tabs-example" defaultActiveKey="first">

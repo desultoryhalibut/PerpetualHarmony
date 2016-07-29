@@ -14,6 +14,7 @@ import Jumbotron from 'react-bootstrap/lib/Jumbotron';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
 import FormControl from 'react-bootstrap/lib/FormControl';
 import Button from 'react-bootstrap/lib/Button';
+import auth from '../auth.js';
 
 import CreateEatup from './CreateEatup.jsx';
 
@@ -38,6 +39,7 @@ class Home extends React.Component {
 
 
   render() {
+    console.log(this.state);
     return (
       <div className="container">
       <Jumbotron>

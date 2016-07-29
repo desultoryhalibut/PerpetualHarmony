@@ -23,7 +23,7 @@ class MyNav extends React.Component {
       <Navbar >
         <Navbar.Header>
           <Navbar.Brand>
-            <LinkContainer to={{ pathname: '/home'}}><a href="#">EatUp</a></LinkContainer>
+            <LinkContainer to={{ pathname: '/'}}><a href="#">EatUp</a></LinkContainer>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>

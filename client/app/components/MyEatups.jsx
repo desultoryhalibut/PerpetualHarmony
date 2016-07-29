@@ -2,7 +2,7 @@ import React from 'react';
 import Button from 'react-bootstrap/lib/Button'
 
 class MyEatups extends React.Component {
-	constructor(props) {
+  constructor(props) {
     super(props);
   }
 
@@ -27,10 +27,14 @@ class MyEatups extends React.Component {
 
     var userCreatedSessions = this.props.userSession.map((result, index) =>
       <div className="card card-block" >
-        <p className="card-title myEatUp" >{result.sessionname}</p>
-
-        <Button className="deleteButton" bsStyle="danger" bsSize="xsmall" key={index}
-        onClick= { this.onSessionDelete.bind(this, index, this.props) }>Delete</Button>
+        <p className="card-title myEatUp" >{result.title}</p>
+        <div className="card-text">
+          <p>{result.address}</p>
+          <p>{result.startTime} - {result.endTime} {result.date}</p>
+          <p>Hosted by: {result.username}</p>
+          <Button className="deleteButton" bsStyle="danger" bsSize="xsmall" key={index}
+          onClick= { this.onSessionDelete.bind(this, index, this.props) }>Delete</Button>
+        </div>
       </div>
     )
 
@@ -41,7 +45,7 @@ class MyEatups extends React.Component {
           {userCreatedSessions}
         </ul>
       </div>
-  	)
+    )
   }
 }
 

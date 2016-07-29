@@ -28,21 +28,25 @@ const ListOfEatUp = withRouter(
     rsvpToEatUp(index,props) {
       var eatupToCreate = index;
       console.log('this.state.autocomplete',this.state.autocomplete, 'this.props:',this.props) //this.props produces all eatups. access them by using index
+
+      //insert post request here
+
+
+
     },
 
-
     render () {
-      var resultStuffs = this.props.sessions.map((result,index) =>
+      var resultStuffs = this.props.sessions.map((result,index) => 
 
         <div className="card card-block" key={index} >
           <h4 className="card-title" key={index}>{result.title}</h4>
           <div className="card-text">
-            <p>{result.address}</p>
-            <p>{result.startTime} - {result.endTime}</p>
+            <p>{result.Restaurant.address}</p>
+            <p>{result.startTime} - {result.endTime} {result.date}</p>
             <p>Hosted by: {result.User.username}</p>
             <Button bsStyle="success" bsSize="xs" onClick={this.handleSearch.bind(this, result)}>Get Details</Button>
             <Button className="rsvpButton" bsStyle="success" bsSize="sm" key={index}
-            onClick= { this.rsvpToEatUp.bind(this, index, this.props) }>RSVP</Button>
+            onClick= { this.rsvpToEatUp.bind(this, index, this.props) }>Join!</Button>
           </div>
         </div>
         )

@@ -1,6 +1,7 @@
 const Eatup = require('../../db/db').Eatup;
 const User = require('../../db/db').User;
 const Restaurant = require('../../db/db').Restaurant;
+const Reservation = require('../../db/db').Reservation;
 
 module.exports = {
 
@@ -16,9 +17,9 @@ module.exports = {
       });
   },
 
-  // Retrieve all EatUp events for a specific user
+  // Retrieve all EatUp events a User has RSVPed to
   getUserEatUps: function(req, res) {
-    const username = req.query.username;
+    const username = req.body.username || 'tee';
 
     User.findOne({ where: {username: username} })
       .then(user => {
@@ -34,7 +35,7 @@ module.exports = {
       });
   },
 
-  // Retrieve specific EatUp Profile by id
+  // Retrieve specific EatUp Profile by its ID
   getEatUp: function(req, res) {
     const id = req.params.id;
 
@@ -43,44 +44,36 @@ module.exports = {
         res.json(eatup);
       })
       .catch(err => {
-        console.log('Error finding eatup ', err);
+        console.error('Error finding eatup ', err);
       });
   },
 
-  // Creates a new Meet Up
+  // Creates a new EatUp and posts it to the database
   postEatUp: function(req, res) {
-    const d = new Date();
-    const title = req.body.title || 'Join my meetup!',
-          description = req.body.description || 'description of restaurant here',
-          startTime = req.body.startTime || '2012-12-31 11:30:45',
-          endTime = req.body.endTime || '2012-12-31 13:30:45',
-          photo = req.body.locationPhoto || 'http://www.themarsh.com/images/thumbnails/thumbnail-food-app.jpg',
-          name = req.body.locationName,
-          address = req.body.locationAddress,
-          latitude = req.body.latitude || undefined,
-          longitude = req.body.longitude || undefined;
 
+    const username = req.body.username;
+
+    // Data for creating a new EatUp
     const newEatUp = {
-      title: title,
-      description: description,
-      startTime: startTime,
-      endTime: endTime,
+      title: req.body.title || 'Join my meetup!',
+      description: req.body.description || 'description of restaurant here',
+      startTime: req.body.startTime || '2012-12-31 11:30:45',
+      endTime: req.body.endTime || '2012-12-31 13:30:45',
       creatorId: null,
       restaurantId: null
     };
 
+    // Data for creating a new Restaurant
     const newRestaurant = {
       name: req.body.locationName,
       address: req.body.locationAddress,
-      latitude: latitude,
-      longitude: longitude,
-      photo: photo
+      latitude: req.body.latitude || null,
+      longitude: req.body.longitude || undefined,
+      photo: req.body.locationPhoto || 'http://www.themarsh.com/images/thumbnails/thumbnail-food-app.jpg'
     };
 
     // Check to see if restaurant exists - if so, add a new restaurant to database
     // If not, create a new restaurant and re-query for the ID
-    // Assign new ID to new eatup and post to database
-
     Restaurant.findOne({where: {name: req.body.locationName}})
       .then(restaurant => {
         console.log('restaurant 1 ', restaurant);
@@ -91,10 +84,11 @@ module.exports = {
         };
       })
       .catch(err => {
-        console.log('Error finding and creating new restaurant ', err);
+        console.error('Error finding and creating new restaurant ', err);
       });
 
-    User.findOne({where: {username: req.body.username}})
+    // Query for User to find userId, update userId for newEatUp and send data for new EatUp to database
+    User.findOne({where: {username: username}})
       .then(user => {
         newEatUp.creatorId = user.get('id');
 
@@ -104,13 +98,13 @@ module.exports = {
             newEatUp.restaurantId = restaurant.get('id');
 
             Eatup.create(newEatUp);
+
             console.log('Created new eat-up ', newEatUp);
           });
       })
       .catch(err => {
-        console.log('Error querying new user ', err);
+        console.error('Error querying new user ', err);
       });
-
 
     res.sendStatus(200);
   },

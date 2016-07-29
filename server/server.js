@@ -8,14 +8,13 @@ var webpack = require('webpack');
 var webpackConfig = require('../webpack.config.js');
 var compiler = webpack(webpackConfig);
 
-
 require('./config/middleware.js')(app, express);
-
-
 require('./db/db.js');
+
+// App routing
 app.use(router);
 
-
+// Webpack
 app.use(webpackDevMiddleware(compiler, {
   hot: true,
   filename: 'bundle.js',
@@ -26,7 +25,7 @@ app.use(webpackDevMiddleware(compiler, {
   historyApiFallback: true,
 }));
 
-
+// Start server
 app.listen(3000, function() {
   console.log('listening on ' + 3000);
 });

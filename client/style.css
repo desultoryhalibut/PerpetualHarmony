@@ -8,12 +8,30 @@ body {
 .head {
   height: 400px;
   max-width: 100%;
-  background-image: url('../assets/photos/foodgathering.jpeg');
+  background-image: url('../assets/photos/foodgathering2.jpeg');
+  transition: background-image ease 25ms;
   background-size:1200px;
 }
 .authComponent {
   float: none;
   margin: auto;
+}
+.navbar {
+  border-radius: 0;
+}
+.navbar-default {
+  background-color: #0A295F;
+  border-color: #0A295F;
+}
+.nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus {
+  background-color: #607D8B;
+}
+.nav-pills:active {
+  background-color: #000000;
+}
+
+a {
+  color: black;
 }
 .myEatups {
   float: right;

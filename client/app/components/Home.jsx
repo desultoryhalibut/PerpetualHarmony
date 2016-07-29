@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import MyNav from './Navbar.jsx';
 import MyEatups from './MyEatups.jsx';
 import ListOfEatUp from './Lists.jsx';
+// import CalendarExample from './Calendar.jsx';
 import Grid from 'react-bootstrap/lib/Grid'
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
@@ -38,6 +39,9 @@ class Home extends React.Component {
 
 
   render() {
+    if (!this.state.userSession) {
+      return (<div>Loading Page...</div>)
+    }
     return (
       <div className="container">
       <div className="head">
@@ -72,12 +76,16 @@ class Home extends React.Component {
             <Col sm={8}>
               <Tab.Content animation>
                 <Tab.Pane eventKey="allEatups">
-
                   <ListOfEatUp sessions = {this.props.data.sessions} />
+                
                 </Tab.Pane>
                 <Tab.Pane eventKey="myEatups">
                   
                   <MyEatups userSession = {this.props.data.userSession} refresh={this.props.refresh.bind(this)} />
+                </Tab.Pane>
+                <Tab.Pane eventKey="calendar">
+                  
+                  
                 </Tab.Pane>
               </Tab.Content>
             </Col>

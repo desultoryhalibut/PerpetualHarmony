@@ -19,6 +19,7 @@ class ListOfEatUp extends React.Component {
 
   handleSearch(event) {
     // var transitionTo = Router.transitionTo;
+
     console.log(event.id);
     window.location='/#/home/' + event.id;
   }
@@ -30,7 +31,7 @@ class ListOfEatUp extends React.Component {
 
     $.ajax({
       type:'POST',
-      url: 'http://localhost:3000/api/eatup/:id/rsvp',  //TO CHANGE
+      url: 'http://localhost:3000/api/eatup/:id/',
       data: JSON.stringify({userId: eatupToCreate.creatorId}),   //TO CHANGE
                             // sessionId: eatupToCreate.id}),   TO CHANGE
       contentType: 'application/json',
@@ -54,7 +55,7 @@ class ListOfEatUp extends React.Component {
           <p>Hosted by: {result.User.username}</p>
           <Button bsStyle="success" bsSize="xs" onClick={this.handleSearch.bind(this, result)}>Get Details</Button>
           <Button className="rsvpButton" bsStyle="success" bsSize="sm" key={index}
-          onClick= { this.rsvpToEatUp.bind(this, index, this.props) }>RSVP</Button>
+          onClick= { this.rsvpToEatUp.bind(this, index, this.props) }>Join!</Button>
         </div>
       </div>
       )

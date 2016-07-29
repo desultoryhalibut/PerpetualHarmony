@@ -113,7 +113,7 @@ class CreateEatup extends React.Component {
 
     return (
       <div>
-        <Button bsStyle="primary" bsSize="medium" onClick={this.open.bind(this)}>
+        <Button bsStyle="primary" bsSize="sm" onClick={this.open.bind(this)}>
           Create EatUp
         </Button>
 

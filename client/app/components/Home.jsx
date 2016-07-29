@@ -42,7 +42,7 @@ class Home extends React.Component {
     console.log(this.state);
     return (
       <div className="container">
-      <Jumbotron>
+      <div class='head'>
         <FormGroup>
            <FormControl
               type="text"
@@ -56,9 +56,9 @@ class Home extends React.Component {
 
         <CreateEatup handleSubmit={this.props.handleSubmit} currentPlace={this.props.data.currentPlace}/>
 
-        </Jumbotron>
+        </div>
 
-        <Tab.Container id="left-tabs-example" defaultActiveKey="first">
+        <Tab.Container id="left-tabs-example" defaultActiveKey="allEatups">
           <Row className="clearfix">
             <Col sm={4}>
               <Nav bsStyle="pills" stacked>
@@ -73,13 +73,10 @@ class Home extends React.Component {
             <Col sm={8}>
               <Tab.Content animation>
                 <Tab.Pane eventKey="allEatups">
-
-                  EatUps in My Area content
-
                   <ListOfEatUp sessions = {this.props.data.sessions} />
                 </Tab.Pane>
                 <Tab.Pane eventKey="myEatups">
-                  EatUps I'm attending content
+
                   <MyEatups userSession = {this.props.data.userSession} refresh={this.props.refresh.bind(this)} />
                 </Tab.Pane>
               </Tab.Content>

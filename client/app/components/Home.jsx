@@ -42,7 +42,7 @@ class Home extends React.Component {
     console.log(this.state);
     return (
       <div className="container">
-      <div class='head'>
+      <div className="head">
         <FormGroup>
            <FormControl
               type="text"

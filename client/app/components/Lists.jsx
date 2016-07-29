@@ -27,10 +27,17 @@ const ListOfEatUp = withRouter(
 
     rsvpToEatUp(index,props) {
       var eatupToCreate = index;
-      console.log('this.state.autocomplete',this.state.autocomplete, 'this.props:',this.props) //this.props produces all eatups. access them by using index
-
+      console.log('index:',index, 'this.props.sessions:',this.props.sessions) //this.props produces all eatups. access them by using index
+      var eatupId = this.props.sessions[index].Restaurant.id;
       //insert post request here
-
+      $.ajax({
+        url: 'api/eatup/'+eatupId+'/rsvp',
+        method: 'POST',
+        data: JSON.stringify({ username: auth.getToken() })
+      })
+      .done(function(success) {
+        console.log("Successful RSVP",success);
+      })
 
 
     },

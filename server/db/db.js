@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const db = new Sequelize('dbeatup', 'root', '', {dialect: 'mysql'});
+const db = new Sequelize('dbeatup', 'root', 'cc', {dialect: 'mysql'});
 
 // Table models
 const User = require('../api/user/user.model')(db, Sequelize);

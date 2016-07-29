@@ -19,7 +19,7 @@ module.exports = {
 
   // Retrieve all EatUp events a User has RSVPed to
   getUserEatUps: function(req, res) {
-    const username = req.query.username;
+    const username = req.body.username || 'tee';
 
     User.findOne({ where: {username: username} })
       .then(user => {
@@ -55,7 +55,7 @@ module.exports = {
 
     // Data for creating a new EatUp
     const newEatUp = {
-      title: req.body.title || 'Join my meetup!',,
+      title: req.body.title || 'Join my meetup!',
       description: req.body.description || 'description of restaurant here',
       startTime: req.body.startTime || '2012-12-31 11:30:45',
       endTime: req.body.endTime || '2012-12-31 13:30:45',

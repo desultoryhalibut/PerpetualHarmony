@@ -22,6 +22,7 @@ router.post('/api/eatup/:id/comment', CommentController.postComment);
 // Route to post and get EatUp reservations
 router.get('/api/eatup/:id/rsvp', ReservationController.postReservation);
 router.post('/api/eatup/:id/rsvp', ReservationController.getReservations);
+router.get('/api/eatup/rsvp', ReservationController.getUserReservations);
 
 // Wildcard route to serve assets to Client
 

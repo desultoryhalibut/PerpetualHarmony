@@ -96,7 +96,7 @@ class App extends React.Component {
   }
 
   handleSearchChange(e) {
-    console.log('handle search chang running')
+    console.log('handle search change running')
     this.setState({ search: e.target.value })
   }
 

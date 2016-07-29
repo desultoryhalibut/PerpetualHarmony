@@ -15,6 +15,8 @@ import FormGroup from 'react-bootstrap/lib/FormGroup';
 import FormControl from 'react-bootstrap/lib/FormControl';
 import Button from 'react-bootstrap/lib/Button';
 
+import CreateEatup from './CreateEatup.jsx';
+
 
 
 class Home extends React.Component {
@@ -49,6 +51,9 @@ class Home extends React.Component {
         </FormGroup>
         {' '}
         <Button type="submit" onClick={ this.props.handleSubmit } bsStyle="success">Create EatUp</Button>
+        
+        <CreateEatup />
+        
         </Jumbotron>
 
         <Tab.Container id="left-tabs-example" defaultActiveKey="first">

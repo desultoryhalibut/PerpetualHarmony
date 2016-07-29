@@ -1,6 +1,8 @@
 import React from 'react';
 import { Button, Grid, Row, Col, Image, Jumbotron, ListGroup, ListGroupItem, Panel, FieldGroup, Glyphicon } from 'react-bootstrap';
 
+import CommentsContainer from './CommentsContainer.jsx';
+
 import MyNav from './Navbar.jsx';
 import auth from '../auth';
 const RouteHandler = require('react-router').RouteHandler;
@@ -116,6 +118,7 @@ class EatupDetails extends React.Component {
           <Col md={1}></Col>
           <Col md={8}>
               <h3>Comments</h3>
+              <CommentsContainer comments="list of comments corresponding to specific eatup"/>
           </Col>
           <Col md={1}></Col>
          

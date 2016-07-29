@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <div className="container">
         <Route path="home" component={Home} onEnter={requireAuth} />
         <Route path="home/:eatupdetails" component={EatupDetails} />
-        <Route path="logout" component={Logout} />
+        <Route path="logout" component={Loading} />
       </div>
   </Router>
   ), document.getElementById('app'));

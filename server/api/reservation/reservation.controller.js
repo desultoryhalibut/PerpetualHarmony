@@ -10,7 +10,7 @@ module.exports = {
     const username = req.body.username;
     const eatupId = req.params.id;
 
-    let newReservation = {
+    var newReservation = {
       userId: null,
       eatupId: eatupId
     };

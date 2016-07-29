@@ -61,7 +61,7 @@ const SignIn = withRouter(
             <h1 className="welcome">Welcome Back</h1>
           </Col>
         </Row>
-        
+
         <Form horizontal>
           <FormGroup>
             <Col xs={7} sm={5} md={4} className="authComponent">

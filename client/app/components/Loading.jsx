@@ -19,7 +19,9 @@ const Loading = withRouter(
         error: false,
         username: '',
         password: '',
-        confirmedPassword: ''
+        email: '',
+        confirmedPassword: '',
+        isLoginForm: true
       }
     },
 
@@ -45,9 +47,9 @@ const Loading = withRouter(
       e.preventDefault();
       if (this.state.password === this.state.confirmedPassword) {
         console.log('The passwords match!');
-        auth.signup(this.state.username, this.state.password, (loggedIn) => {
+        auth.signup(this.state.username, this.state.password, this.state.email, (loggedIn) => {
           if (!loggedIn) {
-            console.log('Not loggedin');
+            console.log('Not loggedin')
             return this.setState({ error: true })
           }
 
@@ -104,13 +106,58 @@ const Loading = withRouter(
       });
     },
 
+    onEmailChange(event) {
+      this.setState({
+        email: event.target.value
+      });
+    },
+
     onLoginPasswordChange(event) {
       this.setState({
         password: event.target.value
       })
     },
 
+    onClickToggle(event) {
+      var classEl = event.target.className.split(' ');
+      if(classEl.indexOf('sign-btn') === -1) {
+        this.setState({isLoginForm: true});
+        console.log('signup');
+      } else {
+        this.setState({isLoginForm: false});
+        console.log('login');
+      }
+    },
+
+    componentWillMount() {
+      if(this.props.route.path === 'logout') {
+        auth.logout();
+        this.props.router.replace('/login');
+      }
+    },
+
     render() {
+      var partial;
+      var btns;
+      if(this.state.isLoginForm) {
+        partial = <form className="form-group" action="index.html" method="post" >
+          <input className="form-control" type="text" name="username" placeholder="Username" onChange={this.onLoginUserNameChange} />
+          <input className="form-control" type="password" name="pass" placeholder="Password" onChange={ this.onLoginPasswordChange } />
+          <button className="btn" type="button" name="button" onClick={ this.handleLogInSubmit }>Log Me In</button>
+        </form>;
+       btns = <div><span className="active login-btn" onClick={this.onClickToggle}>Login</span>
+       <span className="inactive sign-btn" onClick={this.onClickToggle}>Sign up</span></div>;
+      } else {
+        partial = <form className="form-group" action="index.html" method="post" >
+          <input className="form-control" type="text" name="username" placeholder="Username" onChange={ this.onLoginUserNameChange } />
+          <input className="form-control" type="password" name="pass" placeholder="Password"onChange={ this.onLoginPasswordChange } />
+          <input className="form-control" type="password" name="pass" placeholder="Confirm Password"onChange={ this.onConfPasswordChange } />
+          <input className="form-control" type="email" name="email" placeholder="Email" onChange={ this.onEmailChange } />
+          <button className="btn" type="button" name="button" onClick={ this.handleSignUpSubmit }>Sign Me Up</button>
+        </form>;
+        btns = <div><span className="inactive login-btn" onClick={this.onClickToggle}>Login</span>
+        <span className="active sign-btn" onClick={this.onClickToggle}>Sign up</span></div>;
+      }
       return (
         <div>
           <div className="homepage-hero-module">
@@ -127,22 +174,10 @@ const Loading = withRouter(
         </div>
         <div className="credentials-container">
           <div className="tab-options">
-            <span className="active">Login</span>
-            <span className="inactive">Sign up</span>
+            { btns }
           </div>
+          { partial }
 
-          <form className="form-group" action="index.html" method="post" id="login">
-            <input className="form-control" type="text" name="name" placeholder="Username" onChange={this.onLoginUserNameChange} />
-            <input className="form-control" type="password" name="name" placeholder="Password" onChange={ this.onLoginPasswordChange } />
-            <button className="btn" type="button" name="button" onClick={ this.handleLogInSubmit }>Log Me In</button>
-          </form>
-
-          <form className="form-group" action="index.html" method="post" id="signup">
-            <input className="form-control" type="text" name="name" placeholder="Username" onChange={ this.onPasswordChange } />
-            <input className="form-control" type="password" name="name" placeholder="Password"validationState={this.getConfPasswordValidationState()} />
-            <input className="form-control" type="text" name="name" placeholder="Email" onChange={ this.onPasswordChange } />
-            <button className="btn" type="button" name="button" onClick={ this.handleSignUpSubmit }>Sign Me Up</button>
-          </form>
         </div>
         </div>
       )

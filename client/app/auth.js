@@ -1,5 +1,5 @@
 module.exports = {
-  signup(username, pass, cb) {
+  signup(username, pass, email, cb) {
     cb = arguments[arguments.length - 1];
     if (localStorage.token) {
       console.log('There is a token!');
@@ -16,7 +16,8 @@ module.exports = {
       url: 'http://localhost:3000/users/signUp',
       data: JSON.stringify({
         username: username,
-        password: pass
+        password: pass,
+        email: email
       }),
       contentType: 'application/json',
       success: (dbuser) => {

@@ -6,8 +6,8 @@ module.exports = {
   signUp: function(req, res) {
     const user = req.body;
 
-    const username = user.username || 'tee';
-    const password = user.password || 'blagdon';
+    const username = user.username || 'quin';
+    const password = user.password || 'kinser';
 
     const email = user.email || 'randomemail@gmail.com';
 

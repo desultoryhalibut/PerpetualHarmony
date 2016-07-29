@@ -13,10 +13,11 @@ class App extends React.Component {
       userSession: [],
       sessions: [],
       search: '',
-      currentEatup: null
+      currentEatup: null,
+      currentPlace: {},
+      autocomplete: null
     }
   }
-
 
   componentWillMount() {
     auth.onChange = this.updateAuth.bind(this)
@@ -96,25 +97,28 @@ class App extends React.Component {
   }
 
   handleSearchChange(e) {
-    console.log('handle search change running')
-    this.setState({ search: e.target.value })
+    this.setState({ search: e.target.value });
   }
 
   handleSubmit() {
-    // post this.state.search to database
+    var that = this;
     var place = this.state.autocomplete.getPlace();
-    $.ajax({
-      type: 'POST',
-      url: 'http://localhost:3000/api/eatup',
-      //How do we get the actual username
-      data: JSON.stringify({username: auth.getToken(),
-                            locationName: place.name,
-                            locationAddress: place.formatted_address}),
-      contentType: 'application/json',
-      success: (data) => {
-        this.setState(this.state);
-      }
+    this.setState({currentPlace: place}, function() {
+      console.log('currentPlace is set to ', that.state.currentPlace);
     });
+
+    // $.ajax({
+    //   type: 'POST',
+    //   url: 'http://localhost:3000/api/eatup',
+    //   //How do we get the actual username
+    //   data: JSON.stringify({username: auth.getToken(),
+    //                         locationName: place.name,
+    //                         locationAddress: place.formatted_address}),
+    //   contentType: 'application/json',
+    //   success: (data) => {
+    //     this.setState(this.state);
+    //   }
+    // });
   }
 
   componentDidMount() {
@@ -132,7 +136,7 @@ class App extends React.Component {
         <MyNav loggedIn = { this.state.loggedIn }
         />
 
-        <Home data={{userSession: this.state.userSession, sessions: this.state.sessions}}
+        <Home data={{userSession: this.state.userSession, sessions: this.state.sessions, currentPlace: this.state.currentPlace}}
               refresh={this.refresh.bind(this)}
               handleSearchChange = { this.handleSearchChange.bind(this) }
               handleSubmit = { this.handleSubmit.bind(this) }

@@ -1,9 +1,11 @@
-import React from 'react'
-import auth from '../auth'
+import React from 'react';
+import auth from '../auth';
+import { Link, withRouter } from 'react-router';
 
 class Logout extends React.Component {
   componentDidMount() {
-    auth.logout()
+    auth.logout();
+    console.log(this.props);
   }
 
   render() {

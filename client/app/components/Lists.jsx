@@ -25,21 +25,20 @@ const ListOfEatUp = withRouter(
       this.props.router.replace(nRoute);
     },
 
-    rsvpToEatUp(index,props) {
-      var eatupToCreate = index;
-      console.log('index:',index, 'this.props.sessions:',this.props.sessions) //this.props produces all eatups. access them by using index
-      var eatupId = this.props.sessions[index].Restaurant.id;
+    rsvpToEatUp(result) {
+      
+      var eatupId = result.id;
+      console.log('auth.getToken',auth.getToken());
       //insert post request here
       $.ajax({
         url: 'api/eatup/'+eatupId+'/rsvp',
         method: 'POST',
-        data: JSON.stringify({ username: auth.getToken() })
+        data: JSON.stringify({ username: auth.getToken() }),
+        contentType: 'application/json', 
+        success: function(data) {
+          console.log('Successfully RSVPd:',data)
+        }
       })
-      .done(function(success) {
-        console.log("Successful RSVP",success);
-      })
-
-
     },
 
     render () {
@@ -53,7 +52,7 @@ const ListOfEatUp = withRouter(
             <p>Hosted by: {result.User.username}</p>
             <Button bsStyle="success" bsSize="xs" onClick={this.handleSearch.bind(this, result)}>Get Details</Button>
             <Button className="rsvpButton" bsStyle="success" bsSize="sm" key={index}
-            onClick= { this.rsvpToEatUp.bind(this, index, this.props) }>Join!</Button>
+            onClick= { this.rsvpToEatUp.bind(this, result) }>Join!</Button>
           </div>
         </div>
         )

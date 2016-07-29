@@ -1,6 +1,5 @@
 import React from 'react';
 var DateTimeField = require('react-bootstrap-datetimepicker');
-
 import { Button, Popover, Tooltip, Modal, OverlayTrigger, FieldGroup, Checkbox, Radio, FormGroup, ControlLabel, FormControl, HelpBlock } from 'react-bootstrap';
 
 
@@ -10,11 +9,16 @@ const CreateEatup = React.createClass({
   getInitialState() {
     return { showModal: false,
              start: new Date(),
-             end: new Date()
+             end: new Date(),
             };
   },
 
-  
+  componentDidMount() {
+    var input = document.getElementById('searchGoogle');
+    var options = {componentRestrictions: {country: 'us'}};
+    this.setState({ autocomplete: new google.maps.places.Autocomplete(input, options) });
+  },
+
   // form field handlers
   handleTitle(e) {
     console.log(this.state);
@@ -54,8 +58,24 @@ const CreateEatup = React.createClass({
 
   // events
    onSubmit: function(e) {
-    console.log('Submit Pressed: ', this.refs);
-    console.log(this.state);
+    console.log('Submit Pressed: ');
+    $.ajax({
+      type: 'POST',
+      url: 'http://localhost:3000/api/eatup',
+      data: JSON.stringify({
+        username: 'quin',
+        title: 'a',
+        startTime: '2012-12-31 13:30:45',
+        endTime: '2012-12-31 13:30:45',
+        description: 'string'
+        
+      }),
+      contentType: 'application/json',
+      success: (data) => {
+        console.log('success, sent some data: ', data);
+        //this.setState(this.state);
+      }
+    });
   },
 
   close() {
@@ -119,6 +139,7 @@ const CreateEatup = React.createClass({
 
                 <ControlLabel><OverlayTrigger overlay={where}><a href="#">Where is your EatUp?</a></OverlayTrigger></ControlLabel>
                 <FormControl
+                  id="searchGoogle"
                   type="text"
                   value={this.state.where}
                   placeholder="Choose a Location"

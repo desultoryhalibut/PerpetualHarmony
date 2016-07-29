@@ -49,8 +49,8 @@ class ListOfEatUp extends React.Component {
       <div className="card card-block" key={index} >
         <h4 className="card-title" key={index}>{result.title}</h4>
         <div className="card-text">
-          <p>{result.address}</p>
-          <p>{result.startTime} - {result.endTime}</p>
+          <p>{result.Restaurant.address}</p>
+          <p>{result.startTime} - {result.endTime} {result.date}</p>
           <p>Hosted by: {result.User.username}</p>
           <Button bsStyle="success" bsSize="xs" onClick={this.handleSearch.bind(this, result)}>Get Details</Button>
           <Button className="rsvpButton" bsStyle="success" bsSize="sm" key={index}

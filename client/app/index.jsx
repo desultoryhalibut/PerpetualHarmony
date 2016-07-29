@@ -24,13 +24,14 @@ document.addEventListener('DOMContentLoaded', function() {
   ReactDOM.render((
   <Router history={ hashHistory }>
 
-    <Route path="/" component={App} onEnter={requireAuth} />
-    <Route path="/login" component={Loading} />
-      <div className="container">
-        <Route path="home" component={Home} onEnter={requireAuth} />
-        <Route path="home/:eatupdetails" component={EatupDetails} />
-        <Route path="logout" component={Logout} />
-      </div>
+    <Route path="/" component={App} onEnter={requireAuth} >
+      <Route path="/login" component={Loading} />
+        <div className="container">
+          <Route path="home" component={Home} onEnter={requireAuth} />
+          <Route path="home/:eatupdetails" component={EatupDetails} />
+          <Route path="logout" component={Logout} />
+        </div>
+    </Route>
   </Router>
   ), document.getElementById('app'));
 });

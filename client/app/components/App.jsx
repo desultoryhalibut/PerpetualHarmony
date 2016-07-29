@@ -127,6 +127,9 @@ class App extends React.Component {
   }
 
   render() {
+    if (!this.state.userSession) {
+      return (<div>Loading Page...</div>)
+    }
     return (
       <div>
         <MyNav loggedIn = { this.state.loggedIn }

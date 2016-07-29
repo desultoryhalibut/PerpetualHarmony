@@ -51,7 +51,9 @@ class Home extends React.Component {
         </FormGroup>
         {' '}
         <Button type="submit" onClick={ this.props.handleSubmit } bsStyle="success">Create EatUp</Button>
+        
         <CreateEatup />
+        
         </Jumbotron>
 
         <Tab.Container id="left-tabs-example" defaultActiveKey="first">

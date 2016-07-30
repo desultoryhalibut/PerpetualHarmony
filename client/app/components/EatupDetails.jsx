@@ -26,7 +26,7 @@ class EatupDetails extends React.Component {
     // console.log('this.props',this.props.params.eatupdetails)
 
   render () {
-    console.log('Current Eat Up in EatupDetails', this.props.currentEatup);
+    console.log('EatUp Detail currentEatup ', this.props.currentEatup);
 
     var details = {
          "id":2,
@@ -129,7 +129,7 @@ class EatupDetails extends React.Component {
 
     return(
       <div>
-        <MyNav loggedIn = { this.state.loggedIn }  />
+
         <div className="container">
 
           {gridInstance}

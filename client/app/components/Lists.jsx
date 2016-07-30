@@ -23,9 +23,11 @@ const ListOfEatUp = withRouter(
     getDetails(event) {
       var id = event.id;
       var nRoute = 'home/' + id;
-      this.props.getEatupDetails(id);
-      this.props.router.replace(nRoute);
-      console.log('Current Eatup in Lists ', this.props.currentEatup);
+      this.setState({currentEatup: event}, () => {
+        this.props.getEatupDetails(id);
+        // this.props.router.replace(nRoute);
+        console.log('this.state',this.state);
+      });
     },
 
     rsvpToEatUp(result) {

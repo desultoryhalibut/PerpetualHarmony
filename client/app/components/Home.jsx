@@ -35,9 +35,7 @@ class Home extends React.Component {
     var options = {componentRestrictions: {country: 'us'}};
     this.setState({ autocomplete: new google.maps.places.Autocomplete(input, options) });
   }
-  runThis() {
-    console.log('this state contains:',this.state)
-  }
+
 
   render() {
     if (this.props.data.currentEatup) {
@@ -58,7 +56,6 @@ class Home extends React.Component {
         </FormGroup>
 
         <CreateEatup handleSubmit={this.props.handleSubmit} currentPlace={this.props.data.currentPlace}/>
-        <Button onClick={this.runThis.bind(this)}></Button>
 
         </div>
 

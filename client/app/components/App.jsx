@@ -59,7 +59,7 @@ class App extends React.Component {
       });
     })
     .fail(error => {
-      console.error(error);
+      console.error('error',error);
     });
   }
 
@@ -188,7 +188,7 @@ class App extends React.Component {
     var partial;
 
     if(!this.state.currentEatup) {
-      partial = <Home data={{userRSVPs: this.state.userRSVPs, allEatups: this.state.allEatups, currentPlace: this.state.currentPlace, currentEatup: this.state.currentEatup}}
+      partial = <Home data={{userRSVPs: this.state.userRSVPs, allEatups: this.state.allEatups, currentPlace: this.state.currentPlace, currentEatup: this.state.currentEatup, refresh: this.refresh.bind(this)}}
             refresh={ this.refresh.bind(this) }
             handleSearchChange={ this.handleSearchChange.bind(this) }
             handleSubmit={ this.handleSubmit.bind(this) }
@@ -208,7 +208,7 @@ class App extends React.Component {
         { partial }
 
 
-        {JSON.stringify(this.props.children)}
+        
       </div>
     )
   }

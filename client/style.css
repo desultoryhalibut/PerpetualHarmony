@@ -9,7 +9,7 @@ body {
   max-width: 100%;
   background-image: url('../assets/photos/foodgathering.jpeg');
   transition: background-image ease 25ms;
-  background-size:1200px;
+  background-size:1400px;
 }
 .authComponent {
   float: none;
@@ -30,10 +30,16 @@ body {
 }
 
 .address-text {
-  font-size: 14px;
+  font-size: 15px;
+  margin-top: 1em;
+  margin-bottom: 0px;
   line-height: 1.25;
   font-weight: 500;
   letter-spacing: -.02em;
+}
+h4, .h4, h5, .h5, h6, .h6 {
+  margin-top: 5px;
+  margin-bottom: 0px;
 }
 li {
   text-decoration: none;

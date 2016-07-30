@@ -46,49 +46,49 @@ class Home extends React.Component {
     console.log(this.props.data.sessions);
     return (
       <div className="container" id="map">
-        <Map eatUps={this.props.data.allEatups} />
-      <div className='head'>
-        <FormGroup>
-           <FormControl
-              type="text"
-              id="searchTextField"
-              placeholder="Search for a place"
-              onChange={ this.props.handleSearchChange }
-            />
-        </FormGroup>
+        <div className='head'>
+          <FormGroup>
+             <FormControl
+                type="text"
+                id="searchTextField"
+                placeholder="Search for a place"
+                onChange={ this.props.handleSearchChange }
+              />
+          </FormGroup>
 
-        <CreateEatup handleSubmit={this.props.handleSubmit} currentPlace={this.props.data.currentPlace}/>
-        <Button onClick={this.runThis.bind(this)}></Button>
+          <CreateEatup handleSubmit={this.props.handleSubmit} currentPlace={this.props.data.currentPlace}/>
+          <Button onClick={this.runThis.bind(this)}></Button>
 
-        </div>
+          </div>
+          <Map eatUps={this.props.data.allEatups} />
 
-        <Tab.Container id="left-tabs-example" defaultActiveKey="allEatups">
-          <Row className="clearfix">
-            <Col sm={4}>
-              <Nav bsStyle="pills" stacked>
-                <NavItem eventKey="allEatups">
-                  See EatUps In My Area
-                </NavItem>
-                <NavItem eventKey="myEatups">
-                  EatUps I'm Attending
-                </NavItem>
-              </Nav>
-            </Col>
-            <Col sm={8}>
-              <Tab.Content animation>
-                <Tab.Pane eventKey="allEatups">
+          <Tab.Container id="left-tabs-example" defaultActiveKey="allEatups">
+            <Row className="clearfix">
+              <Col sm={4}>
+                <Nav bsStyle="pills" stacked>
+                  <NavItem eventKey="allEatups">
+                    See EatUps In My Area
+                  </NavItem>
+                  <NavItem eventKey="myEatups">
+                    EatUps I'm Attending
+                  </NavItem>
+                </Nav>
+              </Col>
+              <Col sm={8}>
+                <Tab.Content animation>
+                  <Tab.Pane eventKey="allEatups">
 
-                  <ListOfEatUp allEatups = {this.props.data.allEatups} userRSVPs = {this.props.data.userRSVPs} getEatupDetails={this.props.getEatupDetails} currentEatup={this.props.data.currentEatup} refresh={this.props.refresh.bind(this)}/>
-                </Tab.Pane>
-                <Tab.Pane eventKey="myEatups">
+                    <ListOfEatUp allEatups = {this.props.data.allEatups} userRSVPs = {this.props.data.userRSVPs} getEatupDetails={this.props.getEatupDetails} currentEatup={this.props.data.currentEatup} refresh={this.props.refresh.bind(this)}/>
+                  </Tab.Pane>
+                  <Tab.Pane eventKey="myEatups">
 
-                  <MyEatups userRSVPs = {this.props.data.userRSVPs} refresh={this.props.refresh.bind(this)} />
+                    <MyEatups userRSVPs = {this.props.data.userRSVPs} refresh={this.props.refresh.bind(this)} />
 
-                </Tab.Pane>
-              </Tab.Content>
-            </Col>
-          </Row>
-        </Tab.Container>
+                  </Tab.Pane>
+                </Tab.Content>
+              </Col>
+            </Row>
+          </Tab.Container>
 
 
       </div>

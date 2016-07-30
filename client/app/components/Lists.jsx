@@ -77,7 +77,7 @@ const ListOfEatUp = withRouter(
 
       var resultStuffs = this.props.allEatups.map((result, index) =>
 
-        <div className="card card-block" key={index} >
+        <div className="card card-block clearfix" key={index} >
           <h4 className="card-title" key={index}>{result.title}</h4>
 
           <div className="card-text">
@@ -87,15 +87,15 @@ const ListOfEatUp = withRouter(
             <h6>Hosted by: {result.User.username}</h6>
 
               { ( this.state.confirmRSVP && index === result.id ) ? <Results /> : null }
-            <Button bsStyle="success" bsSize="xs" onClick={this.handleSearch.bind(this, result)}>Get Details</Button>
-            <Button className="rsvpButton" bsStyle="success" bsSize="sm" key={index}
+            <Button className="btn-primary" bsSize="xs" onClick={this.handleSearch.bind(this, result)}>Get Details</Button>
+            <Button className="rsvpButton btn-primary" bsSize="sm" key={index}
             onClick= { this.rsvpToEatUp.bind(this, result) }>Join!</Button>
           </div>
         </div>
         )
       return (
         <div>
-          <h1>EatUps around you!</h1>
+          <h1 className="text-center eatup-headline-container">Eatups around you!</h1>
           <ul className="list-group eatupsList">
             {resultStuffs}
           </ul>

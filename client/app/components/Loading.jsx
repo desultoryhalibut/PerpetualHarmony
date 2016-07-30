@@ -58,7 +58,7 @@ const Loading = withRouter(
           if (location.state && location.state.nextPathname) {
             this.props.router.replace(location.state.nextPathname)
           } else {
-            this.props.router.replace('home')
+            this.props.router.replace('/')
           }
         })
       } else {

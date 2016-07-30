@@ -10,6 +10,7 @@ module.exports = {
     // Expect req.body to be {username: ''}
     const username = req.body.username;
     const eatupId = req.params.id;
+    console.log('Username in req.body.username:',username,'. Req.body:',req.body)
 
     var newReservation = {
       userId: null,
@@ -20,6 +21,7 @@ module.exports = {
       .then(user => {
         newReservation.userId = user.get('id');
         Reservation.create(newReservation);
+        console.log('Successful add')
       })
       .catch(err => {
         console.error('Error RSVPing to event ', err);

@@ -24,18 +24,18 @@ export default class CommentsContainer extends React.Component {
     comment.username = auth.getToken();
     // var updatedComments = currentComments.concat([comment]);
     // this.setState({data: updatedComments});
-    console.log('COMMENT: ', comment)
+    console.log('COMMENT: ', comment, 'URL: ', url);
     $.ajax({
-      url: url,
-      dataType: 'json',
+      url: 'http://localhost:3000'+url, ///api/eatup/2/comment
       type: 'POST',
       data: JSON.stringify(comment),
-      success: function(data) {
-        this.setState({data: data});
-      }.bind(this),
-      error: function(err) {
-        console.log('ERR', err, 'posted to: ', url);
-      }.bind(this)
+      contentType: 'application/json'
+    })
+    .done(data => {
+      console.log('Posted comment', data);
+    })
+    .fail(err => {
+      console.log('error posting comment' , err);
     });
   }
 
@@ -66,7 +66,7 @@ export default class CommentsContainer extends React.Component {
     	<div className="commentsContainer">
 	      <h2>Comments</h2>
 	      <CommentList data={this.state.data}/>
-	      <CommentForm onNewComment={this.handleNewComment} url={this.props.url}/>
+	      <CommentForm onNewComment={this.handleNewComment.bind(this)} url={this.props.url}/>
 	    </div>
     );
   }

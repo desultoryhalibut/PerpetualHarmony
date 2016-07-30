@@ -45,7 +45,9 @@ module.exports = {
 
   // Retrieves all RSVPs for a specific EatUp
   getUserReservations: function(req, res) {
-    const username = req.body.username || 'tee';
+
+    const username = req.body.username || 'quin';
+
     var userId;
     console.log('getUserReservations ', username);
 

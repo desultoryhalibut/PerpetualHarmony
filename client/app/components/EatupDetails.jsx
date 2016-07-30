@@ -30,37 +30,16 @@ class EatupDetails extends React.Component {
   render () {
     console.log('EatUp Detail currentEatup ', this.props.currentEatup);
 
-    var details = {
-         "id":2,
-         "title":"Join my meetup!",
-         "startTime":"2012-12-31T19:30:45.000Z",
-         "endTime":"2012-12-31T21:30:45.000Z",
-         "description":"description of restaurant here",
-         "createdAt":"2016-07-28T23:40:05.000Z",
-         "updatedAt":"2016-07-28T23:40:05.000Z",
-         "creatorId":4,
-         "restaurantId":2,
-         "User":{
-            "id":4,
-            "username":"tee",
-            "password":"$2a$10$w6EOq/enUCHKQs8n1FPC7upMwgqc1FSEVs5XAQAPZTRdTx/GUuYtS",
-            "email":"randomemail@gmail.com",
-            "createdAt":"2016-07-28T22:06:10.000Z",
-            "updatedAt":"2016-07-28T22:06:10.000Z"
-         },
-         "Restaurant":{
-            "id":2,
-            "name":"Popeyes® Louisiana Kitchen",
-            "address":"1426 Fillmore St, San Francisco, CA 94115, USA",
-            "latitude":null,
-            "longitude":null,
-            "photo":"http://www.themarsh.com/images/thumbnails/thumbnail-food-app.jpg",
-            "createdAt":"2016-07-28T22:07:22.000Z",
-            "updatedAt":"2016-07-28T22:07:22.000Z"
-         }
-      };
     var restaurant = this.props.currentEatup.Restaurant;
     var commentsUrl = `/api/eatup/${this.props.currentEatup.id.toString()}/comment`;
+
+    var usernames = this.props.currentEatupRSVPs.map((user) => {
+      return (
+        <div>
+          {user.User.username}
+        </div>
+      );
+    });
 
     const gridInstance = (
       <Grid>
@@ -69,7 +48,7 @@ class EatupDetails extends React.Component {
             <Col md={1}></Col>
             <Col md={2}><Image src={restaurant.photo} responsive /></Col>
             <Col md={8}>
-              <h1>{details.title}</h1>
+              <h1>{this.props.currentEatup.title}</h1>
               <h4><Glyphicon glyph="time" /> formatted: {this.props.currentEatup.startTime}</h4>
             </Col>
             <Col md={1}></Col>
@@ -91,7 +70,7 @@ class EatupDetails extends React.Component {
               </Panel>
 
               <Panel header="Who's eating?" bsStyle="success">
-                  <h4>Array of attendee names</h4>
+                  {usernames}
               </Panel>
 
               <Panel header="Anything else?" bsStyle="success">
@@ -105,8 +84,7 @@ class EatupDetails extends React.Component {
         <Row>
           <Col md={1}></Col>
           <Col md={8}>
-              <h3>Comments</h3>
-              <CommentsContainer url={commentsUrl}/>
+            <CommentsContainer url={commentsUrl} currentEatupComments={this.props.currentEatupComments}/>
           </Col>
           <Col md={1}></Col>
 

@@ -7,7 +7,7 @@ module.exports = {
   getComments: function(req, res) {
     const eatupId = req.params.id;
 
-    Comment.findAll({where: {eatupId: eatupId}})
+    Comment.findAll({where: {eatupId: eatupId}, include: [{model: User}]})
       .then(comments => {
         res.json(comments);
       })

@@ -44,6 +44,7 @@ class CreateEatup extends React.Component {
 
   // events
   onSubmit(e) {
+    this.close();
 
     $.ajax({
       type: 'POST',

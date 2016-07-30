@@ -15,6 +15,8 @@ class App extends React.Component {
       allEatups: [],
       search: '',
       currentEatup: null,
+      currentEatupRSVPs: [],
+      currentEatupComments: [],
       currentPlace: {},
       autocomplete: null
     }
@@ -38,7 +40,6 @@ class App extends React.Component {
     this.getUserCreatedSession().bind(this);
     this.getAllSessions();
     this.setState(this.state);
-
   }
 
   getUserCreatedSession() {
@@ -81,6 +82,8 @@ class App extends React.Component {
 
   getEatupDetails(eatupId) {
     var that = this;
+
+    // Retrieves Eatup Details
     $.ajax({
       type: 'GET',
       url: `http://localhost:3000/api/eatup/${eatupId}`,
@@ -95,6 +98,41 @@ class App extends React.Component {
     .fail(err => {
       console.error('Error retrieving eatup details ', err);
     });
+
+    //Retrieve RSVPs for specified Eatup
+    $.ajax({
+      type: 'GET',
+      url: `http://localhost:3000/api/eatup/${eatupId}/rsvp`,
+      contentType: 'application/json'
+    })
+    .done(rsvps => {
+      console.log('RSVPs for EatUp', rsvps);
+
+      this.setState({currentEatupRSVPs: rsvps}, () => {
+        console.log(`currentEatupRSVPs for ${eatupId} is now  ${that.state.currentEatup}`);
+      });
+    })
+    .fail(err => {
+      console.error('Error retrieving eatup RSVPs ', err);
+    });
+
+    //Retrieve COMMENTS for specified Eatup
+    $.ajax({
+      type: 'GET',
+      url: `http://localhost:3000/api/eatup/${eatupId}/comment`,
+      contentType: 'application/json'
+    })
+    .done(comments => {
+      console.log('COMMENTS for EatUp', comments);
+
+      this.setState({currentEatupComments: comments}, () => {
+        console.log(`currentEatupComments for ${eatupId} is now  ${that.state.currentEatup}`);
+      });
+    })
+    .fail(err => {
+      console.error('Error retrieving eatup comments ', err);
+    });
+
   }
 
   googlePlaces() {
@@ -157,7 +195,9 @@ class App extends React.Component {
             getEatupDetails={ this.getEatupDetails.bind(this) }
       />;
     } else {
-      partial = <EatupDetails currentEatup={this.state.currentEatup} />
+      partial = <EatupDetails currentEatup={this.state.currentEatup} currentEatupRSVPs={this.state.currentEatupRSVPs}
+      currentEatupComments={this.state.currentEatupComments}
+      />
     }
 
     return (

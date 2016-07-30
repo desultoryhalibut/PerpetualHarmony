@@ -24,7 +24,7 @@ export default class CommentsContainer extends React.Component {
     comment.username = auth.getToken();
     var updatedComments = currentComments.concat([comment]);
     this.setState({data: updatedComments});
-    
+
     console.log('COMMENT: ', comment, 'URL: ', url);
     $.ajax({
       url: 'http://localhost:3000'+url, ///api/eatup/2/comment
@@ -66,7 +66,7 @@ export default class CommentsContainer extends React.Component {
     return (
     	<div className="commentsContainer">
 	      <h2>Comments</h2>
-	      <CommentList data={this.state.data}/>
+	      <CommentList data={this.state.data} currentEatupComments={this.props.currentEatupComments}/>
 	      <CommentForm onNewComment={this.handleNewComment.bind(this)} url={this.props.url}/>
 	    </div>
     );

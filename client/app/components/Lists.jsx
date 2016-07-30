@@ -12,6 +12,16 @@ import React from 'react';
 import Button from 'react-bootstrap/lib/Button';
 import { Router, Route, Link, hashHistory, withRouter } from 'react-router';
 
+
+var Results = React.createClass({
+    render: function() {
+      console.log('Results rendering')
+        return (
+            <span className="glyphicon glyphicon-ok" aria-hidden="false"></span>
+        );
+    }
+});
+
 const ListOfEatUp = withRouter(
   React.createClass({
     componentDidMount() {
@@ -19,17 +29,22 @@ const ListOfEatUp = withRouter(
       var options = {componentRestrictions: {country: 'us'}};
       this.setState({ autocomplete: new google.maps.places.Autocomplete(input, options) });
     },
-
+    getInitialState: function() {
+      console.log('inside getinitial')
+        return { 
+          confirmRSVP: false,
+          placesRSVPd: []
+        };
+    },
     handleSearch(event) {
       var nRoute = 'home/' + event.id;
       this.props.router.replace(nRoute);
     },
 
-    rsvpToEatUp(result) {
-      
+    rsvpToEatUp(result, index) {
+      this.setState({ confirmRSVP: true });
       var eatupId = result.id;
-      console.log('auth.getToken',auth.getToken());
-      //insert post request here
+
       $.ajax({
         url: 'api/eatup/'+eatupId+'/rsvp',
         method: 'POST',
@@ -40,6 +55,10 @@ const ListOfEatUp = withRouter(
         }
       })
     },
+    getCurrent(index) {
+      console.log('in current function. this:',this, 'index:',index)
+    },
+    
 
     render () {
       var resultStuffs = this.props.sessions.map((result,index) => 
@@ -47,9 +66,13 @@ const ListOfEatUp = withRouter(
         <div className="card card-block" key={index} >
           <h4 className="card-title" key={index}>{result.title}</h4>
           <div className="card-text">
-            <p>{result.Restaurant.address}</p>
-            <p>{result.startTime} - {result.endTime} {result.date}</p>
-            <p>Hosted by: {result.User.username}</p>
+            <p className="address-text"><strong>Where: </strong>{result.Restaurant.name}</p>
+            <h6>{result.Restaurant.address}</h6>
+            <h6>{result.startTime} - {result.endTime} {result.date}</h6>
+            <h6>Hosted by: {result.User.username}</h6>
+            <Button onClick={this.getCurrent.bind(this,index)}></Button>
+              
+              { ( this.state.confirmRSVP && index === result.id ) ? <Results /> : null }
             <Button bsStyle="success" bsSize="xs" onClick={this.handleSearch.bind(this, result)}>Get Details</Button>
             <Button className="rsvpButton" bsStyle="success" bsSize="sm" key={index}
             onClick= { this.rsvpToEatUp.bind(this, result) }>Join!</Button>

@@ -38,17 +38,18 @@ class App extends React.Component {
     this.getUserCreatedSession();
     this.getAllSessions();
     this.setState(this.state);
+    
   }
 
   getUserCreatedSession() {
     var that = this;
     $.ajax({
       type:'GET',
-      url: 'http://localhost:3000/api/eatup/usereatups',
+      url: 'http://localhost:3000/api/users/rsvp',
       data: ({username: auth.getToken()}),
       contentType: 'application/json',
       success: (userSession) => {
-        console.log('Successful login')
+        console.log('Successfully retrieved userSessions:',userSession)
         that.setState({
           userSession: userSession
         });
@@ -65,6 +66,7 @@ class App extends React.Component {
       url: 'http://localhost:3000/api/eatup',
       contentType: 'application/json',
       success: (sessions) => {
+        console.log('Success in retrieving all eatups:',sessions)
         that.setState({
           sessions: sessions
         });
@@ -110,7 +112,7 @@ class App extends React.Component {
     // $.ajax({
     //   type: 'POST',
     //   url: 'http://localhost:3000/api/eatup',
-    //   //How do we get the actual username
+    
     //   data: JSON.stringify({username: auth.getToken(),
     //                         locationName: place.name,
     //                         locationAddress: place.formatted_address}),
@@ -142,7 +144,7 @@ class App extends React.Component {
               handleSubmit = { this.handleSubmit.bind(this) }
         />
 
-        {this.props.children || <p>You are {!this.state.loggedIn && 'not'} logged in.</p>}
+        {JSON.stringify(this.props.children)}
       </div>
     )
   }

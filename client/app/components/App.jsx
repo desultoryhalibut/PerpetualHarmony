@@ -11,8 +11,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userSession: [],
-      sessions: [],
+      userRSVPs: [],
+      allEatups: [],
       search: '',
       currentEatup: null,
       currentPlace: {},
@@ -38,6 +38,7 @@ class App extends React.Component {
     this.getUserCreatedSession().bind(this);
     this.getAllSessions();
     this.setState(this.state);
+
   }
 
   getUserCreatedSession() {
@@ -51,9 +52,9 @@ class App extends React.Component {
     .done(data => {
       console.log('Successfully logged in');
       this.setState({
-        userSession: data
+        userRSVPs: data
       }, () => {
-        console.log('UserSessions from App ', this.state.userSession);
+        console.log('userRSVPs from App ', this.state.userRSVPs);
       });
     })
     .fail(error => {
@@ -70,8 +71,9 @@ class App extends React.Component {
       url: 'http://localhost:3000/api/eatup',
       contentType: 'application/json',
       success: (sessions) => {
+        console.log('Success in retrieving all eatups')
         that.setState({
-          sessions: sessions
+          allEatups: sessions
         });
       }
     });
@@ -160,11 +162,13 @@ class App extends React.Component {
 
     return (
       <div>
+      
         <MyNav loggedIn = { this.state.loggedIn } resetState={this.resetState.bind(this)}/>
 
         { partial }
 
-        {this.props.children || <p>You are {!this.state.loggedIn && 'not'} logged in.</p>}
+
+        {JSON.stringify(this.props.children)}
       </div>
     )
   }

@@ -15,7 +15,6 @@ import FormGroup from 'react-bootstrap/lib/FormGroup';
 import FormControl from 'react-bootstrap/lib/FormControl';
 import Button from 'react-bootstrap/lib/Button';
 import auth from '../auth.js';
-
 import CreateEatup from './CreateEatup.jsx';
 
 class Home extends React.Component {
@@ -23,8 +22,8 @@ class Home extends React.Component {
     super(props);
     this.state = {
       selectedCoordinate: null,
-      userSession: this.props.data.userSession,
-      sessions: this.props.data.sessions
+      userRSVPs: this.props.data.userRSVPs,
+      allEatups: this.props.data.allEatups
     }
   }
 
@@ -33,6 +32,9 @@ class Home extends React.Component {
     var input = document.getElementById('searchTextField');
     var options = {componentRestrictions: {country: 'us'}};
     this.setState({ autocomplete: new google.maps.places.Autocomplete(input, options) });
+  }
+  runThis() {
+    console.log('this state contains:',this.state)
   }
 
   render() {
@@ -53,6 +55,7 @@ class Home extends React.Component {
         </FormGroup>
 
         <CreateEatup handleSubmit={this.props.handleSubmit} currentPlace={this.props.data.currentPlace}/>
+        <Button onClick={this.runThis.bind(this)}></Button>
 
         </div>
 
@@ -71,11 +74,12 @@ class Home extends React.Component {
             <Col sm={8}>
               <Tab.Content animation>
                 <Tab.Pane eventKey="allEatups">
-                  <ListOfEatUp sessions = {this.props.data.sessions} getEatupDetails={this.props.getEatupDetails} currentEatup={this.props.data.currentEatup}/>
+
+                  <ListOfEatUp allEatups = {this.props.data.allEatups} userRSVPs = {this.props.data.userRSVPs} getEatupDetails={this.props.getEatupDetails} currentEatup={this.props.data.currentEatup} refresh={this.props.refresh.bind(this)}/>
                 </Tab.Pane>
                 <Tab.Pane eventKey="myEatups">
 
-                  <MyEatups userSession = {this.props.data.userSession} refresh={this.props.refresh.bind(this)} />
+                  <MyEatups userRSVPs = {this.props.data.userRSVPs} refresh={this.props.refresh.bind(this)} />
 
                 </Tab.Pane>
               </Tab.Content>

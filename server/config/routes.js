@@ -10,7 +10,7 @@ router.post('/users/signin', UserController.signIn);
 
 // API for EatUps
 router.get('/api/eatup', EatUpController.getAllEatUps);
-router.get('/api/eatup/usereatups', EatUpController.getUserEatUps);
+router.get('/api/eatup/usereatups', EatUpController.getUserEatUps);  //diff is that this is all user created eatups - user rsvp'd events should be included in user eatups
 router.get('/api/eatup/:id', EatUpController.getEatUp);
 router.post('/api/eatup', EatUpController.postEatUp);
 router.delete('/api/eatup', EatUpController.deleteEatUp);

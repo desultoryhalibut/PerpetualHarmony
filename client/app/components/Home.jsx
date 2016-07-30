@@ -15,7 +15,6 @@ import FormGroup from 'react-bootstrap/lib/FormGroup';
 import FormControl from 'react-bootstrap/lib/FormControl';
 import Button from 'react-bootstrap/lib/Button';
 import auth from '../auth.js';
-
 import CreateEatup from './CreateEatup.jsx';
 
 
@@ -39,7 +38,11 @@ class Home extends React.Component {
 
 
   render() {
+<<<<<<< HEAD
 
+=======
+    console.log("this.state",this.state);
+>>>>>>> 4fbd9ae4e6b33c1eebe610b8dbc8c0ece89ec0ef
     return (
       <div className="container">
       <div className="head">
@@ -73,7 +76,11 @@ class Home extends React.Component {
             <Col sm={8}>
               <Tab.Content animation>
                 <Tab.Pane eventKey="allEatups">
+<<<<<<< HEAD
                   <ListOfEatUp sessions = {this.props.data.sessions} getEatupDetails={this.props.getEatupDetails} currentEatup={this.props.data.currentEatup}/>
+=======
+                  <ListOfEatUp sessions = {this.props.data.sessions} userSession = {this.props.data.userSession}  refresh={this.props.refresh.bind(this)} />
+>>>>>>> 4fbd9ae4e6b33c1eebe610b8dbc8c0ece89ec0ef
                 </Tab.Pane>
                 <Tab.Pane eventKey="myEatups">
 

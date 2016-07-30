@@ -59,8 +59,8 @@ class EatupDetails extends React.Component {
             "updatedAt":"2016-07-28T22:07:22.000Z"
          }
       };
-    var restaurant = details.Restaurant;
-    var commentsUrl = `/api/eatup/${details.id.toString()}/comment`;
+    var restaurant = this.props.currentEatup.Restaurant;
+    var commentsUrl = `/api/eatup/${this.props.currentEatup.id.toString()}/comment`;
 
     const gridInstance = (
       <Grid>
@@ -70,7 +70,7 @@ class EatupDetails extends React.Component {
             <Col md={2}><Image src={restaurant.photo} responsive /></Col>
             <Col md={8}>
               <h1>{details.title}</h1>
-              <h4><Glyphicon glyph="time" /> formatted: {details.startTime}</h4>
+              <h4><Glyphicon glyph="time" /> formatted: {this.props.currentEatup.startTime}</h4>
             </Col>
             <Col md={1}></Col>
           </Row>
@@ -82,7 +82,7 @@ class EatupDetails extends React.Component {
             <Col md={10}>
 
               <Panel header="When?" bsStyle="success">
-                  <h4>Start: {details.startTime}  End: {details.endTime}</h4>
+                  <h4>Start: {this.props.currentEatup.startTime}  End: {this.props.currentEatup.endTime}</h4>
               </Panel>
 
               <Panel header="Where?" bsStyle="success">
@@ -95,7 +95,7 @@ class EatupDetails extends React.Component {
               </Panel>
 
               <Panel header="Anything else?" bsStyle="success">
-                  <h4>{details.description}</h4>
+                  <h4>{this.props.currentEatup.description}</h4>
               </Panel>
 
             </Col>

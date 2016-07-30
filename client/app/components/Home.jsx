@@ -24,10 +24,9 @@ class Home extends React.Component {
     super(props);
     this.state = {
       selectedCoordinate: null,
-      userSession: this.props.data.userSession,
-      sessions: this.props.data.sessions
+      userRSVPs: this.props.data.userRSVPs,
+      allEatups: this.props.data.allEatups
     }
-
   }
   componentDidMount() {
     auth.login();
@@ -35,14 +34,13 @@ class Home extends React.Component {
     var options = {componentRestrictions: {country: 'us'}};
     this.setState({ autocomplete: new google.maps.places.Autocomplete(input, options) });
   }
+  runThis() {
+    console.log('this state contains:',this.state)
+  }
 
 
   render() {
-<<<<<<< HEAD
 
-=======
-    console.log("this.state",this.state);
->>>>>>> 4fbd9ae4e6b33c1eebe610b8dbc8c0ece89ec0ef
     return (
       <div className="container">
       <div className="head">
@@ -58,6 +56,7 @@ class Home extends React.Component {
         <Button type="submit" onClick={ this.props.handleSubmit } bsStyle="success">Create EatUp</Button>*/}
 
         <CreateEatup handleSubmit={this.props.handleSubmit} currentPlace={this.props.data.currentPlace}/>
+        <Button onClick={this.runThis.bind(this)}></Button>
 
         </div>
 
@@ -76,15 +75,12 @@ class Home extends React.Component {
             <Col sm={8}>
               <Tab.Content animation>
                 <Tab.Pane eventKey="allEatups">
-<<<<<<< HEAD
-                  <ListOfEatUp sessions = {this.props.data.sessions} getEatupDetails={this.props.getEatupDetails} currentEatup={this.props.data.currentEatup}/>
-=======
-                  <ListOfEatUp sessions = {this.props.data.sessions} userSession = {this.props.data.userSession}  refresh={this.props.refresh.bind(this)} />
->>>>>>> 4fbd9ae4e6b33c1eebe610b8dbc8c0ece89ec0ef
+
+                  <ListOfEatUp allEatups = {this.props.data.allEatups} userRSVPs = {this.props.data.userRSVPs} getEatupDetails={this.props.getEatupDetails} currentEatup={this.props.data.currentEatup} refresh={this.props.refresh.bind(this)}/>
                 </Tab.Pane>
                 <Tab.Pane eventKey="myEatups">
 
-                  <MyEatups userSession = {this.props.data.userSession} refresh={this.props.refresh.bind(this)} />
+                  <MyEatups userRSVPs = {this.props.data.userRSVPs} refresh={this.props.refresh.bind(this)} />
 
                 </Tab.Pane>
               </Tab.Content>

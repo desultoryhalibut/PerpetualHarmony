@@ -72,7 +72,7 @@ const ListOfEatUp = withRouter(
 
     render () {
 
-      var resultStuffs = this.props.sessions.map((result, index) =>
+      var resultStuffs = this.props.allEatups.map((result, index) =>
 
         <div className="card card-block" key={index} >
           <h4 className="card-title" key={index}>{result.title}</h4>

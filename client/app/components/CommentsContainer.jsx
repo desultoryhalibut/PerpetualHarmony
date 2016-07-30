@@ -13,15 +13,32 @@ export default class CommentsContainer extends React.Component {
         {id: 4, author: "Tabitha", text: "This too!"}
       ]
     }
+  }
 
+  getComments(){
+    console.log('getComments() invoked', this.props.url);
+    $.ajax({
+      url: this.props.url,
+      method: 'GET',
+      dataType: 'json',
+      cache: false,
+      success: function(data) {
+        this.setState({data: data});
+      }.bind(this),
+      error: function(err) {
+        console.log(err);
+      }.bind(this)
+    });
+  }
+
+  componentDidMount() {
+    this.getComments();
+    //setInterval(this.getComments, 10000).bind(this);
   }
 
   render() {
     return (
-    	<div>
-	      <div className="commentsContainer">
-	        Hello! I am inside the CommentsContainer component.
-	      </div>
+    	<div className="commentsContainer">
 	      <h2>Comments</h2>
 	      <CommentList data={this.state.data}/>
 	      <CommentForm />

@@ -60,21 +60,7 @@ class EatupDetails extends React.Component {
          }
       };
     var restaurant = details.Restaurant;
-    /*
-     <Panel header="When & Where" bsStyle="info">
-       <ListGroup>
-         <ListGroupItem header="When">Start: {details.startTime}  End: {details.endTime}</ListGroupItem>
-       </ListGroup>
-     </Panel>
-
-       <ListGroup>
-         <ListGroupItem header="When">Start: {details.startTime}  End: {details.endTime}</ListGroupItem>
-         <ListGroupItem header="Location">{restaurant.name}</ListGroupItem>
-         <ListGroupItem header="Address" href="#">{restaurant.address}</ListGroupItem>
-         <ListGroupItem header="Who's going">[Array of profile pictures]</ListGroupItem>
-         <ListGroupItem header="More information">{details.description}</ListGroupItem>
-       </ListGroup>
-    */
+    var commentsUrl = `/api/eatup/${details.id.toString()}/comment`;
 
     const gridInstance = (
       <Grid>
@@ -120,7 +106,7 @@ class EatupDetails extends React.Component {
           <Col md={1}></Col>
           <Col md={8}>
               <h3>Comments</h3>
-              <CommentsContainer comments="list of comments corresponding to specific eatup"/>
+              <CommentsContainer url={commentsUrl}/>
           </Col>
           <Col md={1}></Col>
 

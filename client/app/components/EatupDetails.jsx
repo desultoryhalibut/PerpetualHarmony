@@ -69,7 +69,7 @@ class EatupDetails extends React.Component {
             <Col md={1}></Col>
             <Col md={2}><Image src={restaurant.photo} responsive /></Col>
             <Col md={8}>
-              <h1>{details.title}</h1>
+              <h1>{this.props.currentEatup.title}</h1>
               <h4><Glyphicon glyph="time" /> formatted: {this.props.currentEatup.startTime}</h4>
             </Col>
             <Col md={1}></Col>

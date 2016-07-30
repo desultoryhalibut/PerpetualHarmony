@@ -17,8 +17,6 @@ import Button from 'react-bootstrap/lib/Button';
 import auth from '../auth.js';
 import CreateEatup from './CreateEatup.jsx';
 
-
-
 class Home extends React.Component {
   constructor(props) {
     super(props);
@@ -28,6 +26,7 @@ class Home extends React.Component {
       allEatups: this.props.data.allEatups
     }
   }
+
   componentDidMount() {
     auth.login();
     var input = document.getElementById('searchTextField');
@@ -38,8 +37,10 @@ class Home extends React.Component {
     console.log('this state contains:',this.state)
   }
 
-
   render() {
+    if (this.props.data.currentEatup) {
+      console.log('HOME - current eatup', this.props.data.currentEatup);
+    }
 
     return (
       <div className="container">
@@ -52,8 +53,6 @@ class Home extends React.Component {
               onChange={ this.props.handleSearchChange }
             />
         </FormGroup>
-        {/*{' '}
-        <Button type="submit" onClick={ this.props.handleSubmit } bsStyle="success">Create EatUp</Button>*/}
 
         <CreateEatup handleSubmit={this.props.handleSubmit} currentPlace={this.props.data.currentPlace}/>
         <Button onClick={this.runThis.bind(this)}></Button>

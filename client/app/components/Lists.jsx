@@ -37,13 +37,13 @@ const ListOfEatUp = withRouter(
     },
 
     getInitialState: function() {
-      console.log('inside getinitial')
         return { 
           confirmRSVP: false,
         };
     },
     handleSearch(event) {
       var nRoute = 'home/' + event.id;
+      var nRoute = 'home/' + id;
       this.props.getEatupDetails(id);
       this.props.router.replace(nRoute);
       console.log('props and state', this.props, this.state);

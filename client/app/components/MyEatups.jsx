@@ -8,7 +8,7 @@ class MyEatups extends React.Component {
 
 
   onSessionDelete(index, props) {
-    var sessionToDelete = props.userSession[index];
+    var sessionToDelete = props.userRSVPs[index];
 
     $.ajax({
       type:'DELETE',
@@ -25,7 +25,7 @@ class MyEatups extends React.Component {
 
   render () {
 
-    var userCreatedSessions = this.props.userSession.map((result, index) =>
+    var userRSVPs = this.props.userRSVPs.map((result, index) =>
       <div className="card card-block" >
         <p className="card-title myEatUp" >{result.title}</p>
         <div className="card-text">
@@ -42,7 +42,7 @@ class MyEatups extends React.Component {
       <div>
         <h2>Your EatUps</h2>
         <ul className='list-group eatupsList'>
-          {userCreatedSessions}
+          {userRSVPs}
         </ul>
       </div>
     )

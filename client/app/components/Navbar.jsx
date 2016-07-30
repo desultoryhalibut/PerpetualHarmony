@@ -15,6 +15,10 @@ class MyNav extends React.Component {
     super(props);
   }
 
+  handleClick() {
+    this.props.resetState();
+  }
+
   render() {
 
     const username = auth.getToken();
@@ -23,7 +27,7 @@ class MyNav extends React.Component {
       <Navbar >
         <Navbar.Header>
           <Navbar.Brand>
-            <LinkContainer to={{ pathname: '/'}}><a href="#">EatUp</a></LinkContainer>
+            <LinkContainer to={{ pathname: '/'}} onClick={this.handleClick.bind(this)}><a href="#">EatUp</a></LinkContainer>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>

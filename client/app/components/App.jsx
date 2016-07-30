@@ -3,6 +3,7 @@ import auth from '../auth'
 import { Link } from 'react-router';
 import MyNav from './Navbar.jsx';
 import Home from './Home.jsx';
+import EatupDetails from './EatupDetails.jsx';
 
 
 class App extends React.Component {
@@ -10,8 +11,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userSession: [],
-      sessions: [],
+      userRSVPs: [],
+      allEatups: [],
       search: '',
       currentEatup: null,
       currentPlace: {},
@@ -33,26 +34,31 @@ class App extends React.Component {
     })
   }
 
-
   refresh() {
-    this.getUserCreatedSession();
+    this.getUserCreatedSession().bind(this);
     this.getAllSessions();
     this.setState(this.state);
+
   }
 
   getUserCreatedSession() {
     var that = this;
     $.ajax({
       type:'GET',
-      url: 'http://localhost:3000/api/eatup/usereatups',
+      url: 'http://localhost:3000/api/users/rsvp',
       data: ({username: auth.getToken()}),
-      contentType: 'application/json',
-      success: (userSession) => {
-        console.log('Successful login')
-        that.setState({
-          userSession: userSession
-        });
-      }
+      contentType: 'application/json'
+    })
+    .done(data => {
+      console.log('Successfully logged in');
+      this.setState({
+        userRSVPs: data
+      }, () => {
+        console.log('userRSVPs from App ', this.state.userRSVPs);
+      });
+    })
+    .fail(error => {
+      console.error(error);
     });
   }
 
@@ -65,10 +71,29 @@ class App extends React.Component {
       url: 'http://localhost:3000/api/eatup',
       contentType: 'application/json',
       success: (sessions) => {
+        console.log('Success in retrieving all eatups')
         that.setState({
-          sessions: sessions
+          allEatups: sessions
         });
       }
+    });
+  }
+
+  getEatupDetails(eatupId) {
+    var that = this;
+    $.ajax({
+      type: 'GET',
+      url: `http://localhost:3000/api/eatup/${eatupId}`,
+      contentType: 'application/json'
+    })
+    .done(details => {
+      console.log('Details for EatUp', details);
+      this.setState({currentEatup: details}, () => {
+        console.log(`Current EatUpstate for ${eatupId} is now  ${that.state.currentEatup}`);
+      });
+    })
+    .fail(err => {
+      console.error('Error retrieving eatup details ', err);
     });
   }
 
@@ -106,19 +131,6 @@ class App extends React.Component {
     this.setState({currentPlace: place}, function() {
       console.log('currentPlace is set to ', that.state.currentPlace);
     });
-
-    // $.ajax({
-    //   type: 'POST',
-    //   url: 'http://localhost:3000/api/eatup',
-    //   //How do we get the actual username
-    //   data: JSON.stringify({username: auth.getToken(),
-    //                         locationName: place.name,
-    //                         locationAddress: place.formatted_address}),
-    //   contentType: 'application/json',
-    //   success: (data) => {
-    //     this.setState(this.state);
-    //   }
-    // });
   }
 
   componentDidMount() {
@@ -130,19 +142,33 @@ class App extends React.Component {
     this.setState({ autocomplete: new google.maps.places.Autocomplete(input, options) });
   }
 
+  resetState() {
+    this.setState({currentEatup: null});
+  }
+
   render() {
+    var partial;
+
+    if(!this.state.currentEatup) {
+      partial = <Home data={{userSession: this.state.userSession, sessions: this.state.sessions, currentPlace: this.state.currentPlace, currentEatup: this.state.currentEatup}}
+            refresh={ this.refresh.bind(this) }
+            handleSearchChange={ this.handleSearchChange.bind(this) }
+            handleSubmit={ this.handleSubmit.bind(this) }
+            getEatupDetails={ this.getEatupDetails.bind(this) }
+      />;
+    } else {
+      partial = <EatupDetails currentEatup={this.state.currentEatup} />
+    }
+
     return (
       <div>
-        <MyNav loggedIn = { this.state.loggedIn }
-        />
+      
+        <MyNav loggedIn = { this.state.loggedIn } resetState={this.resetState.bind(this)}/>
 
-        <Home data={{userSession: this.state.userSession, sessions: this.state.sessions, currentPlace: this.state.currentPlace}}
-              refresh={this.refresh.bind(this)}
-              handleSearchChange = { this.handleSearchChange.bind(this) }
-              handleSubmit = { this.handleSubmit.bind(this) }
-        />
+        { partial }
 
-        {this.props.children || <p>You are {!this.state.loggedIn && 'not'} logged in.</p>}
+
+        {JSON.stringify(this.props.children)}
       </div>
     )
   }

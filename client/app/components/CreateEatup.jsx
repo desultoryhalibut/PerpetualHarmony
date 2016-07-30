@@ -20,12 +20,6 @@ class CreateEatup extends React.Component {
       title: e.target.value
     });
   }
-  //
-  // handleWhere(e) {
-  //   this.setState({
-  //     where: e.target.value
-  //   });
-  // }
 
   handleStart(newStart) {
     console.log(this.state);
@@ -62,6 +56,8 @@ class CreateEatup extends React.Component {
         description: this.state.details,
         locationName: this.props.currentPlace.name,
         locationAddress: this.props.currentPlace.formatted_address,
+        latitude: this.props.currentPlace.geometry.location.lat(),
+        longitude: this.props.currentPlace.geometry.location.lng(),
         photo: this.props.currentPlace.icon
       }),
       contentType: 'application/json'
@@ -113,7 +109,7 @@ class CreateEatup extends React.Component {
 
     return (
       <div>
-        <Button bsStyle="primary" bsSize="medium" onClick={this.open.bind(this)}>
+        <Button bsStyle="primary" bsSize="sm" onClick={this.open.bind(this)}>
           Create EatUp
         </Button>
 

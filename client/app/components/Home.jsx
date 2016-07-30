@@ -15,34 +15,36 @@ import FormGroup from 'react-bootstrap/lib/FormGroup';
 import FormControl from 'react-bootstrap/lib/FormControl';
 import Button from 'react-bootstrap/lib/Button';
 import auth from '../auth.js';
-
 import CreateEatup from './CreateEatup.jsx';
-
-
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       selectedCoordinate: null,
-      userSession: this.props.data.userSession,
-      sessions: this.props.data.sessions
+      userRSVPs: this.props.data.userRSVPs,
+      allEatups: this.props.data.allEatups
     }
-
   }
+
   componentDidMount() {
     auth.login();
     var input = document.getElementById('searchTextField');
     var options = {componentRestrictions: {country: 'us'}};
     this.setState({ autocomplete: new google.maps.places.Autocomplete(input, options) });
   }
-
+  runThis() {
+    console.log('this state contains:',this.state)
+  }
 
   render() {
-    console.log(this.state);
+    if (this.props.data.currentEatup) {
+      console.log('HOME - current eatup', this.props.data.currentEatup);
+    }
+
     return (
       <div className="container">
-      <div class='head'>
+      <div className="head">
         <FormGroup>
            <FormControl
               type="text"
@@ -51,10 +53,9 @@ class Home extends React.Component {
               onChange={ this.props.handleSearchChange }
             />
         </FormGroup>
-        {/*{' '}
-        <Button type="submit" onClick={ this.props.handleSubmit } bsStyle="success">Create EatUp</Button>*/}
 
         <CreateEatup handleSubmit={this.props.handleSubmit} currentPlace={this.props.data.currentPlace}/>
+        <Button onClick={this.runThis.bind(this)}></Button>
 
         </div>
 
@@ -73,11 +74,13 @@ class Home extends React.Component {
             <Col sm={8}>
               <Tab.Content animation>
                 <Tab.Pane eventKey="allEatups">
-                  <ListOfEatUp sessions = {this.props.data.sessions} />
+
+                  <ListOfEatUp allEatups = {this.props.data.allEatups} userRSVPs = {this.props.data.userRSVPs} getEatupDetails={this.props.getEatupDetails} currentEatup={this.props.data.currentEatup} refresh={this.props.refresh.bind(this)}/>
                 </Tab.Pane>
                 <Tab.Pane eventKey="myEatups">
 
-                  <MyEatups userSession = {this.props.data.userSession} refresh={this.props.refresh.bind(this)} />
+                  <MyEatups userRSVPs = {this.props.data.userRSVPs} refresh={this.props.refresh.bind(this)} />
+
                 </Tab.Pane>
               </Tab.Content>
             </Col>

@@ -21,7 +21,6 @@ module.exports = {
       }),
       contentType: 'application/json',
       success: (dbuser) => {
-        console.log('imhere');
         console.log(dbuser);
         if (dbuser) {
           localStorage.token = dbuser;

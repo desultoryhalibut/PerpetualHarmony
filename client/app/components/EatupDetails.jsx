@@ -28,7 +28,9 @@ class EatupDetails extends React.Component {
     // console.log('this.props',this.props.params.eatupdetails)
 
   render () {
-    var details = {  
+    console.log('EatUp Detail currentEatup ', this.props.currentEatup);
+
+    var details = {
          "id":2,
          "title":"Join my meetup!",
          "startTime":"2012-12-31T19:30:45.000Z",
@@ -38,7 +40,7 @@ class EatupDetails extends React.Component {
          "updatedAt":"2016-07-28T23:40:05.000Z",
          "creatorId":4,
          "restaurantId":2,
-         "User":{  
+         "User":{
             "id":4,
             "username":"tee",
             "password":"$2a$10$w6EOq/enUCHKQs8n1FPC7upMwgqc1FSEVs5XAQAPZTRdTx/GUuYtS",
@@ -46,7 +48,7 @@ class EatupDetails extends React.Component {
             "createdAt":"2016-07-28T22:06:10.000Z",
             "updatedAt":"2016-07-28T22:06:10.000Z"
          },
-         "Restaurant":{  
+         "Restaurant":{
             "id":2,
             "name":"Popeyes® Louisiana Kitchen",
             "address":"1426 Fillmore St, San Francisco, CA 94115, USA",
@@ -63,24 +65,24 @@ class EatupDetails extends React.Component {
     const gridInstance = (
       <Grid>
           <Row className="title">
-           
+
             <Col md={1}></Col>
             <Col md={2}><Image src={restaurant.photo} responsive /></Col>
-            <Col md={8}> 
+            <Col md={8}>
               <h1>{details.title}</h1>
-              <h4><Glyphicon glyph="time" /> formatted: {details.startTime}</h4>  
+              <h4><Glyphicon glyph="time" /> formatted: {details.startTime}</h4>
             </Col>
             <Col md={1}></Col>
           </Row>
-       
+
         <Row><Col md={12}><br/></Col></Row>
         <Row className="details-container">
-          
+
             <Col md={1}></Col>
             <Col md={10}>
-              
+
               <Panel header="When?" bsStyle="success">
-                  <h4>Start: {details.startTime}  End: {details.endTime}</h4> 
+                  <h4>Start: {details.startTime}  End: {details.endTime}</h4>
               </Panel>
 
               <Panel header="Where?" bsStyle="success">
@@ -95,7 +97,7 @@ class EatupDetails extends React.Component {
               <Panel header="Anything else?" bsStyle="success">
                   <h4>{details.description}</h4>
               </Panel>
-              
+
             </Col>
             <Col md={1}></Col>
         </Row>
@@ -107,16 +109,16 @@ class EatupDetails extends React.Component {
               <CommentsContainer url={commentsUrl}/>
           </Col>
           <Col md={1}></Col>
-         
+
         </Row>
-      
+
     </Grid>
 
     );
 
     return(
       <div>
-        <MyNav loggedIn = { this.state.loggedIn }  />
+
         <div className="container">
 
           {gridInstance}

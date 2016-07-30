@@ -1,6 +1,8 @@
 import React from 'react';
 import { Button, Grid, Row, Col, Image, Jumbotron, ListGroup, ListGroupItem, Panel, FieldGroup, Glyphicon } from 'react-bootstrap';
 
+var moment = require('moment');
+
 import CommentsContainer from './CommentsContainer.jsx';
 
 import MyNav from './Navbar.jsx';
@@ -23,15 +25,14 @@ class EatupDetails extends React.Component {
     auth.login()
   }
 
-  //write function to grab place details from database using this.props.params.eatupdetails (index/unique identifier)
-    // var queryParams = this.props.location.query;
-    // console.log('this.props',this.props.params.eatupdetails)
-
   render () {
     console.log('EatUp Detail currentEatup ', this.props.currentEatup);
 
     var restaurant = this.props.currentEatup.Restaurant;
     var commentsUrl = `/api/eatup/${this.props.currentEatup.id.toString()}/comment`;
+
+    var startTime = moment(this.props.currentEatup.startTime).format('llll');
+    var endTime = moment(this.props.currentEatup.endTime).format('llll');
 
     var usernames = this.props.currentEatupRSVPs.map((user) => {
       return (
@@ -49,7 +50,7 @@ class EatupDetails extends React.Component {
             <Col md={2}><Image src={restaurant.photo} responsive /></Col>
             <Col md={8}>
               <h1>{this.props.currentEatup.title}</h1>
-              <h4><Glyphicon glyph="time" /> formatted: {this.props.currentEatup.startTime}</h4>
+              <h4><Glyphicon glyph="time" /> {startTime}</h4>
             </Col>
             <Col md={1}></Col>
           </Row>
@@ -61,7 +62,7 @@ class EatupDetails extends React.Component {
             <Col md={10}>
 
               <Panel header="When?" bsStyle="success">
-                  <h4>Start: {this.props.currentEatup.startTime}  End: {this.props.currentEatup.endTime}</h4>
+                  <h4><span>Start: {startTime}  </span><span>   End: {endTime}</span></h4>
               </Panel>
 
               <Panel header="Where?" bsStyle="success">

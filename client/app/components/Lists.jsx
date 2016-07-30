@@ -42,9 +42,8 @@ const ListOfEatUp = withRouter(
         };
     },
     handleSearch(event) {
-      var nRoute = 'home/' + event.id;
-      var nRoute = 'home/' + id;
-      
+      // var nRoute = 'home/' + event.id;
+      var id = event.id;
       this.setState({currentEatup: event}, () => {
         this.props.getEatupDetails(id);
         // this.props.router.replace(nRoute);

@@ -150,7 +150,7 @@ class App extends React.Component {
     var partial;
 
     if(!this.state.currentEatup) {
-      partial = <Home data={{userSession: this.state.userSession, sessions: this.state.sessions, currentPlace: this.state.currentPlace, currentEatup: this.state.currentEatup}}
+      partial = <Home data={{userRSVPs: this.state.userRSVPs, allEatups: this.state.allEatups, currentPlace: this.state.currentPlace, currentEatup: this.state.currentEatup}}
             refresh={ this.refresh.bind(this) }
             handleSearchChange={ this.handleSearchChange.bind(this) }
             handleSubmit={ this.handleSubmit.bind(this) }
@@ -162,7 +162,7 @@ class App extends React.Component {
 
     return (
       <div>
-      
+
         <MyNav loggedIn = { this.state.loggedIn } resetState={this.resetState.bind(this)}/>
 
         { partial }

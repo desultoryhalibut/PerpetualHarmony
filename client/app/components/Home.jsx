@@ -39,7 +39,7 @@ class Home extends React.Component {
 
 
   render() {
-    console.log(this.state);
+
     return (
       <div className="container">
       <div className="head">
@@ -73,11 +73,12 @@ class Home extends React.Component {
             <Col sm={8}>
               <Tab.Content animation>
                 <Tab.Pane eventKey="allEatups">
-                  <ListOfEatUp sessions = {this.props.data.sessions} />
+                  <ListOfEatUp sessions = {this.props.data.sessions} getEatupDetails={this.props.getEatupDetails} currentEatup={this.props.data.currentEatup}/>
                 </Tab.Pane>
                 <Tab.Pane eventKey="myEatups">
 
                   <MyEatups userSession = {this.props.data.userSession} refresh={this.props.refresh.bind(this)} />
+
                 </Tab.Pane>
               </Tab.Content>
             </Col>

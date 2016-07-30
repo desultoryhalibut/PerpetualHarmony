@@ -20,37 +20,47 @@ const ListOfEatUp = withRouter(
       this.setState({ autocomplete: new google.maps.places.Autocomplete(input, options) });
     },
 
-    handleSearch(event) {
+    getDetails(event) {
+      var id = event.id;
+      console.log('getDetails event id' , event.id);
       var nRoute = 'home/' + event.id;
+      this.props.getEatupDetails(id);
       this.props.router.replace(nRoute);
+      console.log('Current Eatup in Lists ', this.props.currentEatup);
     },
 
     rsvpToEatUp(result) {
-      
       var eatupId = result.id;
-      console.log('auth.getToken',auth.getToken());
-      //insert post request here
+
       $.ajax({
-        url: 'api/eatup/'+eatupId+'/rsvp',
-        method: 'POST',
-        data: JSON.stringify({ username: auth.getToken() }),
-        contentType: 'application/json', 
-        success: function(data) {
-          console.log('Successfully RSVPd:',data)
-        }
+        type: 'POST',
+        url: `http://localhost:3000/api/eatup/${eatupId}/rsvp`,
+        data: JSON.stringify({
+          username: auth.getToken()
+        }),
+        contentType: 'application/json'
       })
+      .done(data => {
+        console.log('new RSVP data', data);
+      })
+      .fail(err => {
+        console.log('Error RSVPing to event ', err);
+      });
+
     },
 
     render () {
-      var resultStuffs = this.props.sessions.map((result,index) => 
+
+      var resultStuffs = this.props.sessions.map((result, index) =>
 
         <div className="card card-block" key={index} >
           <h4 className="card-title" key={index}>{result.title}</h4>
+
           <div className="card-text">
             <p>{result.Restaurant.address}</p>
-            <p>{result.startTime} - {result.endTime} {result.date}</p>
+            <p>{result.startTime} - {result.endTime}</p>
             <p>Hosted by: {result.User.username}</p>
-            <Button bsStyle="success" bsSize="xs" onClick={this.handleSearch.bind(this, result)}>Get Details</Button>
+            <Button bsStyle="success" bsSize="xs" onClick={this.getDetails.bind(this, result)}>Get Details</Button>
             <Button className="rsvpButton" bsStyle="success" bsSize="sm" key={index}
             onClick= { this.rsvpToEatUp.bind(this, result) }>Join!</Button>
           </div>

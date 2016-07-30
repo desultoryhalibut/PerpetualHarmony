@@ -15,6 +15,28 @@ export default class CommentsContainer extends React.Component {
     }
   }
 
+  handleNewComment(comment, url) {
+    // console.log('handleNewComment STATE', this.state);
+    // var currentComments = this.state.data;
+
+    comment.id = (Math.random() * 100000) + 50;
+    // var updatedComments = currentComments.concat([comment]);
+    // this.setState({data: updatedComments});
+
+    $.ajax({
+      url: url,
+      dataType: 'json',
+      type: 'POST',
+      data: comment,
+      success: function(data) {
+        this.setState({data: data});
+      }.bind(this),
+      error: function(err) {
+        console.log(err);
+      }.bind(this)
+    });
+  }
+
   getComments(){
     console.log('getComments() invoked', this.props.url);
     $.ajax({
@@ -27,6 +49,7 @@ export default class CommentsContainer extends React.Component {
       }.bind(this),
       error: function(err) {
         console.log(err);
+        console.log(this.props.url);
       }.bind(this)
     });
   }
@@ -41,7 +64,7 @@ export default class CommentsContainer extends React.Component {
     	<div className="commentsContainer">
 	      <h2>Comments</h2>
 	      <CommentList data={this.state.data}/>
-	      <CommentForm />
+	      <CommentForm onNewComment={this.handleNewComment} url={this.props.url}/>
 	    </div>
     );
   }

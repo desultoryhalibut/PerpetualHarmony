@@ -33,9 +33,8 @@ class App extends React.Component {
     })
   }
 
-
   refresh() {
-    this.getUserCreatedSession();
+    this.getUserCreatedSession().bind(this);
     this.getAllSessions();
     this.setState(this.state);
   }
@@ -44,15 +43,20 @@ class App extends React.Component {
     var that = this;
     $.ajax({
       type:'GET',
-      url: 'http://localhost:3000/api/eatup/usereatups',
+      url: 'http://localhost:3000/api/users/rsvp',
       data: ({username: auth.getToken()}),
-      contentType: 'application/json',
-      success: (userSession) => {
-        console.log('Successful login')
-        that.setState({
-          userSession: userSession
-        });
-      }
+      contentType: 'application/json'
+    })
+    .done(data => {
+      console.log('Successful login ', data);
+      this.setState({
+        userSession: data
+      }, () => {
+        console.log('UserSessions from App ', this.state.userSession);
+      });
+    })
+    .fail(error => {
+      console.error(error);
     });
   }
 
@@ -69,6 +73,24 @@ class App extends React.Component {
           sessions: sessions
         });
       }
+    });
+  }
+
+  getEatupDetails(eatupId) {
+    var that = this;
+    $.ajax({
+      type: 'GET',
+      url: `http://localhost:3000/api/eatup/${eatupId}`,
+      contentType: 'application/json'
+    })
+    .done(details => {
+      console.log(`Details for EatUp ${eatupId} ${details}`);
+      this.setState({currentEatup: details}, () => {
+        console.log(`Current EatUpstate for ${eatupId} is now  ${that.state.currentEatup}`);
+      });
+    })
+    .fail(err => {
+      console.error('Error retrieving eatup details ', err);
     });
   }
 
@@ -136,10 +158,11 @@ class App extends React.Component {
         <MyNav loggedIn = { this.state.loggedIn }
         />
 
-        <Home data={{userSession: this.state.userSession, sessions: this.state.sessions, currentPlace: this.state.currentPlace}}
-              refresh={this.refresh.bind(this)}
-              handleSearchChange = { this.handleSearchChange.bind(this) }
-              handleSubmit = { this.handleSubmit.bind(this) }
+        <Home data={{userSession: this.state.userSession, sessions: this.state.sessions, currentPlace: this.state.currentPlace, currentEatup: this.state.currentEatup}}
+              refresh={ this.refresh.bind(this) }
+              handleSearchChange={ this.handleSearchChange.bind(this) }
+              handleSubmit={ this.handleSubmit.bind(this) }
+              getEatupDetails={ this.getEatupDetails.bind(this) }
         />
 
         {this.props.children || <p>You are {!this.state.loggedIn && 'not'} logged in.</p>}

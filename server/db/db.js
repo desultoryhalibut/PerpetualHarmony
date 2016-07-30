@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const db = new Sequelize('dbeatup', 'root', '', {dialect: 'mysql'});
+const db = new Sequelize('dbeatup', 'root', 'mainstreet', {dialect: 'mysql'});
 
 // Table models
 const User = require('../api/user/user.model')(db, Sequelize);
@@ -27,6 +27,8 @@ Comment.belongsTo(Eatup, {foreignKey: 'eatupId', targetKey: 'id'});
 // RESERVATION Table - add foreign key userId to User eatupId and Eatup
 User.belongsToMany(Eatup, { through: 'Reservation', foreignKey: 'userId' });
 Eatup.belongsToMany(User, { through: 'Reservation', foreignKey: 'eatupId' });
+Reservation.belongsTo(User, { foreignKey: 'userId', targetKey: 'id' });
+Reservation.belongsTo(Eatup, { foreignKey: 'eatupId', targetKey: 'id' });
 
 // Synchronizing the database
 db.query('SET FOREIGN_KEY_CHECKS = 0')
@@ -47,5 +49,6 @@ module.exports = {
   Comment: Comment,
   Restaurant: Restaurant,
   Eatup: Eatup,
-  Reservation: Reservation
+  Reservation: Reservation,
+  db: db
 }

@@ -12,9 +12,11 @@ export default class CommentList extends React.Component {
     if(this.props.data.length) {
       var comments = this.props.data.map(function(comment) {
             return (
-              <Comment author={comment.username} key={comment.id}>
-                {comment.comment}
-              </Comment>
+              <div>
+                <div><strong>A Username</strong></div>
+                <div>{comment.comment}</div>
+              </div>
+              
             );
           });
     } else {

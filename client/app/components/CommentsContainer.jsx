@@ -18,12 +18,13 @@ export default class CommentsContainer extends React.Component {
   }
 
   handleNewComment(comment, url) {
-    // console.log('handleNewComment STATE', this.state);
-    // var currentComments = this.state.data;
+    console.log('handleNewComment STATE', this.state);
+    var currentComments = this.state.data;
 
     comment.username = auth.getToken();
-    // var updatedComments = currentComments.concat([comment]);
-    // this.setState({data: updatedComments});
+    var updatedComments = currentComments.concat([comment]);
+    this.setState({data: updatedComments});
+    
     console.log('COMMENT: ', comment, 'URL: ', url);
     $.ajax({
       url: 'http://localhost:3000'+url, ///api/eatup/2/comment

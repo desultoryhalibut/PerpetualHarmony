@@ -3,6 +3,7 @@ import auth from '../auth'
 import { Link } from 'react-router';
 import MyNav from './Navbar.jsx';
 import Home from './Home.jsx';
+import EatupDetails from './EatupDetails.jsx';
 
 
 class App extends React.Component {
@@ -13,7 +14,7 @@ class App extends React.Component {
       userRSVPs: [],
       allEatups: [],
       search: '',
-      currentEatup: {},
+      currentEatup: null,
       currentPlace: {},
       autocomplete: null
     }
@@ -37,7 +38,7 @@ class App extends React.Component {
     this.getUserCreatedSession().bind(this);
     this.getAllSessions();
     this.setState(this.state);
-    
+
   }
 
   getUserCreatedSession() {
@@ -141,19 +142,31 @@ class App extends React.Component {
     this.setState({ autocomplete: new google.maps.places.Autocomplete(input, options) });
   }
 
+  resetState() {
+    this.setState({currentEatup: null});
+  }
+
   render() {
-    console.log('Current Eatup ', this.state.currentEatup);
+    var partial;
+
+    if(!this.state.currentEatup) {
+      partial = <Home data={{userSession: this.state.userSession, sessions: this.state.sessions, currentPlace: this.state.currentPlace, currentEatup: this.state.currentEatup}}
+            refresh={ this.refresh.bind(this) }
+            handleSearchChange={ this.handleSearchChange.bind(this) }
+            handleSubmit={ this.handleSubmit.bind(this) }
+            getEatupDetails={ this.getEatupDetails.bind(this) }
+      />;
+    } else {
+      partial = <EatupDetails currentEatup={this.state.currentEatup} />
+    }
+
     return (
       <div>
-        <MyNav loggedIn = { this.state.loggedIn }
-        />
+      
+        <MyNav loggedIn = { this.state.loggedIn } resetState={this.resetState.bind(this)}/>
 
-        <Home data={{userRSVPs: this.state.userRSVPs, allEatups: this.state.allEatups, currentPlace: this.state.currentPlace, currentEatup: this.state.currentEatup}}
-              refresh={ this.refresh.bind(this) }
-              handleSearchChange={ this.handleSearchChange.bind(this) }
-              handleSubmit={ this.handleSubmit.bind(this) }
-              getEatupDetails={ this.getEatupDetails.bind(this) }
-        />
+        { partial }
+
 
         {JSON.stringify(this.props.children)}
       </div>

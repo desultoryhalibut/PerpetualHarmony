@@ -37,16 +37,20 @@ const ListOfEatUp = withRouter(
     },
 
     getInitialState: function() {
-        return { 
+        return {
           confirmRSVP: false,
         };
     },
     handleSearch(event) {
       var nRoute = 'home/' + event.id;
       var nRoute = 'home/' + id;
-      this.props.getEatupDetails(id);
-      this.props.router.replace(nRoute);
-      console.log('props and state', this.props, this.state);
+      
+      this.setState({currentEatup: event}, () => {
+        this.props.getEatupDetails(id);
+        // this.props.router.replace(nRoute);
+        console.log('this.state',this.state);
+      });
+
     },
 
     rsvpToEatUp(result, rsvpId) {
@@ -68,7 +72,7 @@ const ListOfEatUp = withRouter(
         console.log('Error RSVPing to event ', err);
       });
     },
-    
+
 
     render () {
 
@@ -82,7 +86,7 @@ const ListOfEatUp = withRouter(
             <h6>{result.Restaurant.address}</h6>
             <h6>{result.startTime} - {result.endTime} {result.date}</h6>
             <h6>Hosted by: {result.User.username}</h6>
-              
+
               { ( this.state.confirmRSVP && index === result.id ) ? <Results /> : null }
             <Button bsStyle="success" bsSize="xs" onClick={this.handleSearch.bind(this, result)}>Get Details</Button>
             <Button className="rsvpButton" bsStyle="success" bsSize="sm" key={index}

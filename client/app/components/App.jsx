@@ -13,7 +13,7 @@ class App extends React.Component {
       userSession: [],
       sessions: [],
       search: '',
-      currentEatup: null,
+      currentEatup: {},
       currentPlace: {},
       autocomplete: null
     }
@@ -48,7 +48,7 @@ class App extends React.Component {
       contentType: 'application/json'
     })
     .done(data => {
-      console.log('Successful login ', data);
+      console.log('Successfully logged in');
       this.setState({
         userSession: data
       }, () => {
@@ -84,7 +84,7 @@ class App extends React.Component {
       contentType: 'application/json'
     })
     .done(details => {
-      console.log(`Details for EatUp ${eatupId} ${details}`);
+      console.log('Details for EatUp', details);
       this.setState({currentEatup: details}, () => {
         console.log(`Current EatUpstate for ${eatupId} is now  ${that.state.currentEatup}`);
       });
@@ -128,19 +128,6 @@ class App extends React.Component {
     this.setState({currentPlace: place}, function() {
       console.log('currentPlace is set to ', that.state.currentPlace);
     });
-
-    // $.ajax({
-    //   type: 'POST',
-    //   url: 'http://localhost:3000/api/eatup',
-    //   //How do we get the actual username
-    //   data: JSON.stringify({username: auth.getToken(),
-    //                         locationName: place.name,
-    //                         locationAddress: place.formatted_address}),
-    //   contentType: 'application/json',
-    //   success: (data) => {
-    //     this.setState(this.state);
-    //   }
-    // });
   }
 
   componentDidMount() {
@@ -153,6 +140,7 @@ class App extends React.Component {
   }
 
   render() {
+    console.log('Current Eatup ', this.state.currentEatup);
     return (
       <div>
         <MyNav loggedIn = { this.state.loggedIn }

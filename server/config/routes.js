@@ -19,6 +19,8 @@ router.delete('/api/eatup', EatUpController.deleteEatUp);
 router.get('/api/eatup/:id/comment', CommentController.getComments);
 router.post('/api/eatup/:id/comment', CommentController.postComment);
 
+
+
 // Route to post and get EatUp reservations
 router.get('/api/eatup/:id/rsvp', ReservationController.postReservation);
 router.post('/api/eatup/:id/rsvp', ReservationController.getReservations);

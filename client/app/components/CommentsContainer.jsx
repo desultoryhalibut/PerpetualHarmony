@@ -2,6 +2,8 @@ import React from 'react';
 import CommentList from './CommentList.jsx';
 import CommentForm from './CommentForm.jsx';
 
+import auth from '../auth';
+
 export default class CommentsContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -19,20 +21,20 @@ export default class CommentsContainer extends React.Component {
     // console.log('handleNewComment STATE', this.state);
     // var currentComments = this.state.data;
 
-    comment.id = (Math.random() * 100000) + 50;
+    comment.username = auth.getToken();
     // var updatedComments = currentComments.concat([comment]);
     // this.setState({data: updatedComments});
-
+    console.log('COMMENT: ', comment)
     $.ajax({
       url: url,
       dataType: 'json',
       type: 'POST',
-      data: comment,
+      data: JSON.stringify(comment),
       success: function(data) {
         this.setState({data: data});
       }.bind(this),
       error: function(err) {
-        console.log(err);
+        console.log('ERR', err, 'posted to: ', url);
       }.bind(this)
     });
   }

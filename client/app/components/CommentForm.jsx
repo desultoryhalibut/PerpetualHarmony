@@ -9,7 +9,6 @@ export default class CommentForm extends React.Component {
   }
 
   handleComment(e) {
-    console.log('this',this)
     this.setState({ comment: e.target.value });
   }
 

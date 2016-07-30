@@ -58,7 +58,7 @@ class App extends React.Component {
       });
     })
     .fail(error => {
-      console.error(error);
+      console.error('error',error);
     });
   }
 
@@ -168,7 +168,7 @@ class App extends React.Component {
         { partial }
 
 
-        {JSON.stringify(this.props.children)}
+        
       </div>
     )
   }

@@ -66,7 +66,6 @@ const ListOfEatUp = withRouter(
         contentType: 'application/json',
         success: function(data) {
           that.setState({RSVP: eatupId});
-          console.log('Rsvp successful:',data)
           this.props.refresh();
         }
       })
@@ -80,8 +79,9 @@ const ListOfEatUp = withRouter(
 
     render () {
 
-      var resultStuffs = this.props.allEatups.map((result, index) =>
 
+      var resultStuffs = this.props.allEatups.map((result, index) =>
+        
         <div className="card card-block" key={index} >
           <h4 className="card-title" key={index}>{result.title}</h4>
           <span><Button bsStyle="success" bsSize="xs" onClick={this.handleSearch.bind(this, result)}>Get Details</Button></span>
@@ -91,7 +91,7 @@ const ListOfEatUp = withRouter(
                 <Col md={4} mdPush={4}>
                   <p className="address-text">{result.Restaurant.name}</p> 
                   <h5>{result.Restaurant.address}</h5> 
-                  <h5><strong>From: </strong> {moment(result.startTime).format("MMM Do YY")} - {moment(result.endTime).format("MMM Do YY")}</h5>
+                  <h5>{moment(result.startTime).format("llll")} - {moment(result.endTime).format("llll")}</h5>
                   <h5><strong>Hosted By: </strong> {result.User.username}</h5>
                 </Col>
                 <Col md={4} mdPull={4}>
@@ -116,6 +116,7 @@ const ListOfEatUp = withRouter(
           <ul className="list-group eatupsList">
             {resultStuffs.reverse()}
           </ul>
+
         </div>
       )
     }

@@ -1,5 +1,6 @@
 import React from 'react';
-import Button from 'react-bootstrap/lib/Button'
+import Button from 'react-bootstrap/lib/Button';
+import moment from 'moment';
 
 class MyEatups extends React.Component {
   constructor(props) {
@@ -27,14 +28,17 @@ class MyEatups extends React.Component {
 
     var userRSVPs = this.props.userRSVPs.map((result, index) =>
       <div className="card card-block" >
-        <p className="card-title myEatUp" >{result.title}</p>
+        <p className="card-title myEatUp" > {result.Eatup.title} <Button bsStyle="success" bsSize="xs" onClick={this.handleSearch.bind(this, result)}>Get Details</Button></p>
+
+        
         <div className="card-text">
-          <p>{result.address}</p>
-          <p>{result.startTime} - {result.endTime} {result.date}</p>
-          <p>Hosted by: {result.username}</p>
+          <p className="address-text">{result.Restaurant.name}</p> 
+          <h5>{result.Restaurant.address}</h5> 
+          <h5><strong>From: </strong> {moment(result.startTime).format("llll")} - {moment(result.endTime).format("llll")}</h5>
           <Button className="deleteButton" bsStyle="danger" bsSize="xsmall" key={index}
           onClick= { this.onSessionDelete.bind(this, index, this.props) }>Delete</Button>
         </div>
+        
       </div>
     )
 
@@ -42,7 +46,7 @@ class MyEatups extends React.Component {
       <div>
         
         <ul className='list-group eatupsList'>
-          {userRSVPs}
+          {userRSVPs.reverse()}
         </ul>
       </div>
     )

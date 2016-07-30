@@ -8,7 +8,8 @@ export default class CommentForm extends React.Component {
     }
   }
 
-  handleChange(e) {
+  handleComment(e) {
+    console.log('this',this)
     this.setState({ comment: e.target.value });
   }
 
@@ -18,16 +19,16 @@ export default class CommentForm extends React.Component {
     if (!comment) {
       return;
     }
-    // TODO: send request to the server
+    this.props.onNewComment({comment: comment}, this.props.url);
     this.setState({comment: ''});
   }
 
   render() {
     return (
-      <form className="commentForm" onSubmit={this.handleSubmit}>
+      <form className="commentForm" onSubmit={this.handleSubmit.bind(this)}>
         <input type="text" placeholder="Leave a comment..."
           value={this.state.comment}
-          onChange={this.handleComment}
+          onChange={this.handleComment.bind(this)}
         />
         <input type="submit" value="Post" />
       </form>

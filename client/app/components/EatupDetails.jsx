@@ -55,8 +55,10 @@ class EatupDetails extends React.Component {
             <Col md={1}></Col>
           </Row>
 
-        <Row><Col md={12}><br/></Col></Row>
-        <Row className="details-container">
+          <Row className="details-container">
+            <Col md={6}>
+              <Panel header="Who's Eating?" className="users-panel clearfix">
+                {usernames}
 
             <Col md={1}></Col>
             <Col md={10}>

@@ -6,7 +6,7 @@ import FormGroup from 'react-bootstrap/lib/FormGroup';
 import FormControl from 'react-bootstrap/lib/FormControl';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import Checkbox from 'react-bootstrap/lib/Checkbox';
-
+import moment from 'moment';
 import auth from '../auth'
 import React from 'react';
 import Button from 'react-bootstrap/lib/Button';
@@ -47,12 +47,13 @@ const ListOfEatUp = withRouter(
       this.setState({currentEatup: event}, () => {
         this.props.getEatupDetails(id);
         // this.props.router.replace(nRoute);
-        console.log('this.state',this.state);
       });
 
     },
 
     rsvpToEatUp(result, rsvpId) {
+      var that = this;
+
       this.setState({ confirmRSVP: true });
       var eatupId = result.id;
 
@@ -62,43 +63,60 @@ const ListOfEatUp = withRouter(
         data: JSON.stringify({
           username: auth.getToken()
         }),
-        contentType: 'application/json'
+        contentType: 'application/json',
+        success: function(data) {
+          that.setState({RSVP: eatupId});
+          that.props.refresh();
+        }
       })
       .done(data => {
-        console.log('new RSVP data', data);
+        console.log('all RSVPs for user:',this.props);
       })
       .fail(err => {
         console.log('Error RSVPing to event ', err);
       });
     },
 
-
     render () {
 
-      var resultStuffs = this.props.allEatups.map((result, index) =>
 
+      var resultStuffs = this.props.allEatups.map((result, index) =>
+        
         <div className="card card-block" key={index} >
           <h4 className="card-title" key={index}>{result.title}</h4>
-
+          <span><Button bsStyle="success" bsSize="xs" onClick={this.handleSearch.bind(this, result)}>Get Details</Button></span>
           <div className="card-text">
-            <p className="address-text"><strong>Where: </strong>{result.Restaurant.name}</p>
-            <h6>{result.Restaurant.address}</h6>
-            <h6>{result.startTime} - {result.endTime} {result.date}</h6>
-            <h6>Hosted by: {result.User.username}</h6>
+            <Grid>
+              <Row className="show-grid">
+                <Col md={4} mdPush={4}>
+                  <p className="address-text">{result.Restaurant.name}</p> 
+                  <h5>{result.Restaurant.address}</h5> 
+                  <h5>{moment(result.startTime).format("llll")} - {moment(result.endTime).format("llll")}</h5>
+                  <h5><strong>Hosted By: </strong> {result.User.username}</h5>
+                </Col>
+                <Col md={4} mdPull={4}>
+                  <div className="rsvpButton">
+                    <Button bsStyle="success" bsSize="sm" key={index}
+                    onClick= { this.rsvpToEatUp.bind(this, result) }>  { ( this.state.confirmRSVP && (result.id === this.state.RSVP) ) ? <Results /> : null } Join!</Button>
+                  </div>
+                </Col>
+              </Row>
+            </Grid>
+            
+            
 
-              { ( this.state.confirmRSVP && index === result.id ) ? <Results /> : null }
-            <Button bsStyle="success" bsSize="xs" onClick={this.handleSearch.bind(this, result)}>Get Details</Button>
-            <Button className="rsvpButton" bsStyle="success" bsSize="sm" key={index}
-            onClick= { this.rsvpToEatUp.bind(this, result) }>Join!</Button>
+            
+            
           </div>
         </div>
         )
       return (
         <div>
-          <h1>EatUps around you!</h1>
+          
           <ul className="list-group eatupsList">
-            {resultStuffs}
+            {resultStuffs.reverse()}
           </ul>
+
         </div>
       )
     }

@@ -41,7 +41,7 @@ class Home extends React.Component {
     if (this.props.data.currentEatup) {
       console.dir('HOME - current eatup', this.props.data.currentEatup);
     }
-    
+
     return (
       <div className="container" id="map">
         <div className='head'>

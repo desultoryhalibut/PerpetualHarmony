@@ -79,9 +79,7 @@ const ListOfEatUp = withRouter(
 
     render () {
 
-
       var resultStuffs = this.props.allEatups.map((result, index) =>
-        
 
         <div className="card card-block clearfix" key={index} >
 
@@ -97,7 +95,7 @@ const ListOfEatUp = withRouter(
               { ( this.state.confirmRSVP && index === result.id ) ? <Results /> : null }
             <Button className="btn-primary" bsSize="xs" onClick={this.handleSearch.bind(this, result)}>Get Details</Button>
             <Button className="rsvpButton btn-primary" bsSize="sm" key={index}
-            onClick= { this.rsvpToEatUp.bind(this, result) }>  
+            onClick= { this.rsvpToEatUp.bind(this, result) }>
             { ( this.state.confirmRSVP && (result.id === this.state.RSVP) ) ? <Results /> : null } Join!
             </Button>
 

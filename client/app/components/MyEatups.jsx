@@ -37,6 +37,7 @@ class MyEatups extends React.Component {
           <Button className="deleteButton" bsStyle="danger" bsSize="xsmall" key={index}
           onClick= { this.onSessionDelete.bind(this, index, this.props) }>Delete</Button>
 
+
         </div>
       </div>
     )

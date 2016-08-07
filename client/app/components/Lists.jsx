@@ -6,7 +6,7 @@ import FormGroup from 'react-bootstrap/lib/FormGroup';
 import FormControl from 'react-bootstrap/lib/FormControl';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import Checkbox from 'react-bootstrap/lib/Checkbox';
-
+import moment from 'moment';
 import auth from '../auth'
 import React from 'react';
 import Button from 'react-bootstrap/lib/Button';
@@ -47,12 +47,13 @@ const ListOfEatUp = withRouter(
       this.setState({currentEatup: event}, () => {
         this.props.getEatupDetails(id);
         // this.props.router.replace(nRoute);
-        console.log('this.state',this.state);
       });
 
     },
 
     rsvpToEatUp(result, rsvpId) {
+      var that = this;
+
       this.setState({ confirmRSVP: true });
       var eatupId = result.id;
 
@@ -62,43 +63,54 @@ const ListOfEatUp = withRouter(
         data: JSON.stringify({
           username: auth.getToken()
         }),
-        contentType: 'application/json'
+        contentType: 'application/json',
+        success: function(data) {
+          that.setState({RSVP: eatupId});
+          that.props.refresh();
+        }
       })
       .done(data => {
-        console.log('new RSVP data', data);
+        console.log('all RSVPs for user:',this.props);
       })
       .fail(err => {
         console.log('Error RSVPing to event ', err);
       });
     },
 
-
     render () {
 
       var resultStuffs = this.props.allEatups.map((result, index) =>
 
         <div className="card card-block clearfix" key={index} >
+
           <h4 className="card-title" key={index}>{result.title}</h4>
 
           <div className="card-text">
+
             <p className="address-text"><strong>Where: </strong>{result.Restaurant.name}</p>
             <h6>{result.Restaurant.address}</h6>
-            <h6>{result.startTime} - {result.endTime} {result.date}</h6>
+            <h6>{moment(result.startTime).format("llll")} - {moment(result.endTime).format("llll")}</h6>
             <h6>Hosted by: {result.User.username}</h6>
 
               { ( this.state.confirmRSVP && index === result.id ) ? <Results /> : null }
             <Button className="btn-primary" bsSize="xs" onClick={this.handleSearch.bind(this, result)}>Get Details</Button>
             <Button className="rsvpButton btn-primary" bsSize="sm" key={index}
-            onClick= { this.rsvpToEatUp.bind(this, result) }>Join!</Button>
+            onClick= { this.rsvpToEatUp.bind(this, result) }>  
+            { ( this.state.confirmRSVP && (result.id === this.state.RSVP) ) ? <Results /> : null } Join!
+            </Button>
+          
           </div>
         </div>
-        )
+      )
       return (
         <div>
+
           <h1 className="text-center eatup-headline-container">Eatups around you!</h1>
+
           <ul className="list-group eatupsList">
-            {resultStuffs}
+            {resultStuffs.reverse()}
           </ul>
+
         </div>
       )
     }

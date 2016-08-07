@@ -45,7 +45,7 @@ class CreateEatup extends React.Component {
   // events
   onSubmit(e) {
     this.close();
-
+    console.log('onSubmit working. should run ajax call to create eatup')
     $.ajax({
       type: 'POST',
       url: 'http://localhost:3000/api/eatup',

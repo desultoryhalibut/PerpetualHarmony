@@ -29,8 +29,15 @@ class MyEatups extends React.Component {
       <div className="card card-block" >
         <p className="card-title myEatUp" >{result.Eatup.title}</p>
         <div className="card-text">
-          <p>{result.Eatup.startTime} - {result.Eatup.endTime}</p>
+
+          <p>{moment(result.startTime).format("llll")} - {moment(result.endTime).format("llll")}</p>
           <p>{result.Eatup.description}</p>
+
+          <p>{result.Eatup.startTime} - {result.Eatup.endTime} </p>
+          
+          <Button className="deleteButton" bsStyle="danger" bsSize="xsmall" key={index}
+          onClick= { this.onSessionDelete.bind(this, index, this.props) }>Delete</Button>
+
         </div>
       </div>
     )

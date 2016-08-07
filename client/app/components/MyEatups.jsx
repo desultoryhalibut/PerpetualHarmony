@@ -9,14 +9,15 @@ class MyEatups extends React.Component {
 
   onSessionDelete(index, props) {
     var sessionToDelete = props.userRSVPs[index];
-
+    console.log('session to delete:',sessionToDelete)
     $.ajax({
       type:'DELETE',
       url: 'http://localhost:3000/api/eatup',
       data: JSON.stringify({userId: sessionToDelete.creatorId, sessionId: sessionToDelete.id}),
       contentType: 'application/json',
-      success: () => {
-        console.log('Successful delete');
+      success: (data) => {
+
+        console.log('Successful delete. this was deleted:',data);
         this.props.refresh();
       }
     });

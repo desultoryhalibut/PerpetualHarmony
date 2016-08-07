@@ -88,10 +88,19 @@ module.exports = {
           .then(user => {
             newEatUp.creatorId = user.get('id');
 
+
             Restaurant.findOne({where: {name: req.body.locationName}})
               .then(function(restaurant) {
                 newEatUp.restaurantId = restaurant.get('id');
-                Eatup.create(newEatUp);
+                Eatup.create(newEatUp)
+                .then((eatup) => {
+                  var newReservation = {
+                    userId: user.get('id'),
+                    eatupId: eatup.id
+                  };
+                  Reservation.create(newReservation);
+                  console.log('Successful add')
+                })
                 res.sendStatus(200);
               });
           });
@@ -105,6 +114,7 @@ module.exports = {
   // Deletes a EatUp
   deleteEatUp: function(req, res) {
     const data = req.body;
+    console.log('sessionId was deleted:',data.sessionId, userId)
     Eatup.destroy({where: {id: data.sessionId, creatorId: data.userId}});
     res.sendStatus(200);
   }

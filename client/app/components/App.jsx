@@ -47,7 +47,7 @@ class App extends React.Component {
     $.ajax({
       type:'GET',
       url: 'http://localhost:3000/api/users/rsvp',
-      data: ({username: auth.getToken()}),
+      data: {username: auth.getToken()},
       contentType: 'application/json'
     })
     .done(data => {
@@ -208,7 +208,6 @@ class App extends React.Component {
         { partial }
 
 
-        {JSON.stringify(this.props.children)}
       </div>
     )
   }

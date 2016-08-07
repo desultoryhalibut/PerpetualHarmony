@@ -41,7 +41,11 @@ class Home extends React.Component {
     if (this.props.data.currentEatup) {
       console.dir('HOME - current eatup', this.props.data.currentEatup);
     }
+<<<<<<< d04d70ec0c6d1ee69ef60fbb043e9c5b778b4387
 
+=======
+
+>>>>>>> Resolve merge conflicts
     return (
       <div className="container" id="map">
         <div className='head'>
@@ -75,13 +79,14 @@ class Home extends React.Component {
                 <Tab.Content animation>
                   <Tab.Pane eventKey="allEatups">
 
-                  <ListOfEatUp allEatups = {this.props.data.allEatups} userRSVPs = {this.props.data.userRSVPs} getEatupDetails={this.props.getEatupDetails} currentEatup={this.props.data.currentEatup} refresh={this.props.data.refresh.bind(this)}/>
-                </Tab.Pane>
+                    <ListOfEatUp allEatups = {this.props.data.allEatups} userRSVPs = {this.props.data.userRSVPs} getEatupDetails={this.props.getEatupDetails} currentEatup={this.props.data.currentEatup} refresh={this.props.data.refresh.bind(this)}/>
+                  </Tab.Pane>
+
                 <Tab.Pane eventKey="myEatups">
 
-                    <MyEatups userRSVPs = {this.props.data.userRSVPs} refresh={this.props.refresh.bind(this)} />
+                  <MyEatups userRSVPs = {this.props.data.userRSVPs} refresh={this.props.data.refresh.bind(this)} />
 
-                  </Tab.Pane>
+                </Tab.Pane>
                 </Tab.Content>
               </Col>
             </Row>

@@ -37,7 +37,7 @@ class App extends React.Component {
   }
 
   refresh() {
-    this.getUserCreatedSession().bind(this);
+    this.getUserCreatedSession.bind(this)();
     this.getAllSessions();
     this.setState(this.state);
   }
@@ -47,7 +47,7 @@ class App extends React.Component {
     $.ajax({
       type:'GET',
       url: 'http://localhost:3000/api/users/rsvp',
-      data: ({username: auth.getToken()}),
+      data: {username: auth.getToken()},
       contentType: 'application/json'
     })
     .done(data => {
@@ -72,7 +72,7 @@ class App extends React.Component {
       url: 'http://localhost:3000/api/eatup',
       contentType: 'application/json',
       success: (sessions) => {
-        console.log('Success in retrieving all eatups')
+        console.log('Success in retrieving all eatups:',sessions);
         that.setState({
           allEatups: sessions
         });
@@ -188,7 +188,7 @@ class App extends React.Component {
     var partial;
 
     if(!this.state.currentEatup) {
-      partial = <Home data={{userRSVPs: this.state.userRSVPs, allEatups: this.state.allEatups, currentPlace: this.state.currentPlace, currentEatup: this.state.currentEatup}}
+      partial = <Home data={{refresh: this.refresh.bind(this), userRSVPs: this.state.userRSVPs, allEatups: this.state.allEatups, currentPlace: this.state.currentPlace, currentEatup: this.state.currentEatup}}
             refresh={ this.refresh.bind(this) }
             handleSearchChange={ this.handleSearchChange.bind(this) }
             handleSubmit={ this.handleSubmit.bind(this) }
@@ -208,7 +208,6 @@ class App extends React.Component {
         { partial }
 
 
-        {JSON.stringify(this.props.children)}
       </div>
     )
   }

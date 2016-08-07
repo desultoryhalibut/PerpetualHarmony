@@ -9,8 +9,10 @@ class MyEatups extends React.Component {
 
 
   onSessionDelete(index, props) {
-    var eatupToDelete = props.userRSVPs[index];
-    console.log('eatup to delete:',eatupToDelete)
+
+    var sessionToDelete = props.userRSVPs[index];
+    console.log('session to delete:',sessionToDelete)
+
     $.ajax({
       type:'DELETE',
       url: 'http://localhost:3000/api/eatup',
@@ -25,6 +27,7 @@ class MyEatups extends React.Component {
 
 
   render () {
+
     var userRSVPs = this.props.userRSVPs.map((result, index) =>
 
       <div className="card card-block clearfix" >

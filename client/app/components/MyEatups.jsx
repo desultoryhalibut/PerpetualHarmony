@@ -24,16 +24,13 @@ class MyEatups extends React.Component {
 
 
   render () {
-
+    console.log('This is RSVPSSSSSS',this.props.userRSVPs);
     var userRSVPs = this.props.userRSVPs.map((result, index) =>
       <div className="card card-block" >
-        <p className="card-title myEatUp" >{result.title}</p>
+        <p className="card-title myEatUp" >{result.Eatup.title}</p>
         <div className="card-text">
-          <p>{result.address}</p>
-          <p>{result.startTime} - {result.endTime} {result.date}</p>
-          <p>Hosted by: {result.username}</p>
-          <Button className="deleteButton" bsStyle="danger" bsSize="xsmall" key={index}
-          onClick= { this.onSessionDelete.bind(this, index, this.props) }>Delete</Button>
+          <p>{result.Eatup.startTime} - {result.Eatup.endTime}</p>
+          <p>{result.Eatup.description}</p>
         </div>
       </div>
     )

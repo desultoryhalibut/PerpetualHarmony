@@ -78,6 +78,7 @@ class Home extends React.Component {
                   <ListOfEatUp allEatups = {this.props.data.allEatups} userRSVPs = {this.props.data.userRSVPs} getEatupDetails={this.props.getEatupDetails} currentEatup={this.props.data.currentEatup} refresh={this.props.data.refresh.bind(this)}/>
                 </Tab.Pane>
 
+
                 <Tab.Pane eventKey="myEatups">
 
                   <MyEatups userRSVPs = {this.props.data.userRSVPs} refresh={this.props.data.refresh.bind(this)} />

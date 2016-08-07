@@ -85,6 +85,9 @@ const ListOfEatUp = withRouter(
 
 
           <h4 className="card-title" key={index}>{result.title}</h4>
+
+          <span><Button bsStyle="success" bsSize="xs" onClick={this.handleSearch.bind(this, result)}>Get Details</Button></span>
+
           <div className="card-text">
 
             <p className="address-text"><strong>Where: </strong>{result.Restaurant.name}</p>

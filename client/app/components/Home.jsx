@@ -35,15 +35,13 @@ class Home extends React.Component {
     var options = {componentRestrictions: {country: 'us'}};
     this.setState({ autocomplete: new google.maps.places.Autocomplete(input, options) });
   }
-  runThis() {
-    console.log('this state contains:',this.state)
-  }
+
 
   render() {
     if (this.props.data.currentEatup) {
       console.dir('HOME - current eatup', this.props.data.currentEatup);
     }
-    console.log(this.props.data.sessions);
+    
     return (
       <div className="container" id="map">
         <div className='head'>
@@ -56,8 +54,7 @@ class Home extends React.Component {
               />
           </FormGroup>
 
-          <CreateEatup handleSubmit={this.props.handleSubmit} currentPlace={this.props.data.currentPlace}/>
-          <Button onClick={this.runThis.bind(this)}></Button>
+        <CreateEatup handleSubmit={this.props.handleSubmit.bind(this)} currentPlace={this.props.data.currentPlace}/>
 
           </div>
           <Map eatUps={this.props.data.allEatups} />
@@ -78,13 +75,14 @@ class Home extends React.Component {
                 <Tab.Content animation>
                   <Tab.Pane eventKey="allEatups">
 
-                    <ListOfEatUp allEatups = {this.props.data.allEatups} userRSVPs = {this.props.data.userRSVPs} getEatupDetails={this.props.getEatupDetails} currentEatup={this.props.data.currentEatup} refresh={this.props.refresh.bind(this)}/>
-                  </Tab.Pane>
-                  <Tab.Pane eventKey="myEatups">
+                  <ListOfEatUp allEatups = {this.props.data.allEatups} userRSVPs = {this.props.data.userRSVPs} getEatupDetails={this.props.getEatupDetails} currentEatup={this.props.data.currentEatup} refresh={this.props.data.refresh.bind(this)}/>
+                </Tab.Pane>
 
-                    <MyEatups userRSVPs = {this.props.data.userRSVPs} refresh={this.props.refresh.bind(this)} />
+                <Tab.Pane eventKey="myEatups">
 
-                  </Tab.Pane>
+                  <MyEatups userRSVPs = {this.props.data.userRSVPs} refresh={this.props.data.refresh.bind(this)} />
+
+                </Tab.Pane>
                 </Tab.Content>
               </Col>
             </Row>

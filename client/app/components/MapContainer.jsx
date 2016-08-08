@@ -20,7 +20,8 @@ export default class Map extends Component {
        <GoogleMap
         bootstrapURLKeys={{ key: GoogleApiKey }}
         center={[37.798307, -122.408013]}
-        zoom={15}>
+        zoom={15}
+        options={{styles: [{stylers: [{ saturation: -80 }] }]}}>
         {markers.map(marker => {
           return <EatUpMarker lat={marker.lat} lng={marker.lng} text={'A'}></EatUpMarker>
         })}

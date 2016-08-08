@@ -1,5 +1,6 @@
 const Eatup = require('../../db/db').Eatup;
 const User = require('../../db/db').User;
+const Restaurant = require('../../db/db').Restaurant;
 const Reservation = require('../../db/db').Reservation;
 const db = require('../../db/db');
 
@@ -46,19 +47,29 @@ module.exports = {
   // Retrieves all RSVPs for a specific EatUp
   getUserReservations: function(req, res) {
 
-    const username = req.body.username || 'quin';
+    let username = req.query.username;
 
     var userId;
-    console.log('getUserReservations ', username);
 
     User.findOne({where: {username: username}})
       .then(user => {
         userId = user.id;
 
         Reservation.findAll({where: {userId: userId}, include: [ {model: Eatup}]})
-          .then(reservations => {
-            res.json(reservations);
-          });
+           .then(reservations => {
+             var restIds = [];
+             for(var i = 0; i < reservations; i++) {
+               // STORE IN restIds each id of restaurants
+             }
+             
+             Restaurant.findAll({where: {id: restIds} })
+             .then(rests => {
+               console.log('Boom! this works now just add this results to the original reservations object',rests);
+               res.json(reservations);
+             }).catch(e => {
+               console.log('error!',e);
+             })
+           });
       });
   }
 

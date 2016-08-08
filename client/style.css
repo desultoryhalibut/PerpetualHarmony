@@ -63,8 +63,8 @@ a {
 }
 .card {
   border: 1px solid #9d8d87!important;
-  border-radius: 16px!important;
-  padding: 1em 2em;
+  border-radius: 5px!important;
+  padding: 1em 1.5em;
   margin: 1em 0;
   background-color: white
 }
@@ -78,4 +78,28 @@ a {
 #map {
   width: 100%;
   height: 400px;
+}
+.eatup-headline-container {
+  font-family: "Archivo Narrow", sans-serif;
+  letter-spacing: 3px;
+  font-size: 55px;
+}
+.card-title, .card-text h6, .address-text  {
+  font: 35px "Archivo Narrow", sans-serif;
+}
+.card-text h6, .address-text {
+  font-size: 20px;
+}
+.nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus {
+  background: #0A295F;
+  height: 55px;
+  font-size: 22px;
+  text-align: center;
+}
+.nav>li>a {
+  text-align: center;
+  font-size: 22px;
+}
+#left-tabs-example .col-sm-4 {
+  margin-top: 94px;
 }

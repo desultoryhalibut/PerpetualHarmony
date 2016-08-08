@@ -82,37 +82,33 @@ const ListOfEatUp = withRouter(
 
       var resultStuffs = this.props.allEatups.map((result, index) =>
         
-        <div className="card card-block" key={index} >
-          <h4 className="card-title" key={index}>{result.title}</h4>
-          <span><Button bsStyle="success" bsSize="xs" onClick={this.handleSearch.bind(this, result)}>Get Details</Button></span>
-          <div className="card-text">
-            <Grid>
-              <Row className="show-grid">
-                <Col md={4} mdPush={4}>
-                  <p className="address-text">{result.Restaurant.name}</p> 
-                  <h5>{result.Restaurant.address}</h5> 
-                  <h5>{moment(result.startTime).format("llll")} - {moment(result.endTime).format("llll")}</h5>
-                  <h5><strong>Hosted By: </strong> {result.User.username}</h5>
-                </Col>
-                <Col md={4} mdPull={4}>
-                  <div className="rsvpButton">
-                    <Button bsStyle="success" bsSize="sm" key={index}
-                    onClick= { this.rsvpToEatUp.bind(this, result) }>  { ( this.state.confirmRSVP && (result.id === this.state.RSVP) ) ? <Results /> : null } Join!</Button>
-                  </div>
-                </Col>
-              </Row>
-            </Grid>
-            
-            
 
-            
-            
+        <div className="card card-block clearfix" key={index} >
+
+
+          <h4 className="card-title" key={index}>{result.title}</h4>
+          <div className="card-text">
+
+            <p className="address-text"><strong>Where: </strong>{result.Restaurant.name}</p>
+            <h6>{result.Restaurant.address}</h6>
+            <h6>{moment(result.startTime).format("llll")} - {moment(result.endTime).format("llll")}</h6>
+            <h6>Hosted by: {result.User.username}</h6>
+
+              { ( this.state.confirmRSVP && index === result.id ) ? <Results /> : null }
+            <Button className="btn-primary" bsSize="xs" onClick={this.handleSearch.bind(this, result)}>Get Details</Button>
+            <Button className="rsvpButton btn-primary" bsSize="sm" key={index}
+            onClick= { this.rsvpToEatUp.bind(this, result) }>  
+            { ( this.state.confirmRSVP && (result.id === this.state.RSVP) ) ? <Results /> : null } Join!
+            </Button>
+
           </div>
         </div>
-        )
+      )
       return (
         <div>
-          
+
+          <h1 className="text-center eatup-headline-container">Eatups around you!</h1>
+
           <ul className="list-group eatupsList">
             {resultStuffs.reverse()}
           </ul>

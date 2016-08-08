@@ -9,7 +9,6 @@ module.exports = {
   getAllEatUps: function(req, res) {
     Eatup.findAll({include: [ {model: User, required: true}, {model: Restaurant} ]})
       .then(data => {
-        console.log('Eatup data ', data);
         res.send(data);
       })
       .catch(error => {
@@ -76,7 +75,6 @@ module.exports = {
     // If not, create a new restaurant and re-query for the ID
     Restaurant.findOne({where: {name: req.body.locationName}})
       .then(restaurant => {
-        console.log('restaurant 1 ', restaurant);
         if (!restaurant) {
           Restaurant.create(newRestaurant);
         } else {
@@ -114,8 +112,10 @@ module.exports = {
   // Deletes a EatUp
   deleteEatUp: function(req, res) {
     const data = req.body;
-    console.log('sessionId was deleted:',data.sessionId, userId)
-    Eatup.destroy({where: {id: data.sessionId, creatorId: data.userId}});
+    Reservation.destroy({where: {eatupId: data.eatupId, userId: data.userId}})
+    .then((reservation) => {
+      console.log('reservation which was destroyed:',reservation)
+    })
     res.sendStatus(200);
   }
 

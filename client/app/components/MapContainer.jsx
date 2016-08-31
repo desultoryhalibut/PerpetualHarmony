@@ -23,7 +23,7 @@ export default class Map extends Component {
         zoom={15}
         options={{styles: [{stylers: [{ saturation: -80 }] }]}}>
         {markers.map(marker => {
-          return <EatUpMarker lat={marker.lat} lng={marker.lng} text={'A'}></EatUpMarker>
+          return <EatUpMarker lat={marker.lat} lng={marker.lng} text={'E'}></EatUpMarker>
         })}
        </GoogleMap>
     );

@@ -45,7 +45,6 @@ class EatupDetails extends React.Component {
     const gridInstance = (
       <Grid>
           <Row className="title">
-
             <Col md={1}></Col>
             <Col md={2}><Image src={restaurant.photo} responsive /></Col>
             <Col md={8}>
@@ -60,30 +59,22 @@ class EatupDetails extends React.Component {
               <Panel header="Who's Eating?" className="users-panel clearfix">
                 {usernames}
               </Panel>
-
-            <Col md={1}></Col>
-            <Col md={10}>
+            </Col>
+            <Col md={6}>
+              <Col md={8}>
+                <Panel header="When?" bsStyle="success">
+                    <h4><span>Start: {startTime}  </span><br />
+                    <span>   End: {endTime}</span></h4>
+                </Panel>
               </Col>
 
-              <Panel header="When?" bsStyle="success">
-                  <h4><span>Start: {startTime}  </span><span>   End: {endTime}</span></h4>
-              </Panel>
+              <Col md={4}>
+                <Panel header="Anything else?" bsStyle="success">
+                    <h4>{this.props.currentEatup.description}</h4>
+                </Panel>
+              </Col>
 
-              <Panel header="Where?" bsStyle="success">
-                  <h4>{restaurant.name}</h4>
-                  <h5><Glyphicon glyph="map-marker"/> {restaurant.address}</h5>
-              </Panel>
-
-              <Panel header="Who's eating?" bsStyle="success">
-                  {usernames}
-              </Panel>
-
-              <Panel header="Anything else?" bsStyle="success">
-                  <h4>{this.props.currentEatup.description}</h4>
-              </Panel>
-             
             </Col>
-            <Col md={1}></Col>
         </Row>
 
         <Row>

@@ -2,6 +2,7 @@ const Eatup = require('../../db/db').Eatup;
 const User = require('../../db/db').User;
 const Restaurant = require('../../db/db').Restaurant;
 const Reservation = require('../../db/db').Reservation;
+const Restaurant = require('../../db/db').Restaurant;
 const db = require('../../db/db');
 
 module.exports = {

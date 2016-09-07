@@ -61,7 +61,7 @@ module.exports = {
              for(var i = 0; i < reservations; i++) {
                // STORE IN restIds each id of restaurants
              }
-             
+
              Restaurant.findAll({where: {id: restIds} })
              .then(rests => {
                console.log('Boom! this works now just add this results to the original reservations object',rests);

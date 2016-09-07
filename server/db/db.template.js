@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
-const db = new Sequelize('database', 'username', 'password');
-const bcrypt = require('bcrypt');
+
+// Insert database log-in credentials to dbeatup database here
+const db = new Sequelize('database_name', 'username', 'password', {dialect: 'mysql'});
 
 // Table models
 const User = require('../api/user/user.model')(db, Sequelize);
@@ -9,7 +10,7 @@ const Eatup = require('../api/eatup/eatup.model')(db, Sequelize);
 const Reservation = require('../api/reservation/reservation.model')(db, Sequelize);
 const Comment = require('../api/comment/comment.model')(db, Sequelize);
 
-// Connect to Database
+// Connect to database
 db.authenticate()
   .then((err) => {
     console.log('Connection has been established successfully.');
@@ -17,17 +18,19 @@ db.authenticate()
     console.log('Unable to connect to the database:', err);
   });
 
-// EATUP Table - add foreign key creatorId to the Eatup model
+// // EATUP Table - add foreign key creatorId to the Eatup model
 Eatup.belongsTo(User, {foreignKey: 'creatorId', targetKey: 'id'});
 Eatup.belongsTo(Restaurant, {foreignKey: 'restaurantId', targetKey: 'id'});
 
-// COMMENT Table - add foreign key userId to User eatupId to Eatup
+// // COMMENT Table - add foreign key userId to User eatupId to Eatup
 Comment.belongsTo(User, {foreignKey: 'userId', targetKey: 'id'});
 Comment.belongsTo(Eatup, {foreignKey: 'eatupId', targetKey: 'id'});
 
 // RESERVATION Table - add foreign key userId to User eatupId and Eatup
 User.belongsToMany(Eatup, { through: 'Reservation', foreignKey: 'userId' });
 Eatup.belongsToMany(User, { through: 'Reservation', foreignKey: 'eatupId' });
+Reservation.belongsTo(User, { foreignKey: 'userId', targetKey: 'id' });
+Reservation.belongsTo(Eatup, { foreignKey: 'eatupId', targetKey: 'id' });
 
 // Synchronizing the database
 db.query('SET FOREIGN_KEY_CHECKS = 0')
@@ -48,5 +51,6 @@ module.exports = {
   Comment: Comment,
   Restaurant: Restaurant,
   Eatup: Eatup,
-  Reservation: Reservation
+  Reservation: Reservation,
+  db: db
 }

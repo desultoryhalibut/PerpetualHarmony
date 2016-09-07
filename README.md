@@ -1,12 +1,5 @@
 # Project Name
-
-> Pithy project description
-
-## Team
-
-  - __Product Owner__: Sunny
-  - __Scrum Master__: Tyler
-  - __Development Team Members__: Dan, David, Sunny, Tyler
+EatUp is a  "MeetUp.com for foodies" that allows users to connect to others who want to eat at the same restaurant.  Users can view nearby events, RSVP to them, and create their own EatUp events.
 
 ## Table of Contents
 
@@ -15,8 +8,6 @@
 1. [Development](#development)
     1. [Installing Dependencies](#installing-dependencies)
     1. [Tasks](#tasks)
-1. [Team](#team)
-1. [Contributing](#contributing)
 
 ## Usage
 
@@ -29,7 +20,7 @@
   3. npm start
   ```
 
-  To compile webpack file automatically 
+  To compile webpack file automatically
   ```
   npm run dev
   ```
@@ -42,10 +33,7 @@
 ## Requirements
 
 - Node 0.10.x
-- Redis 2.6.x
-- Postgresql 9.1.x
-- etc
-- etc
+- MySql
 
 ## Development
 
@@ -54,18 +42,5 @@
 From within the root directory:
 
 ```sh
-sudo npm install -g bower
 npm install
-bower install
-insert db name, username, password 
 ```
-
-
-### Roadmap
-
-View the project roadmap [here](LINK_TO_PROJECT_ISSUES)
-
-
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.

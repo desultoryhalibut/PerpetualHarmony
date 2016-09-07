@@ -33,7 +33,7 @@ class MyEatups extends React.Component {
 
           <p>{moment(result.startTime).format("llll")} - {moment(result.endTime).format("llll")}</p>
           <p>{result.Eatup.description}</p>
-          
+
           <Button className="deleteButton" bsStyle="danger" bsSize="xsmall" key={index}
           onClick= { this.onSessionDelete.bind(this, index, this.props) }>Delete</Button>
 

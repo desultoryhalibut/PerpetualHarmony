@@ -1,4 +1,4 @@
-# Project Name
+# EatUp
 EatUp is a  "MeetUp.com for foodies" that allows users to connect to others who want to eat at the same restaurant.  Users can view nearby events, RSVP to them, and create their own EatUp events.
 
 ## Table of Contents

@@ -1,5 +1,4 @@
 import React from 'react';
-
 import Comment from './Comment.jsx';
 
 export default class CommentList extends React.Component {
@@ -11,7 +10,6 @@ export default class CommentList extends React.Component {
   }
 
   render() {
-    console.log('data: props?', this.props.currentEatupComments);
 
     if (!this.props.currentEatupComments) {
       return (
@@ -21,14 +19,12 @@ export default class CommentList extends React.Component {
 
     if(this.props.currentEatupComments.length) {
       var comments = this.props.currentEatupComments.map(function(comment) {
-            return (
-              <div>
-                <div><strong>{comment.User.username}</strong></div>
-                <div>{comment.comment}</div>
-              </div>
-
-            );
-          });
+        return (
+          <div>
+            <strong>{comment.User.username}</strong>: {comment.comment}
+          </div>
+        );
+      });
     } else {
       comments = <div>Be the first to comment!</div>;
     }

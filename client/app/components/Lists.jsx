@@ -12,14 +12,13 @@ import React from 'react';
 import Button from 'react-bootstrap/lib/Button';
 import { Router, Route, Link, hashHistory, withRouter } from 'react-router';
 
-
-var Results = React.createClass({
-    render: function() {
-      console.log('Results rendering')
-        return (
-            <span className="glyphicon glyphicon-ok" aria-hidden="false"></span>
-        );
-    }
+const Results = React.createClass({
+  render: function() {
+    console.log('Results rendering')
+      return (
+        <span className="glyphicon glyphicon-ok" aria-hidden="false"></span>
+      );
+  }
 });
 
 const ListOfEatUp = withRouter(
@@ -79,26 +78,26 @@ const ListOfEatUp = withRouter(
 
     render () {
 
-
       var resultStuffs = this.props.allEatups.map((result, index) =>
-        
 
         <div className="card card-block clearfix" key={index} >
 
+          <h4 className="details-heading" key={index}>{result.title}</h4>
 
-          <h4 className="card-title" key={index}>{result.title}</h4>
           <div className="card-text">
 
             <p className="address-text"><strong>Where: </strong>{result.Restaurant.name}</p>
-            <h6>{result.Restaurant.address}</h6>
-            <h6>{moment(result.startTime).format("llll")} - {moment(result.endTime).format("llll")}</h6>
-            <h6>Hosted by: {result.User.username}</h6>
+            <h6><strong>Location</strong>: {result.Restaurant.address}</h6>
+            <h6><strong>Date</strong>: {moment(result.startTime).format("llll")} - {moment(result.endTime).format("llll")}</h6>
+            <h6><strong>Hosted by</strong>: {result.User.username}</h6>
 
-              { ( this.state.confirmRSVP && index === result.id ) ? <Results /> : null }
-            <Button className="btn-primary" bsSize="xs" onClick={this.handleSearch.bind(this, result)}>Get Details</Button>
+            { ( this.state.confirmRSVP && index === result.id ) ? <Results /> : null }
+
+            <Button className="btn-primary" bsSize="xs" onClick={this.handleSearch.bind(this, result)}>See EatUp Details</Button>
+
             <Button className="rsvpButton btn-primary" bsSize="sm" key={index}
-            onClick= { this.rsvpToEatUp.bind(this, result) }>  
-            { ( this.state.confirmRSVP && (result.id === this.state.RSVP) ) ? <Results /> : null } Join!
+            onClick= { this.rsvpToEatUp.bind(this, result) }>
+            { ( this.state.confirmRSVP && (result.id === this.state.RSVP) ) ? <Results /> : null } RSVP
             </Button>
 
           </div>

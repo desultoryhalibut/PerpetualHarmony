@@ -139,6 +139,7 @@ const Loading = withRouter(
     render() {
       var partial;
       var btns;
+
       if(this.state.isLoginForm) {
         partial = <form className="form-group" action="index.html" method="post" >
           <input className="form-control" type="text" name="username" placeholder="Username" onChange={this.onLoginUserNameChange} />
@@ -158,18 +159,21 @@ const Loading = withRouter(
         btns = <div><span className="inactive login-btn" onClick={this.onClickToggle}>Login</span>
         <span className="active sign-btn" onClick={this.onClickToggle}>Sign up</span></div>;
       }
+
       return (
+
         <div>
           <div className="homepage-hero-module">
             <div className="video-container">
-                <div className="filter"></div>
-                <video autoPlay loop className="fillWidth">
-                  <source src="./assets/Coffee-Shot/Mp4/Coffee-Shot.mp4" type="video/mp4" />
-                  <source src="./assets/Coffee-Shot/Ogv/Coffee-Shot.ogv" type="video/webm" />
-                </video>
-                <div className="poster hidden">
-                  <img src="/assets/Coffee-Shot/Snapshots/Coffee-Shot.jpg" alt="" />
-                </div>
+
+              <img src="/assets/Coffee-Shot/Snapshots/Coffee-Shot.jpg" alt="" className="poster"/>
+
+              {/*<div className="filter"></div>*/}
+              {/*<video autoPlay loop className="fillWidth">
+                <source src="./assets/Coffee-Shot/Mp4/Coffee-Shot.mp4" type="video/mp4" />
+                <source src="./assets/Coffee-Shot/Ogv/Coffee-Shot.ogv" type="video/webm" />
+              </video>*/}
+              
             </div>
         </div>
         <div className="credentials-container">
@@ -179,9 +183,9 @@ const Loading = withRouter(
           { partial }
 
         </div>
-        </div>
-      )
-    }
+      </div>
+    )
+   }
   })
 )
 

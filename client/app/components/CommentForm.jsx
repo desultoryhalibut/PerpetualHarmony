@@ -24,12 +24,12 @@ export default class CommentForm extends React.Component {
 
   render() {
     return (
-      <form className="commentForm" onSubmit={this.handleSubmit.bind(this)}>
-        <input type="text" placeholder="Leave a comment..."
+      <form className="commentForm center form-inline" onSubmit={this.handleSubmit.bind(this)}>
+        <input type="text" className="form-control" placeholder="Leave a comment..."
           value={this.state.comment}
           onChange={this.handleComment.bind(this)}
         />
-        <input type="submit" value="Post" />
+        <input type="submit" value="Post" className="btn"/>
       </form>
     );
   }

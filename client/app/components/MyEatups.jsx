@@ -9,8 +9,10 @@ class MyEatups extends React.Component {
 
 
   onSessionDelete(index, props) {
+
     var eatupToDelete = props.userRSVPs[index];
     console.log('eatup to delete:',eatupToDelete)
+
     $.ajax({
       type:'DELETE',
       url: 'http://localhost:3000/api/eatup',
@@ -25,6 +27,7 @@ class MyEatups extends React.Component {
 
 
   render () {
+
     var userRSVPs = this.props.userRSVPs.map((result, index) =>
 
       <div className="card card-block clearfix" >
@@ -35,7 +38,7 @@ class MyEatups extends React.Component {
           <p>{result.Eatup.description}</p>
 
           <Button className="deleteButton" bsStyle="danger" bsSize="xsmall" key={index}
-          onClick= { this.onSessionDelete.bind(this, index, this.props) }>Delete</Button>
+          onClick= { this.onSessionDelete.bind(this, index, this.props) }>Un-RSVP</Button>
 
         </div>
       </div>

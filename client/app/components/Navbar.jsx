@@ -27,7 +27,7 @@ class MyNav extends React.Component {
       <Navbar >
         <Navbar.Header>
           <Navbar.Brand>
-            <LinkContainer to={{ pathname: '/'}} onClick={this.handleClick.bind(this)}><a href="#">EatUp</a></LinkContainer>
+            <LinkContainer to={{ pathname: '/'}} onClick={this.handleClick.bind(this)}><a href="#"><strong>EatUp</strong></a></LinkContainer>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>

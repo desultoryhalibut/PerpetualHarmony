@@ -1,33 +1,26 @@
+/*Fonts*/
+@import 'https://fonts.googleapis.com/css?family=Montserrat:700|Raleway';
+
+/*Elements*/
+
+a {
+  color: #FFF;
+}
+
 body {
-  background-color: white;
+  background-color: #f5f5f5;
+  font-family: 'Raleway', sans-serif;
 }
-.welcome {
-  text-align: center;
+
+li {
+  text-decoration: none;
 }
-.head {
-  height: 400px;
-  max-width: 100%;
-  background-image: url('../assets/photos/foodgathering.jpeg');
-  transition: background-image ease 25ms;
-  background-size: cover;
+
+ul {
+  text-decoration: none;
 }
-.authComponent {
-  float: none;
-  margin: auto;
-}
-.navbar {
-  border-radius: 0;
-}
-.navbar-default {
-  background-color: #0A295F;
-  border-color: #0A295F;
-}
-.nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus {
-  background-color: #607D8B;
-}
-.nav-pills:active {
-  background-color: #000000;
-}
+
+/*Classes and IDs*/
 
 .address-text {
   font-size: 14px;
@@ -35,32 +28,17 @@ body {
   font-weight: 500;
   letter-spacing: -.02em;
 }
-li {
-  text-decoration: none;
-}
-ul {
-  text-decoration: none;
+
+.authComponent {
+  float: none;
+  margin: auto;
 }
 
-a {
-  color: black;
+.center {
+  margin: 0 auto;
+  text-align: center;
 }
-.myEatups {
-  float: right;
-}
-.deleteButton, .rsvpButton {
-  float: right;
-}
-#searchTextField {
-  width: 20em;
-}
-.signing {
-  font-size: 1.2em;
-}
-.listing {
-  font-size: 1.2em;
-  font-weight: bold;
-}
+
 .card {
   border: 1px solid #9d8d87!important;
   border-radius: 5px!important;
@@ -68,38 +46,132 @@ a {
   margin: 1em 0;
   background-color: white
 }
+
 .card-title {
   font-weight: bold;
 }
-.myEatUp {
-  display: inline-block;
-  margin: 0;
+
+.card-title, .card-text h6, .address-text  {
+  font: 35px "Archivo Narrow", sans-serif;
 }
-#map {
-  width: 100%;
-  height: 400px;
+
+.card-text h6, .address-text {
+  font-size: 20px;
 }
+
+.deleteButton, .rsvpButton {
+  float: right;
+}
+
+.details-detail {
+  margin-top: 2em;
+}
+
+.details-heading {
+  font-size: 40px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.details-image {
+  background-color: #eeeeee;
+  border: 1px solid lightgray;
+  border-radius: 3px;
+  max-height: 250px;
+  max-width: 250px;
+  min-height: 200px;
+  padding: 20px;
+}
+
+.details-panel {
+  margin-top: 3em;
+}
+
 .eatup-headline-container {
   font-family: "Archivo Narrow", sans-serif;
   letter-spacing: 3px;
   font-size: 55px;
 }
-.card-title, .card-text h6, .address-text  {
-  font: 35px "Archivo Narrow", sans-serif;
+
+.head {
+  height: 400px;
+  max-width: 100%;
+  background-image: url('../assets/photos/foodgathering.jpeg');
+  transition: background-image ease 25ms;
+  background-size: cover;
 }
-.card-text h6, .address-text {
-  font-size: 20px;
+
+
+#left-tabs-example .col-sm-4 {
+  margin-top: 94px;
 }
+
+.listing {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.myEatups {
+  float: right;
+}
+
+.myEatUp {
+  display: inline-block;
+  margin: 0;
+}
+
+#map {
+  width: 100%;
+  height: 400px;
+}
+
+.nav>li>a {
+  text-align: center;
+  font-size: 22px;
+}
+
+.navbar {
+  border-radius: 0;
+}
+
+.navbar-default {
+  background-color: #0A295F;
+  border-color: #0A295F;
+}
+
+.nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus {
+  background-color: #607D8B;
+}
+
+.nav-pills:active {
+  background-color: #000000;
+}
+
 .nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus {
   background: #0A295F;
   height: 55px;
   font-size: 22px;
   text-align: center;
 }
-.nav>li>a {
-  text-align: center;
-  font-size: 22px;
+
+#searchTextField {
+  width: 20em;
 }
-#left-tabs-example .col-sm-4 {
-  margin-top: 94px;
+.signing {
+  font-size: 1.2em;
+}
+
+.user-image {
+  border-radius: 50%;
+  padding: 10px;
+}
+
+.users-panel {
+  font-size: 16px;
+  margin-top: 2em;
+  max-width: 90%;
+  text-align:left;
+}
+
+.welcome {
+  text-align: center;
 }

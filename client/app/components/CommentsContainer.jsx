@@ -1,7 +1,6 @@
 import React from 'react';
 import CommentList from './CommentList.jsx';
 import CommentForm from './CommentForm.jsx';
-
 import auth from '../auth';
 
 export default class CommentsContainer extends React.Component {
@@ -27,7 +26,7 @@ export default class CommentsContainer extends React.Component {
 
     console.log('COMMENT: ', comment, 'URL: ', url);
     $.ajax({
-      url: 'http://localhost:3000'+url, ///api/eatup/2/comment
+      url: 'http://localhost:3000'+url,
       type: 'POST',
       data: JSON.stringify(comment),
       contentType: 'application/json'
@@ -59,16 +58,18 @@ export default class CommentsContainer extends React.Component {
 
   componentDidMount() {
     this.getComments();
-    //setInterval(this.getComments, 10000).bind(this);
   }
 
   render() {
+
     return (
     	<div className="commentsContainer">
-	      <h2>Comments</h2>
 	      <CommentList data={this.state.data} currentEatupComments={this.props.currentEatupComments}/>
+        <br />
+        <br />
 	      <CommentForm onNewComment={this.handleNewComment.bind(this)} url={this.props.url}/>
 	    </div>
     );
+
   }
 }

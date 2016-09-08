@@ -2,8 +2,6 @@ const Eatup = require('../../db/db').Eatup;
 const User = require('../../db/db').User;
 const Restaurant = require('../../db/db').Restaurant;
 const Reservation = require('../../db/db').Reservation;
-const Restaurant = require('../../db/db').Restaurant;
-const db = require('../../db/db');
 
 module.exports = {
 
@@ -49,8 +47,7 @@ module.exports = {
   getUserReservations: function(req, res) {
 
     let username = req.query.username;
-
-    var userId;
+    let userId;
 
     User.findOne({where: {username: username}})
       .then(user => {
@@ -71,5 +68,4 @@ module.exports = {
            });
       });
   }
-
 }

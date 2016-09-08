@@ -41,11 +41,7 @@ class Home extends React.Component {
     if (this.props.data.currentEatup) {
       console.dir('HOME - current eatup', this.props.data.currentEatup);
     }
-<<<<<<< d04d70ec0c6d1ee69ef60fbb043e9c5b778b4387
 
-=======
-
->>>>>>> Resolve merge conflicts
     return (
       <div className="container" id="map">
         <div className='head'>

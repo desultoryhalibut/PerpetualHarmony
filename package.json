@@ -1,7 +1,7 @@
 {
   "name": "PerpetualHarmony",
-  "version": "1.0.0",
-  "description": "",
+  "version": "2.0.0",
+  "description": "EatUp is a 'MeetUp.com for foodies' that allows users to connect to others who want to eat at the same restaurant. Users can view nearby events, RSVP to them, and create their own EatUp events.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -11,15 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dealundgren/PerpetualHarmony.git"
+    "url": "https://github.com/desultoryhalibut/PerpetualHarmony.git"
   },
-  "keywords": [],
-  "author": "",
+  "author": "Tabitha Blagdon, Christine Chou, Carlos Espinal, Quin Kinser",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/dealundgren/PerpetualHarmony/issues"
+    "url": "https://github.com/desultoryhalibut/PerpetualHarmony/issues"
   },
-  "homepage": "https://github.com/dealundgren/PerpetualHarmony#readme",
+  "homepage": "https://github.com/desultoryhalibut/PerpetualHarmony",
   "dependencies": {
     "babel-loader": "^6.2.4",
     "babel-preset-es2015": "^6.9.0",
@@ -50,5 +49,8 @@
   },
   "devDependencies": {
     "nodemon": "^1.9.2"
+  },
+  "engines": {
+    "node": "6.2.2"
   }
 }

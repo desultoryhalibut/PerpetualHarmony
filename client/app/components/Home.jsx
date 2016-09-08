@@ -75,8 +75,8 @@ class Home extends React.Component {
                 <Tab.Content animation>
                   <Tab.Pane eventKey="allEatups">
 
-                    <ListOfEatUp allEatups = {this.props.data.allEatups} userRSVPs = {this.props.data.userRSVPs} getEatupDetails={this.props.getEatupDetails} currentEatup={this.props.data.currentEatup} refresh={this.props.data.refresh.bind(this)}/>
-                  </Tab.Pane>
+                  <ListOfEatUp allEatups = {this.props.data.allEatups} userRSVPs = {this.props.data.userRSVPs} getEatupDetails={this.props.getEatupDetails} currentEatup={this.props.data.currentEatup} refresh={this.props.data.refresh.bind(this)}/>
+                </Tab.Pane>
 
                 <Tab.Pane eventKey="myEatups">
 

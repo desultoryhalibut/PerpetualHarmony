@@ -2,6 +2,7 @@ const Eatup = require('../../db/db').Eatup;
 const User = require('../../db/db').User;
 const Restaurant = require('../../db/db').Restaurant;
 const Reservation = require('../../db/db').Reservation;
+const Restaurant = require('../../db/db').Restaurant;
 const db = require('../../db/db');
 
 module.exports = {
@@ -61,10 +62,8 @@ module.exports = {
              for(var i = 0; i < reservations; i++) {
                // STORE IN restIds each id of restaurants
              }
-
              Restaurant.findAll({where: {id: restIds} })
              .then(rests => {
-               console.log('Boom! this works now just add this results to the original reservations object',rests);
                res.json(reservations);
              }).catch(e => {
                console.log('error!',e);

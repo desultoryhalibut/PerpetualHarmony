@@ -86,6 +86,7 @@ const ListOfEatUp = withRouter(
           <h4 className="card-title" key={index}>{result.title}</h4>
 
           <span><Button bsStyle="success" bsSize="xs" onClick={this.handleSearch.bind(this, result)}>Get Details</Button></span>
+
           <div className="card-text">
 
             <p className="address-text"><strong>Where: </strong>{result.Restaurant.name}</p>
@@ -96,7 +97,6 @@ const ListOfEatUp = withRouter(
               { ( this.state.confirmRSVP && index === result.id ) ? <Results /> : null }
             <Button className="btn-primary" bsSize="xs" onClick={this.handleSearch.bind(this, result)}>Get Details</Button>
             <Button className="rsvpButton btn-primary" bsSize="sm" key={index}
-
             onClick= { this.rsvpToEatUp.bind(this, result) }>
             { ( this.state.confirmRSVP && (result.id === this.state.RSVP) ) ? <Results /> : null } Join!
             </Button>
